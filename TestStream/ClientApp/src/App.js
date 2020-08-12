@@ -19,6 +19,8 @@ import AdminLogin from './components/AdminLogin';
 import VideoDetail from './components/VideoDetail';
 import Main from './components/Main';
 
+
+
 import './custom.css'
 
 export default class App extends Component {
@@ -31,9 +33,9 @@ export default class App extends Component {
             <Layout>
 
                 <Route exact path='/' component={Home} />
-                <Route path="/user-list" component={UserList} />
-                <Route path="/user-profile" component={User} />
-                <Route path="/user-profile/:id" component={User} />
+                <AuthorizeRoute path="/user-list" component={UserList} />
+                <AuthorizeRoute path="/user-profile" component={User} />
+                <AuthorizeRoute path="/user-profile/:id" component={User} />
                 <Route path="/video-detail/:id" component={VideoDetail} />
                 <Route path='/counter' component={Counter} />
                 <AuthorizeRoute path='/fetch-data' component={FetchData} />
