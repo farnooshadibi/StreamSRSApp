@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
@@ -51,7 +51,7 @@ export class Login extends Component {
         } else {
             switch (action) {
                 case LoginActions.Login:
-                    return (<div>Processing login</div>);
+                    return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LoginActions.LoginCallback:
                     return (<div>Processing login callback</div>);
                 case LoginActions.Profile:

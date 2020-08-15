@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
@@ -53,7 +53,7 @@ export class Logout extends Component {
             const action = this.props.action;
             switch (action) {
                 case LogoutActions.Logout:
-                    return (<div>Processing logout</div>);
+                    return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LogoutActions.LogoutCallback:
                     return (<div>Processing logout callback</div>);
                 case LogoutActions.LoggedOut:
@@ -82,7 +82,7 @@ export class Logout extends Component {
                     throw new Error("Invalid authentication result status.");
             }
         } else {
-            this.setState({ message: "You successfully logged out!" });
+            this.setState({ message: "شما با موفقیت خارج شدید" });
         }
     }
 
