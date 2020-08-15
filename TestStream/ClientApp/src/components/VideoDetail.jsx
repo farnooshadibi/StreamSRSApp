@@ -14,7 +14,7 @@ export default class VideoDetail extends Component{
 
     componentDidMount(){
         const{params} = this.props.match;
-        axios.get(`http://192.168.110.52:5000/api/customer/${params.id}`)
+        axios.get(`/api/customer/${params.id}`)
         .then(response => {
             console.log("r", response);
             this.setState ({

@@ -40,5 +40,31 @@ namespace TestStream.Controllers
             }
 
         }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            try
+            {
+                var shrine = db.shrines.Find(id);
+                if (shrine == null)
+                {
+                    return this.NotFound("shrine doesnt exist");
+                }
+                else
+                {
+
+                    return Ok(shrine);
+                }
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Shrine", "Get", "Admin");
+                return this.NotFound("Dosnt Get shrine successfully");
+            }
+
+
+        }
     }
 }
