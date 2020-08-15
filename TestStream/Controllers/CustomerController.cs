@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestStream.Data;
@@ -12,7 +11,6 @@ using TestStream.Models.ApiModels.Customer;
 
 namespace TestStream.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -52,9 +50,9 @@ namespace TestStream.Controllers
             {
                 Response response = new Response();
 
-                customer.StreamKey = Guid.NewGuid();
+                customer.KeyStream = Guid.NewGuid();
                 //customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.StreamKey);
+                customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.KeyStream);
 
                 //if (customer.Image != null)
                 //{

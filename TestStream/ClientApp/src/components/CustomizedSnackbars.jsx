@@ -111,7 +111,7 @@ export default class CustomizedSnackbars extends Component {
         {action === 'add' || action === 'submit' ?
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
+            vertical: 'top',
             horizontal: 'right',
           }}
           className="rtl"
@@ -132,7 +132,7 @@ export default class CustomizedSnackbars extends Component {
           {action === 'edit' ?
             <Snackbar
             anchorOrigin={{
-              vertical: 'bottom',
+                        vertical: 'top',
               horizontal: 'right',
             }}
             open={this.state.open}
@@ -151,7 +151,7 @@ export default class CustomizedSnackbars extends Component {
         {action === "error" ?
             <Snackbar
             anchorOrigin={{
-              vertical: 'bottom',
+              vertical: 'top',
               horizontal: 'right',
             }}
             open={this.state.open}
