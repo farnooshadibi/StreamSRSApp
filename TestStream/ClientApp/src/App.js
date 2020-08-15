@@ -28,8 +28,8 @@ export default class App extends Component {
   static displayName = App.name;
 
   render () {
-    return (
-        <div>
+      return (
+          <div>
             {/*<Header />*/}
             <Layout>
 
@@ -41,8 +41,9 @@ export default class App extends Component {
                 <Route path='/counter' component={Counter} />
                 <AuthorizeRoute path='/fetch-data' component={FetchData} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-                <Footer />
-            </Layout>
+
+              </Layout>
+              <Footer />
         </div >
     );
   }

@@ -33,7 +33,7 @@ export class Logout extends Component {
                 this.processLogoutCallback();
                 break;
             case LogoutActions.LoggedOut:
-                this.setState({ isReady: true, message: "You successfully logged out!" });
+                this.setState({ isReady: true, message: "شما با موفقیت خارج شدید" });
                 break;
             default:
                 throw new Error(`Invalid action '${action}'`);
@@ -55,7 +55,7 @@ export class Logout extends Component {
                 case LogoutActions.Logout:
                     return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LogoutActions.LogoutCallback:
-                    return (<div>Processing logout callback</div>);
+                    return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LogoutActions.LoggedOut:
                     return (<div>{message}</div>);
                 default:
