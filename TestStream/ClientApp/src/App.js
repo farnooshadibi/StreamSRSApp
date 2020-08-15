@@ -18,6 +18,7 @@ import UserList from './components/UserList';
 import AdminLogin from './components/AdminLogin';
 import VideoDetail from './components/VideoDetail';
 import Main from './components/Main';
+import Footer from './components/Footer';
 
 
 
@@ -40,7 +41,7 @@ export default class App extends Component {
                 <Route path='/counter' component={Counter} />
                 <AuthorizeRoute path='/fetch-data' component={FetchData} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-
+                <Footer />
             </Layout>
         </div >
     );

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-//import {Player} from 'video-react';
-//import "../../node_modules/video-react/dist/video-react.css"
+
 
 
 export default class VideoDetail extends Component{
@@ -15,7 +14,7 @@ export default class VideoDetail extends Component{
 
     componentDidMount(){
         const{params} = this.props.match;
-        axios.get(`/api/customer/${params.id}`)
+        axios.get(`http://192.168.110.52:5000/api/customer/${params.id}`)
         .then(response => {
             console.log("r", response);
             this.setState ({
@@ -34,7 +33,7 @@ export default class VideoDetail extends Component{
     console.log(video.url)
         return(
             <div className="rtl text-center">
-            <h3> عنوان  : {video.name}</h3>
+            <h3>{video.name}</h3>
             <br />
             {/* <video
         controls
