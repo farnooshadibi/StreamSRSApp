@@ -42,7 +42,7 @@ export default class ShrineDetail extends Component{
         width="100%"
         src={video.url}
         data-viblast-key="ef2e322c-8725-49c9-b4d5-23c4e374d27f"
-        autoplay
+        autoPlay
         >
 
         </video>
