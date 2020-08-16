@@ -26,7 +26,7 @@ namespace TestStream.Controllers
         {
             try
             {
-                var customers = db.customers.ToList();
+                var customers = db.customers.Where(c => c.IsActive == true).ToList();
                 Response response = new Response();
                 response.Data = customers;
                 response.Status = true;
@@ -53,6 +53,7 @@ namespace TestStream.Controllers
                 customer.KeyStream = Guid.NewGuid();
                 //customer.StreamKey = customer.Id;
                 customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.KeyStream);
+                customer.IsActive = true;
 
                 //if (customer.Image != null)
                 //{

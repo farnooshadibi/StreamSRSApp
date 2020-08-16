@@ -12,10 +12,10 @@ namespace TestStream.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShrineController : ControllerBase
+    public class PlayListController : ControllerBase
     {
         private ApplicationDbContext db;
-        public ShrineController(ApplicationDbContext context)
+        public PlayListController(ApplicationDbContext context)
         {
             db = context;
         }
@@ -25,9 +25,9 @@ namespace TestStream.Controllers
         {
             try
             {
-                var shrines = db.shrines.Where(c => c.IsActive == true).ToList();
+                var playList = db.playLists.Where(c => c.IsActive == true).ToList();
                 Response response = new Response();
-                response.Data = shrines;
+                response.Data = playList;
                 response.Status = true;
                 response.Message = "Received successfully";
                 return Ok(response);
@@ -35,36 +35,36 @@ namespace TestStream.Controllers
             }
             catch (Exception e)
             {
-                writeException.Write(e.Message, DateTime.Now, "Shrine", "Get", "Admin");
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Get", "Admin");
                 return this.NotFound("Dosnt Received successfully");
             }
 
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        // POST api/values
+        [HttpPost]
+        public ActionResult Post([FromBody] PlayList playList)
         {
             try
             {
-                var shrine = db.shrines.Find(id);
-                if (shrine == null)
-                {
-                    return this.NotFound("shrine doesnt exist");
-                }
-                else
-                {
+                Response response = new Response();
 
-                    return Ok(shrine);
-                }
+
+                db.playLists.Add(playList);
+                db.SaveChanges();
+                response.Data = playList;
+                response.Status = true;
+                response.Message = " Create successfully";
+
+
+                return Ok(response);
             }
+
             catch (Exception e)
             {
-                writeException.Write(e.Message, DateTime.Now, "Shrine", "Get", "Admin");
-                return this.NotFound("Dosnt Get shrine successfully");
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Post", "Admin");
+                return this.NotFound("Dosnt Create successfully");
             }
-
-
         }
     }
 }

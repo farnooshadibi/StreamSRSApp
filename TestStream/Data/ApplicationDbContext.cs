@@ -20,5 +20,6 @@ namespace TestStream.Data
         public DbSet<Customer> customers { get; set; }
         public DbSet<Admin> admins { get; set; }
         public DbSet<Shrine> shrines { get; set; }
+        public DbSet<PlayList> playLists { get; set; }
     }
 }
