@@ -25,7 +25,7 @@ namespace TestStream.Controllers
         {
             try
             {
-                var shrines = db.shrines.ToList();
+                var shrines = db.shrines.Where(c => c.IsActive == true).ToList();
                 Response response = new Response();
                 response.Data = shrines;
                 response.Status = true;

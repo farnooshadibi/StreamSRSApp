@@ -12,5 +12,7 @@ namespace TestStream.Models
         public Guid KeyStream { get; set; }
         public string Url { get; set; }
         public string Image { get; set; }
+        public bool IsActive { get; set; }
+        public ICollection<PlayList> playLists { get; set; }
     }
 }
