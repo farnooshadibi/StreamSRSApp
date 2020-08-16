@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import VideoList from './VideoList';
 import SearchBox from './SearchBox/SearchBox';
-import Carousel from 'react-bootstrap/Carousel'
 
 
 export default class Home extends Component {
@@ -40,46 +39,11 @@ export default class Home extends Component {
         console.log(this.state.customers)
         return (
             <div>
-                <div>
-                <Carousel>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                                src="https://lh3.googleusercontent.com/TXdmAkU48xY7A1D6y7DhFXgAfT4PBea1MNpXLh4KZm6MDMTC-DuSu46BPsUAWYAp5p2VvhSulhUdR8tfZpnSrJLqOnImvL3p1yUJKxPhSutTVtIADmBBPcM_zD5wua9ObmhMYBxr3uoE33QgFDdjUYIihJxWiYIrlrq95NGhnsutNddbTmA2B9ez_ln27vBAQsPrb7shzGauUILq6U8RqmAeDYuYTOQe8b2tUI52TCIIBOduOfEsIU8WLiZC67QIfT7DOPJOtzJdxSb0Dm3EuD4VqSbt2oFugICCYCNjWBz57JuRBCUickhBSTgAGcqL8faVkR7Wmmmz8_gcW25RVU5RavfS4YerRdtIH1ouUurSNFIKgEKpQ6aIW6znJGuJDagNaU5rAYRhdvS5LsN9M3xGYZCtwunJrUXNsdoqTMTTLznPJLjRK0FVjDu6aBbxLRADPkA4SPqjzgRtKCsQGePu_Cc02QMS6xvCQawPA0KdEYXFp20To3V82wzygPNX1tytMq0tUHuL8ieNyCSLci_8aOvf6Ul-sExnH6UA9kGL_oWpxJhUeODtPjSh3GtrkS94WsFu4w_axhHSUG6VtQ8qOeUn1b6IjhsEc6_iYnnGqmqDqUp6uMYEHP8jjoOS7yIqpS20Un-tB8bwFpsMPGXSzkQYJswIcB8y8GZYLhOnZYOSIfbif0g3r8S2O2UovKecs_2kGxfIjO4pJ4U=w1560-h924-no"
-                                alt="First slide"
-                                width="80%"
-                                height="auto"
-                        />
-                        <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                                src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Cuesta_del_obispo_01.jpg"
-                            alt="Third slide"
-                        />
-
-                        <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                                src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/130238819/original/d4096d4950eba421600f21c6c753c19375222eb6/draw-you-a-landscape-image-with-ms-paint.png"
-                            alt="Third slide"
-                        />
-
-                        <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
+                <div className="jumbotron rtl">
+                    <div className="container">
+                        <h3 >وب‌سایت </h3>
+                        <p>لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند که صفحه طراحی یا صفحه بندی شده بعد از اینکه متن در آن قرار گیرد چگونه به نظر می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته شده‌است. از آنجایی که طراحان عموما نویسنده متن نیستند و وظیفه رعایت حق تکثیر متون را ندارند و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند.</p>
+                    </div>
                 </div>
                 <div className="text-center">
                     <SearchBox placeholder='جست و جو' handleSearch={this.handleSearch} />
