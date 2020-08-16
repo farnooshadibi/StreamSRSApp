@@ -40,10 +40,10 @@ export default class ShrineList extends Component{
                                 </div>
                                 <div className="row" style={{ padding: "5px" }}>
                                     <div className="col-md-12">
-                                        <p className="" style={{ fontSize: "80%", marginBottom: "10px" }}>{shrines.name}</p>
+                                        <p className="" style={{ fontSize: "80%", marginBottom: "10px" }}>{shrines.description}</p>
                                     </div>
                                     <div className="col-md-12">
-                                        <Link className="d-block btn btn-outline-success" to={`video-detail/${shrines.id}`}>مشاهده</Link>
+                                        <Link className="d-block btn btn-outline-success" to={`shrine-detail/${shrines.id}`}>مشاهده</Link>
                                         <Telegram simple link="http://sharingbuttons.io" />
                                         <Whatsapp simple link="http://sharingbuttons.io" />
                                     </div>
