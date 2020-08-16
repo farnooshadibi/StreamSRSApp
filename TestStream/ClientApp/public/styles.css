@@ -1,8 +1,11 @@
+@font-face {
+  font-family: bbc;
+  src: url(bbc.woff);
+}
+
+
 * {
-    font-family: 'BBCNassim', Arial, tahoma;
+    font-family: bbc, Arial, tahoma;
     font-size: 20px;
     letter-spacing: 1px;
-}
-.plyr__progress{
-    display: none;
 }
