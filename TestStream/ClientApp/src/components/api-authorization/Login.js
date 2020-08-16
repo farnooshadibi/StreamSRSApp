@@ -53,7 +53,7 @@ export class Login extends Component {
                 case LoginActions.Login:
                     return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LoginActions.LoginCallback:
-                    return (<div>Processing login callback</div>);
+                    return (<div>منتظر بمانید در حال انجام عملیات</div>);
                 case LoginActions.Profile:
                 case LoginActions.Register:
                     return (<div></div>);

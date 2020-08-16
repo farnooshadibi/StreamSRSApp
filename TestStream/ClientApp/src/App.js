@@ -19,6 +19,8 @@ import AdminLogin from './components/AdminLogin';
 import VideoDetail from './components/VideoDetail';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import ShrineDetail from './components/ShrineDetail';
+import ShrineList from './components/ShrineList';
 
 
 
@@ -28,8 +30,8 @@ export default class App extends Component {
   static displayName = App.name;
 
   render () {
-    return (
-        <div>
+      return (
+          <div>
             {/*<Header />*/}
             <Layout>
 
@@ -39,10 +41,12 @@ export default class App extends Component {
                 <AuthorizeRoute path="/user-profile/:id" component={User} />
                 <Route path="/video-detail/:id" component={VideoDetail} />
                 <Route path='/counter' component={Counter} />
-                <AuthorizeRoute path='/fetch-data' component={FetchData} />
+                  <AuthorizeRoute path='/fetch-data' component={FetchData} />
+                  <Route path="/shrine-list" component={ShrineList} />
+                  <Route path="/shrine-detail/:id" component={ShrineDetail} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-                <Footer />
-            </Layout>
+
+              </Layout>
         </div >
     );
   }

@@ -50,12 +50,9 @@ namespace TestStream.Controllers
             {
                 Response response = new Response();
 
-                //Determine the next ID
-                //var newId = db.customers.Select(x => x.Id).Max() + 1;
-                //customer.Id = newId;
-                //customer.StreamKey = Guid.NewGuid();
-                customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.StreamKey);
+                customer.KeyStream = Guid.NewGuid();
+                //customer.StreamKey = customer.Id;
+                customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.KeyStream);
 
                 //if (customer.Image != null)
                 //{

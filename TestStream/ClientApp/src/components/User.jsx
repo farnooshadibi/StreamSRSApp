@@ -158,7 +158,7 @@ export default class User extends Component{
                     </div>
 
 
-                    <div className="form-group">
+                    <div className="form-group" style={{ marginBottom:220 }}>
                     <br />
                     <button type="submit" className="btn btn-success"  style={{marginLeft:10}}>ثبت </button> 
                     <button className="btn btn-info"  onClick={this.backToList.bind(this)} > بازگشت به لیست مشتریان</button>
