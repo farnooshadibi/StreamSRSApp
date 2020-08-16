@@ -32,7 +32,6 @@ export default class App extends Component {
   render () {
       return (
           <div>
-            {/*<Header />*/}
             <Layout>
 
                 <Route exact path='/' component={Home} />
