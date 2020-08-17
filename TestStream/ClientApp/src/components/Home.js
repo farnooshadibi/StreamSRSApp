@@ -53,7 +53,34 @@ export default class Home extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: min,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            initialSlide: 0,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         };
        
         const filteredCustomers = customers.filter(customer => {
@@ -76,7 +103,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
                     <div className="underline"></div>
                     <Slider {...settings}>
-                        {shrines.map((customer, index) => <VideoList key={index} customer={customer} />)}
+                        {shrines.map((shrine, index) => <VideoList key={index} customer={shrine} />)}
                     </Slider>
                 </div>
                 <div className="downStar">
