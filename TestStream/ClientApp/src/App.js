@@ -21,6 +21,7 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import ShrineDetail from './components/ShrineDetail';
 import ShrineList from './components/ShrineList';
+import UserProgram from './components/UserProgram';
 
 
 
@@ -38,7 +39,8 @@ export default class App extends Component {
                 <Route exact path='/' component={Home} />
                 <AuthorizeRoute path="/user-list" component={UserList} />
                 <AuthorizeRoute path="/user-profile" component={User} />
-                <AuthorizeRoute path="/user-profile/:id" component={User} />
+                  <AuthorizeRoute path="/user-profile/:id" component={User} />
+                  <AuthorizeRoute path="/user-program" component={UserProgram} />
                 <Route path="/video-detail/:id" component={VideoDetail} />
                 <Route path='/counter' component={Counter} />
                   <AuthorizeRoute path='/fetch-data' component={FetchData} />

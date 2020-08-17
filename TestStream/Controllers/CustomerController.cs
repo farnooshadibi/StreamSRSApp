@@ -26,7 +26,86 @@ namespace TestStream.Controllers
         {
             try
             {
+                Response response = new Response();
+                List<CustomerProgramDto> list = new List<CustomerProgramDto>();
+                CustomerProgramDto customerDto = new CustomerProgramDto();
+
+                customerDto.PlayList  = new PlayList();
+
+
                 var customers = db.customers.Where(c => c.IsActive == true).ToList();
+                //foreach (var c in customers)
+                //{
+                //    var program = db.playLists.Where(item => item.CustomerId == c.Id).FirstOrDefault();
+
+                //    list.Add(new CustomerProgramDto
+                //    {
+                //        Image = c.Image,
+                //        Url = c.Url,
+                //        Name = c.Name,
+                //        Id = c.Id,
+                //        PlayList = program
+                //    });
+
+                //}
+                response.Data = customers;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            //try
+            //{
+
+            //    Response response = new Response();
+
+            //    var customers = db.customers.Where(c => c.IsActive == true).ToList();
+            //    List<CustomerProgramDto> list = new List<CustomerProgramDto>();
+            //    CustomerProgramDto customerDto = new CustomerProgramDto();
+            //    customerDto.playList = new PlayList();
+            //    foreach ( var c in customers)
+            //    {
+            //        var program = db.playLists.Where(c => c.CustomerId == c.Id).FirstOrDefault();
+            //        customerDto.Image = c.Image;
+            //        customerDto.Url = c.Url;
+            //        customerDto.Name = c.Name;
+            //        customerDto.Id = c.Id;
+            //        customerDto.playList = program;
+            //        list.Add(new CustomerProgramDto
+            //        {
+            //            Image = c.Image,
+            //            Url = c.Url,
+            //            Name = c.Name,
+            //            Id = c.Id,
+            //            playList = new PlayList { Id = program.Id, Name= program.Name,
+            //            PerformerName = program.PerformerName,
+            //            Lamenter = program.Lamenter,
+            //            StartTime = program.StartTime,
+            //            EndTime = program.EndTime
+            //            }
+            //        });
+
+            //    }
+            //    response.Data = list;
+            //    response.Status = true;
+            //    response.Message = "Received successfully";
+            //    return Ok(response);
+
+            //}
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Get", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+
+        [HttpGet("GetFamousCustomer")]
+        public ActionResult GetFamousCustomer()
+        {
+            try
+            {
+                var customers = db.customers.Where(c => c.IsActive == true && c.Famous == true).ToList();
                 Response response = new Response();
                 response.Data = customers;
                 response.Status = true;
@@ -36,7 +115,7 @@ namespace TestStream.Controllers
             }
             catch (Exception e)
             {
-                writeException.Write(e.Message, DateTime.Now, "Customer", "Get", "Admin");
+                writeException.Write(e.Message, DateTime.Now, "Customer", "GetFamousCustomer", "Admin");
                 return this.NotFound("Dosnt Received successfully");
             }
 
