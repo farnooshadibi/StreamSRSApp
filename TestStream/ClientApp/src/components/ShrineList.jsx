@@ -31,7 +31,7 @@ export default class ShrineList extends Component{
             <div className="row rtl">
                 {shrines.map((shrines, index) => 
                     <div className="col-lg-4 col-md-6 d-flex justify-content-around" style={{ marginBottom: 10 }}>
-                        <div className="card text-center" style={{ width: '18rem', height: "50" }}>
+                        <div className="card text-center" style={{ width: '18rem'}}>
                             <div className="card" style={{ height: "50" }}>
                                 <img src={shrines.image} className="card-img-top" alt={shrines.name} style={{ width: "auto", height: '17rem' }} />
                                 <div style={{ borderBottom: "2px solid #888888", padding: 0, marginTop: "12px", marginBottom: "5px" }} className="card-body">

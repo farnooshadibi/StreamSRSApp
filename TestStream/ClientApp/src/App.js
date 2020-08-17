@@ -24,6 +24,7 @@ import ShrineList from './components/ShrineList';
 
 
 
+
 import './custom.css'
 
 export default class App extends Component {
