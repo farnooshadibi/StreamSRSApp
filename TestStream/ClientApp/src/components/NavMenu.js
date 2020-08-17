@@ -6,7 +6,7 @@ import './NavMenu.css';
 import Header from './sections/Header';
 import authService from './api-authorization/AuthorizeService';
 import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
-
+import SearchBox from './SearchBox/SearchBox';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -92,7 +92,7 @@ export class NavMenu extends Component {
         return (
             <div>
                 <header>
-                    <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+                    <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
                         <Container>
                             <NavbarBrand tag={Link} to="/">عزاداران</NavbarBrand>
                             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -100,9 +100,16 @@ export class NavMenu extends Component {
                                 <ul className="navbar-nav flex-grow">
                                     <NavItem>
                                         <NavLink tag={Link} to="/">خانه</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/shrine-list">پخش زنده حرم مطهر</NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
+                                    <NavItem>
+                                        <div className="text-center">
+                                            <SearchBox placeholder='جست و جو' handleSearch={this.handleSearch} />
+                                        </div>
                                     </NavItem>
                                 </ul>
                             </Collapse>

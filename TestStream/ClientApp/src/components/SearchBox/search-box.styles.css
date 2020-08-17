@@ -1,13 +1,14 @@
 .search {
     -webkit-appearance: none;
-    border: 1px solid rgb(114, 114, 114);
+    
     outline: none;
-    height: 10%;
+    height: 30px;
     padding: 10px;
-    width: 30%;
-    line-height: 30px;
-    margin-bottom: 30px;
-    background-color: #e9ecef;
-    color: black;
-    border-radius: 10px;
+    width: 90%;
+    line-height: 20px;
+    margin: 5px auto;
+    background-color: #4d4d4d;
+    color: #9f9f9f;
+    border-radius: 5px;
+    border:none;
 }
