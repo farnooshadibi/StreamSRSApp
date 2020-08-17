@@ -9,3 +9,68 @@
     font-size: 20px;
     letter-spacing: 1px;
 }
+
+body{
+    background-color:#000!important;
+}
+.navbar > .container, .navbar > .container-fluid {
+    background-color: #171717!important;
+}
+
+.navbar-brand, .nav-link {
+    font-size: .9rem !important;
+}
+.nav-item:hover .active {
+    visibility:visible;
+}
+.nav-item > .active {
+    height:5px;
+    border-radius:2px;
+    background-image: linear-gradient(87deg,#f01212 -71%,#5b0404 28%);
+    visibility:hidden;
+}
+
+.navbar {
+    padding: 1.2rem 1rem .6rem 1rem !important;
+}
+.bgMoharam {
+    background-image: url('./back_1.jpg');
+    padding: 40px 120px;
+}
+
+.cardBg {
+    border-radius: 25px!important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    background-color: #e000008a !important;
+}
+.card-title, .card-name{
+    color:white;
+    text-decoration:none;
+}
+
+.underline {
+    margin: 0 auto;
+    height: 5px;
+    width:10%;
+    border-radius: 2px;
+    background-image: linear-gradient(87deg,#f01212 -71%,#5b0404 28%);
+    visibility: visible;
+}
+.upstar {
+    width: 35%;
+    margin: 0 auto;
+}
+.upstar > img {
+    width: 100%;
+}
+
+.downStar {
+    width: 35%;
+    margin: 0 auto;
+}
+
+.downStar > img {
+    width: 100%;
+    transform: rotate(180deg);
+}

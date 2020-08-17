@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import VideoList from './VideoList';
-import SearchBox from './SearchBox/SearchBox';
+
+import Slider from "react-slick";
 
 
 export default class Home extends Component {
@@ -9,6 +10,7 @@ export default class Home extends Component {
         super(props);
         this.state = {
             customers: [],
+            shrines:[],
             searchField: ''
         }
     }
@@ -25,6 +27,17 @@ export default class Home extends Component {
             })
             .catch((error) => console.log(error))
 
+        axios.get('/api/shrine')
+            .then(response => {
+                console.log("response", response);
+                const { data } = response.data;
+                this.setState({
+                    shrines: data
+                })
+
+            })
+            .catch((error) => console.log(error))
+
     }
 
     handleSearch = (e) => {
@@ -32,32 +45,45 @@ export default class Home extends Component {
     }
 
     render() {
-        const { customers, searchField } = this.state;
+        const { customers, searchField, shrines } = this.state;
+        let min = 0
+        customers.length>shrines.length ? min=shrines.length : min= customers.length
+        var settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: min,
+            slidesToScroll: 1
+        };
+       
         const filteredCustomers = customers.filter(customer => {
             return customer.name.toLowerCase().includes(searchField.toLowerCase());
         });
         console.log(this.state.customers)
         return (
             <div>
-
-                <div className="jumbotron rtl">
-                    <div className="container">
-                        <h3 >وب‌سایت </h3>
-                        <p>لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند که صفحه طراحی یا صفحه بندی شده بعد از اینکه متن در آن قرار گیرد چگونه به نظر می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته شده‌است. از آنجایی که طراحان عموما نویسنده متن نیستند و وظیفه رعایت حق تکثیر متون را ندارند و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند.</p>
-                    </div>
+                <div className="bgMoharam">
+                    <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>
+                    <div className="underline"></div>
+                <Slider {...settings}>
+                    {filteredCustomers.map((customer, index) =><VideoList key={index} customer={customer} />)}
+                    </Slider>
                 </div>
-
-                <div className="text-center">
-                    <SearchBox placeholder='جست و جو' handleSearch={this.handleSearch} />
+                <div className="upstar">
+                    <img src='./starTop.png' />
                 </div>
-
-                <div className="row rtl">
-                    {filteredCustomers.map((customer, index) => <VideoList key={index} customer={customer} />)}
-
+                <div className="bgMoharam">
+                    <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
+                    <div className="underline"></div>
+                    <Slider {...settings}>
+                        {shrines.map((customer, index) => <VideoList key={index} customer={customer} />)}
+                    </Slider>
                 </div>
-
-
+                <div className="downStar">
+                    <img src='./starTop.png' />
+                </div>
             </div>
+
         )
     }
 } 
