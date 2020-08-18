@@ -8,6 +8,7 @@ import axios from 'axios';
 import authService from './api-authorization/AuthorizeService';
 import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
 import SearchBox from './SearchBox/SearchBox';
+import ProgramList from './ProgramList';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -21,7 +22,7 @@ export class NavMenu extends Component {
             isAuthenticated: false,
             userName: null,
             name: '',
-            filteredCustomer:[]
+            filteredCustomer: []
         };
     }
 
@@ -49,18 +50,24 @@ export class NavMenu extends Component {
     }
 
     handleSearch(e) {
-       // this.setState({ name: e.target.value });
-        const { name } = "سه";
-        axios.post('/api/customer/SearchByName', { name })
+        e.preventDefault();
+        const name = this.state;
+
+        axios.post('/api/customer/SearchByName', name)
             .then(response => {
                 const { data } = response.data;
                 this.setState({ filteredCustomer: data });
-                console.log(data)
+
+                console.log(this.state.filteredCustomer)
             })
             .catch((error) => {
                 console.log(error)
-            }
-            )
+            })
+
+        //const url = '/search-list';
+        //window.open(url, '_blank');
+        //window.location.href('/shrine-list');
+        // this.props.history.push('/shrine-list');
 
     }
     render() {
@@ -122,15 +129,30 @@ export class NavMenu extends Component {
                                     </NavItem>
 
                                     <NavItem>
-                                        <div className="text-center">
-                                            <SearchBox placeholder='جست و جو' handleSearch={this.handleSearch} />
-                                        </div>
+                                        <form onSubmit={this.handleSearch.bind(this)}>
+                                            <div className="text-center">
+                                                <input className='search'
+                                                    type='text'
+                                                    placeholder="جستجو"
+                                                    value={this.state.name}
+                                                    onChange={(event) => { this.setState({ name: event.target.value }); }}
+                                                />
+                                                <button className="btn"> <Link className="btn btn-light " to={{pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} >جستجو </Link></button>
+                                                {/*<SearchBox placeholder='جست و جو' handleSearch={this.handleSearch.bind(this)} />*/}
+                                            </div>
+                                        </form>
+
+                                       
                                     </NavItem>
+
                                 </ul>
                             </Collapse>
                         </Container>
                     </Navbar>
                 </header>
+                {/*  <div className="row">
+                    {this.state.filteredCustomer.map((shrine, index) => <ProgramList key={index} customer={shrine} mode="shrine-detail" />)}
+                </div> */}
             </div>
         );
     }

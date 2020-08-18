@@ -21,6 +21,8 @@ import ShrineDetail from './components/ShrineDetail';
 import ShrineList from './components/ShrineList';
 import UserProgram from './components/UserProgram';
 import './custom.css'
+import ProgramList from './components/ProgramList';
+import SearchList from './components/SearchList';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -40,6 +42,7 @@ export default class App extends Component {
                   <AuthorizeRoute path='/fetch-data' component={FetchData} />
                   <Route path="/shrine-list" component={ShrineList} />
                   <Route path="/shrine-detail/:id" component={ShrineDetail} />
+                  <Route path="/search-list" component={SearchList} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
               </Layout>
