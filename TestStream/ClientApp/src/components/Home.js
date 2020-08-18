@@ -40,9 +40,7 @@ export default class Home extends Component {
 
     }
 
-    handleSearch = (e) => {
-        this.setState({ searchField: e.target.value });
-    }
+
 
     render() {
         const { customers, searchField, shrines } = this.state;

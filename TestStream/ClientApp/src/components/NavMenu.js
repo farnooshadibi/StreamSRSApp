@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
 import Header from './sections/Header';
+import axios from 'axios';
 import authService from './api-authorization/AuthorizeService';
 import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
 import SearchBox from './SearchBox/SearchBox';
@@ -18,7 +19,9 @@ export class NavMenu extends Component {
         this.state = {
             collapsed: true,
             isAuthenticated: false,
-            userName: null
+            userName: null,
+            name: '',
+            filteredCustomer:[]
         };
     }
 
@@ -45,6 +48,21 @@ export class NavMenu extends Component {
         });
     }
 
+    handleSearch(e) {
+       // this.setState({ name: e.target.value });
+        const { name } = "سه";
+        axios.post('/api/customer/SearchByName', { name })
+            .then(response => {
+                const { data } = response.data;
+                this.setState({ filteredCustomer: data });
+                console.log(data)
+            })
+            .catch((error) => {
+                console.log(error)
+            }
+            )
+
+    }
     render() {
         const { isAuthenticated, userName } = this.state;
         if (!isAuthenticated) {
