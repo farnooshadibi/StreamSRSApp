@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import VideoList from './VideoList';
-
+import ProgramList from './ProgramList';
 import Slider from "react-slick";
 
 
@@ -89,6 +89,9 @@ export default class Home extends Component {
         console.log(this.state.customers)
         return (
             <div>
+                <div className="cover">
+                    <p className="heroquote"> به سایت سوگواران<br/> خوش آمدید.</p>
+                </div>
                 <div className="bgMoharam">
                     <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>
                     <div className="underline"></div>
@@ -108,6 +111,14 @@ export default class Home extends Component {
                 </div>
                 <div className="downStar">
                     <img src='./starTop.png' />
+                </div>
+
+                <div className="bgBarname">
+                    <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
+                    <div className="underline"></div>
+                    <div className="row">
+                        {shrines.map((shrine, index) => <ProgramList key={index} customer={shrine} mode="shrine-detail" />)}
+                    </div>
                 </div>
             </div>
 

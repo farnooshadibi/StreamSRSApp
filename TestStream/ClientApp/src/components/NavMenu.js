@@ -102,10 +102,7 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} to="/">خانه</NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-                                    <NavItem>
-                                        <NavLink tag={Link} to="/shrine-list">پخش زنده حرم مطهر</NavLink>
-                                        <div className="active"></div>
-                                    </NavItem>
+
                                     <NavItem>
                                         <div className="text-center">
                                             <SearchBox placeholder='جست و جو' handleSearch={this.handleSearch} />

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Telegram, Whatsapp } from 'react-social-sharing'
+
 import {Link} from 'react-router-dom'
 
 export default class VideoList extends Component{
