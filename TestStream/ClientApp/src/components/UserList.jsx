@@ -3,9 +3,6 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 //import Cookies from 'universal-cookie'
 import CustomizedSnackbars, { } from './CustomizedSnackbars'
-import { Table, Button } from 'rsuite';
-
-const { Column, HeaderCell, Cell, Pagination } = Table;
 const getUrl = '/api/customer';
 
 
@@ -93,84 +90,40 @@ export default class UserList extends Component {
     }
     render() {
         return (
+            <div className="table-responsive box-body">
+                <Link className="btn btn-success" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
+                <br />
+                <table style={{
+                    fontFamily: 'arial',
+                    borderCollapse: 'collapse'
+                }}>
+                    <thead>
+                        <tr>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>URL</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>عکس</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>ویرایش</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>حذف</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>برنامه پخش</th>
+                        </tr>
+                    </thead>
+                {this.state.users.map((customer, index) => 
+                    <tbody >
+                        <tr>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.id}</td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.name}</td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.url}</td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.name}</td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/user-profile', state: { userId: customer.id, mode: 'edit' } }} >ویرایش </Link></td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(customer.id) }}> حذف</button></td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-warning" to={{ pathname: '/user-program', state: { userId: customer.id, mode: 'add' } }} >افزودن برنامه </Link></td>
+                        </tr>
+                    </tbody>
+                    )}
+                </table>
 
-            <div className="box-body rtl" style={{ marginBottom: 100, marginLeft: 100, marginRight: 100 }}>
-                <Link className="btn btn-success rtl" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
-                <div>
-                    <Table
-                        height={500}
-                        data={this.state.users}
-                        onRowClick={data => {
-                            console.log("data", data);
-                        }}
-                    >
-                        <Column width={70} align="center" fixed>
-                            <HeaderCell>شماره</HeaderCell>
-                            <Cell dataKey="id" />
-                        </Column>
-
-                        <Column width={200} fixed>
-                            <HeaderCell>نام</HeaderCell>
-                            <Cell dataKey="name" />
-                        </Column>
-
-                        <Column width={200}>
-                            <HeaderCell>Url</HeaderCell>
-                            <Cell dataKey="url" />
-                        </Column>
-
-                        <Column width={200}>
-                            <HeaderCell> عکس</HeaderCell>
-                            <Cell dataKey="image" style={{ width: "100%", height: '78rem' }} />
-                        </Column>
-
-                        <Column width={120} fixed="right">
-                            <HeaderCell>ویرایش</HeaderCell>
-
-                            <Cell>
-                                {rowData => {
-                                    function handleAction() {
-                                        alert(`id:${rowData.id}`);
-                                    }
-                                    return (
-                                        <span>
-                                            <Link to={{ pathname: '/user-profile', state: { userId: rowData.id, mode: 'edit' } }} >ویرایش </Link>
-                                        </span>
-                                    );
-                                }}
-                            </Cell>
-                        </Column>
-                        <Column width={120} fixed="right">
-                            <HeaderCell>حذف</HeaderCell>
-
-                            <Cell style={{ height: 100 }}>
-                                {rowData => {
-                                    return (
-                                        <span>
-                                            <Button appearance="subtle" color="red" onClick={() => { this.handleClickOpen(rowData.id) }}> حذف</Button>
-                                        </span>
-                                    );
-                                }}
-                            </Cell>
-                        </Column>
-                        <Column width={120} fixed="right">
-                            <HeaderCell>افزودن برنامه</HeaderCell>
-
-                            <Cell>
-                                {rowData => {
-                                    function handleAction() {
-                                        alert(`id:${rowData.id}`);
-                                    }
-                                    return (
-                                        <span>
-                                            <Link to={{ pathname: '/user-program', state: { userId: rowData.id, mode: 'add' } }} >افزودن برنامه </Link>
-                                        </span>
-                                    );
-                                }}
-                            </Cell>
-                        </Column>
-                    </Table>
-                </div>
+ 
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.open} handleClose={this.handleCloseCustomizadSnack.bind(this)} handleRequest={this.handleDelete.bind(this)} />
             </div>
         )

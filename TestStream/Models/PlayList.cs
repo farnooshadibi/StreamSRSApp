@@ -19,8 +19,8 @@ namespace TestStream.Models
         public string Lamenter { get; set; }
         public string EventPlace { get; set; }
         public bool IsActive { get; set; }
-        [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
+        //[ForeignKey("CustomerId")]
+        //public virtual Customer Customer { get; set; }
         public int CustomerId { get; set; }
     }
 }

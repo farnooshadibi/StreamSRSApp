@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestStream.Data;
 
 namespace TestStream.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200818055721_CreatePlayListEntity")]
+    partial class CreatePlayListEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -476,7 +478,7 @@ namespace TestStream.Data.Migrations
 
             modelBuilder.Entity("TestStream.Models.PlayList", b =>
                 {
-                    b.HasOne("TestStream.Models.Customer", null)
+                    b.HasOne("TestStream.Models.Customer", "Customer")
                         .WithMany("playLists")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)

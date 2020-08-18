@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace TestStream.Data.Migrations
 {
@@ -7,18 +7,6 @@ namespace TestStream.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsActive",
-                table: "shrines",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsActive",
-                table: "customers",
-                nullable: false,
-                defaultValue: false);
-
             migrationBuilder.CreateTable(
                 name: "playLists",
                 columns: table => new
@@ -27,7 +15,7 @@ namespace TestStream.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<System.DateTime>(nullable: false),
                     Duration = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
@@ -59,13 +47,6 @@ namespace TestStream.Data.Migrations
             migrationBuilder.DropTable(
                 name: "playLists");
 
-            migrationBuilder.DropColumn(
-                name: "IsActive",
-                table: "shrines");
-
-            migrationBuilder.DropColumn(
-                name: "IsActive",
-                table: "customers");
         }
     }
 }
