@@ -43,7 +43,6 @@ export default class UserList extends Component {
             .then(response => {
                 const { data } = response.data;
                 this.setState({ users: data });
-                console.log("users", this.state.users)
             })
             .catch(error => console.log(error))
     }

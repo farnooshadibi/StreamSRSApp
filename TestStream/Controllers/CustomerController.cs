@@ -322,7 +322,7 @@ namespace TestStream.Controllers
             {
                 Response response = new Response();
 
-                string CName = customer.Name;
+                string CName = customer.Name.Replace(" ", "");
 
 
                 if (string.IsNullOrEmpty(CName))
@@ -332,7 +332,7 @@ namespace TestStream.Controllers
 
                 else
                 {
-                    var result = db.customers.Where(current => current.Name.Contains(CName)).ToList();
+                    var result = db.customers.Where(current => current.Name.Replace(" ", "").Contains(CName)).ToList();
 
 
                     response.Data = result;
