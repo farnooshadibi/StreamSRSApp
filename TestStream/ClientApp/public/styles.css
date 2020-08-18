@@ -98,3 +98,8 @@ body{
     background-image: url('./redback.png');
     padding: 5% 10%;
 }
+.player{
+    width:70%;
+    height:auto;
+    border-radius:10px;
+}
