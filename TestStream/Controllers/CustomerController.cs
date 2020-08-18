@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TestStream.Data;
 using TestStream.Extra_Classes;
 using TestStream.Models;
@@ -30,10 +31,17 @@ namespace TestStream.Controllers
                 List<CustomerProgramDto> list = new List<CustomerProgramDto>();
                 CustomerProgramDto customerDto = new CustomerProgramDto();
 
-                customerDto.PlayList  = new PlayList();
+                var customerPlayList = db.customers
+                    .Where(c => c.IsActive == true)
+                    .Include(c => c.playLists)
+                    .ToList();
+                    //context.Students
+                    //       .Where(s => s.FirstName == "Bill")
+                    //       .Include(s => s.Grade)
+                    //       .FirstOrDefault();
 
 
-                var customers = db.customers.Where(c => c.IsActive == true).ToList();
+                //var customers = db.customers.Where(c => c.IsActive == true).ToList();
                 //foreach (var c in customers)
                 //{
                 //    var program = db.playLists.Where(item => item.CustomerId == c.Id).FirstOrDefault();
@@ -48,7 +56,7 @@ namespace TestStream.Controllers
                 //    });
 
                 //}
-                response.Data = customers;
+                response.Data = customerPlayList;
                 response.Status = true;
                 response.Message = "Received successfully";
                 return Ok(response);

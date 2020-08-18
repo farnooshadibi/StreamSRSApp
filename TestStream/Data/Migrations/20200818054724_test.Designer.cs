@@ -10,8 +10,8 @@ using TestStream.Data;
 namespace TestStream.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200816093444_CreatePlayListEntity")]
-    partial class CreatePlayListEntity
+    [Migration("20200818054724_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -327,6 +327,9 @@ namespace TestStream.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Famous")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

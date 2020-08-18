@@ -12,7 +12,7 @@ namespace TestStream.Models.ApiModels.Customer
         public int StreamKey { get; set; }
         public string Url { get; set; }
         public string Image { get; set; }
+        public List<PlayList> PlayLists { get; set; }
 
-        public PlayList PlayList { get; set; }
     }
 }
