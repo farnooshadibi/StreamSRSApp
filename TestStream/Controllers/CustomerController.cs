@@ -110,9 +110,52 @@ namespace TestStream.Controllers
         {
             try
             {
-                var customers = db.customers.Where(c => c.IsActive == true && c.Famous == true).ToList();
                 Response response = new Response();
-                response.Data = customers;
+
+                var customerPlayList = db.customers
+                    .Where(c => c.IsActive == true && c.Famous == true)
+                    .Select( c => new
+                    {
+                        c ,
+                        PlayList = c.playLists .Where( p => p.EndTime > DateTime.Now)
+                        .OrderBy( p => p.StartTime)
+                        .FirstOrDefault()
+                    })
+                    .ToList();
+
+                response.Data = customerPlayList;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "GetFamousCustomer", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+
+        [HttpGet("GetOtherCustomer")]
+        public ActionResult GetOtherCustomer()
+        {
+            try
+            {
+                Response response = new Response();
+
+                var customerPlayList = db.customers
+                    .Where(c => c.IsActive == true && c.Famous == false)
+                    .Select(c => new
+                    {
+                        c,
+                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now)
+                       .OrderBy(p => p.StartTime)
+                       .FirstOrDefault()
+                    })
+                    .ToList();
+
+                response.Data = customerPlayList;
                 response.Status = true;
                 response.Message = "Received successfully";
                 return Ok(response);
@@ -138,6 +181,7 @@ namespace TestStream.Controllers
                 //customer.StreamKey = customer.Id;
                 customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.KeyStream);
                 customer.IsActive = true;
+                customer.Famous = true;
 
                 //if (customer.Image != null)
                 //{
@@ -266,6 +310,44 @@ namespace TestStream.Controllers
             {
                 writeException.Write(e.Message, DateTime.Now, "Customer", "Delete", "Admin");
                 return this.NotFound("Dosnt Delete successfully");
+            }
+        }
+
+
+        // POST api/values
+        [HttpPost("SearchByName")]
+        public ActionResult SearchByName([FromBody] CustomerSearchDto customer)
+        {
+            try
+            {
+                Response response = new Response();
+
+                string CName = customer.Name;
+
+
+                if (string.IsNullOrEmpty(CName))
+                {
+                    return this.NotFound("حداقل یک مورد را برای جستجو وارد نمایید");
+                }
+
+                else
+                {
+                    var result = db.customers.Where(current => current.Name.Contains(CName)).ToList();
+
+
+                    response.Data = result;
+                    response.Status = true;
+                    response.Message = " Reseive successfully";
+
+
+                    return Ok(response);
+                }
+            }
+
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Post", "Admin");
+                return this.NotFound("Dosnt Reseive successfully");
             }
         }
 

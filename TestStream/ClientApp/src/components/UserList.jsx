@@ -91,8 +91,8 @@ export default class UserList extends Component {
     }
     render() {
         return (
-            <div class="table-responsive box-body rtl">
-                <Link className="btn btn-success rtl" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
+            <div className="table-responsive box-body">
+                <Link className="btn btn-success" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
                 <br />
                 <table style={{
                     fontFamily: 'arial',
@@ -116,12 +116,11 @@ export default class UserList extends Component {
                             <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.name}</td>
                             <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.url}</td>
                             <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{customer.name}</td>
-                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link to={{ pathname: '/user-profile', state: { userId: customer.id, mode: 'edit' } }} >ویرایش </Link></td>
-                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-primary" color="red" onClick={() => { this.handleClickOpen(customer.id) }}> حذف</button></td>
-                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link to={{ pathname: '/user-program', state: { userId: customer.id, mode: 'add' } }} >افزودن برنامه </Link></td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/user-profile', state: { userId: customer.id, mode: 'edit' } }} >ویرایش </Link></td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(customer.id) }}> حذف</button></td>
+                            <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-warning" to={{ pathname: '/user-program', state: { userId: customer.id, mode: 'add' } }} >افزودن برنامه </Link></td>
                         </tr>
                     </tbody>
-
                     )}
                 </table>
 
