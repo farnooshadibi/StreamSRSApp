@@ -35,10 +35,7 @@ namespace TestStream.Controllers
                     .Where(c => c.IsActive == true)
                     .Include(c => c.playLists)
                     .ToList();
-                    //context.Students
-                    //       .Where(s => s.FirstName == "Bill")
-                    //       .Include(s => s.Grade)
-                    //       .FirstOrDefault();
+
 
 
                 //var customers = db.customers.Where(c => c.IsActive == true).ToList();
