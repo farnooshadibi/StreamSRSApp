@@ -5,10 +5,11 @@ import {Link} from 'react-router-dom'
 export default class VideoList extends Component{
     
     render(){
-        const { customer } = this.props;
+        const { customer, mode } = this.props;
+
         return (
             <div>
-                <Link to={`shrine-detail/${customer.id}`}>
+            <Link to={`${mode}/${customer.id}`}>
             <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                 <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
                     <div className="card cardBg"  >
