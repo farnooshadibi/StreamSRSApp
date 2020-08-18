@@ -93,7 +93,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>
                     <div className="underline"></div>
                 <Slider {...settings}>
-                    {filteredCustomers.map((customer, index) =><VideoList key={index} customer={customer} />)}
+                        {filteredCustomers.map((customer, index) => <VideoList key={index} customer={customer} mode="video-detail" />)}
                     </Slider>
                 </div>
                 <div className="upstar">
@@ -103,7 +103,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
                     <div className="underline"></div>
                     <Slider {...settings}>
-                        {shrines.map((shrine, index) => <VideoList key={index} customer={shrine} />)}
+                        {shrines.map((shrine, index) => <VideoList key={index} customer={shrine} mode="shrine-detail" />)}
                     </Slider>
                 </div>
                 <div className="downStar">
