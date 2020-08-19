@@ -8,20 +8,13 @@ import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import './styles/css/bootstrap.min.css';
-//import './styles/css/bootstrap-rtl.min.css';
-import Header from './components/sections/Header';
-//import { Route, Switch } from 'react-router-dom';
-import NoMatch from './components/NoMatch';
 import User from './components/User';
 import UserList from './components/UserList';
 import VideoDetail from './components/VideoDetail';
-import Main from './components/Main';
-import Footer from './components/Footer';
 import ShrineDetail from './components/ShrineDetail';
 import ShrineList from './components/ShrineList';
 import UserProgram from './components/UserProgram';
-import './custom.css'
-import ProgramList from './components/ProgramList';
+import './custom.css';
 import SearchList from './components/SearchList';
 
 export default class App extends Component {

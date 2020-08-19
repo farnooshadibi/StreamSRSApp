@@ -18,7 +18,6 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get('/api/customer')
             .then(response => {
-                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: data
@@ -29,7 +28,6 @@ export default class Home extends Component {
 
         axios.get('/api/shrine')
             .then(response => {
-                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     shrines: data
@@ -84,7 +82,6 @@ export default class Home extends Component {
         const filteredCustomers = customers.filter(customer => {
             return customer.name.toLowerCase().includes(searchField.toLowerCase());
         });
-        console.log(this.state.customers)
         return (
             <div>
                 <div className="cover">

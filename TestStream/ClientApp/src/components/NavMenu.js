@@ -3,12 +3,9 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
-import Header from './sections/Header';
-import axios from 'axios';
 import authService from './api-authorization/AuthorizeService';
-import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
-import SearchBox from './SearchBox/SearchBox';
-import ProgramList from './ProgramList';
+
+
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;

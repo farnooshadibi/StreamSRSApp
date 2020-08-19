@@ -1,5 +1,5 @@
 import React from 'react'
-import { Telegram, Whatsapp, Twitter, Facebook } from 'react-social-sharing'
+import { Telegram, Whatsapp, Twitter } from 'react-social-sharing'
 
 const Footer = () => {
   return(

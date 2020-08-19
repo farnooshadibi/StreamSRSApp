@@ -3,9 +3,6 @@ import axios from 'axios';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import FileInputComponent from 'react-file-input-previews-base64';
-import User from './User';
-//import Cookies from 'universal-cookie';
-//import {Redirect} from 'react-router-dom';
 const apiPost = '/api/PlayList';
 
 

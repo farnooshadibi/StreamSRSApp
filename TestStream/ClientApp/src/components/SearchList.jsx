@@ -1,8 +1,6 @@
-﻿import React, { Component } from 'react'
-import { Telegram, Whatsapp } from 'react-social-sharing'
+﻿import React, { Component } from 'react';
 import './programlist.css';
 import ProgramList from './ProgramList';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class SearchList extends Component {
