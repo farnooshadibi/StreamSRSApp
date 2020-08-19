@@ -16,30 +16,32 @@ import ShrineList from './components/ShrineList';
 import UserProgram from './components/UserProgram';
 import './custom.css';
 import SearchList from './components/SearchList';
+import StreamManagement from './components/StreamManagement';
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
-  render () {
-      return (
-          <div>
-            <Layout>
+    render() {
+        return (
+            <div>
+                <Layout>
 
-                <Route exact path='/' component={Home} />
-                <AuthorizeRoute path="/user-list" component={UserList} />
-                <AuthorizeRoute path="/user-profile" component={User} />
-                  <AuthorizeRoute path="/user-profile/:id" component={User} />
-                  <AuthorizeRoute path="/user-program" component={UserProgram} />
-                <Route path="/video-detail/:id" component={VideoDetail} />
-                <Route path='/counter' component={Counter} />
-                  <AuthorizeRoute path='/fetch-data' component={FetchData} />
-                  <Route path="/shrine-list" component={ShrineList} />
-                  <Route path="/shrine-detail/:id" component={ShrineDetail} />
-                  <Route path="/search-list" component={SearchList} />
-                <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+                    <Route exact path='/' component={Home} />
+                    <AuthorizeRoute path="/user-list" component={UserList} />
+                    <AuthorizeRoute path="/user-profile" component={User} />
+                    <AuthorizeRoute path="/user-profile/:id" component={User} />
+                    <AuthorizeRoute path="/user-program" component={UserProgram} />
+                    <Route path="/video-detail/:id" component={VideoDetail} />
+                    <Route path='/counter' component={Counter} />
+                    <AuthorizeRoute path='/fetch-data' component={FetchData} />
+                    <Route path="/shrine-list" component={ShrineList} />
+                    <Route path="/shrine-detail/:id" component={ShrineDetail} />
+                    <Route path="/search-list" component={SearchList} />
+                    <Route path="/stream-list" component={StreamManagement} />
+                    <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
-              </Layout>
-        </div >
-    );
-  }
+                </Layout>
+            </div >
+        );
+    }
 }

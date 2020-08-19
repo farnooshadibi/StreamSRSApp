@@ -73,6 +73,9 @@ export class NavMenu extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} to="/user-list">مشتریان</NavLink>
                                     </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/stream-list">مدیریت استریم ها</NavLink>
+                                    </NavItem>
                                     <LoginMenu>
                                     </LoginMenu>
                                 </ul>
