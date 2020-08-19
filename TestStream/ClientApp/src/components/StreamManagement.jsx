@@ -30,6 +30,23 @@ export default class UserList extends Component {
         }
     }
     componentDidMount(e) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+        //fetch('http://185.194.76.58:1985/api/v1/clients')
+        //        .then(res => res.json())
+        //        .then(
+        //            (result) => {
+        //                const { data } = result.data;
+        //                console.log("reeeee", result);
+        //                this.setState({ users: data });
+        //            },
+        //            (error) => {
+        //                this.setState({
+        //                    isLoaded: true,
+        //                    error
+        //                });
+        //            }
+        //        )
+
         this.getUserList();
     }
     togglePopup() {
@@ -37,20 +54,27 @@ export default class UserList extends Component {
             showPopup: !this.state.showPopup
         });
     }
-    getUserList() {
-        axios.get('https://185.194.76.58:1985/api/v1/clients')
-            .then(response => {
-                const { data } = response.data;
-                console.log("r", response);
-                this.setState({ users: data });
-            })
-            .catch(error => console.log(error))
-    }
+        getUserList() {
+            //
+            const https = require('https');
+            const agent = new https.Agent({
+                rejectUnauthorized: false
+            });
+            axios.get('http://185.194.76.58:1985/api/v1/clients', { httpsAgent: agent })
+                .then(response => {
+                    const { data } = response.data.clients;
+                    console.log("r", response.data.clients);
+                    console.log("data", data);
+                    this.setState({ users: response.data.clients });
+                    console.log("userrrrrrrr", this.state.users);
+                })
+                .catch(error => console.log(error))
+        }
     handleClickOpen(id) {
         this.setState({ mode: 'delete' })
         //console.log("mode:",this.state.mode)
         this.setState({ setOpen: true, open: true, userId: id })
-        this.setState({ message: "آیا مایل به حذف کاربر هستید؟" })
+        this.setState({ message: "آیا مایل به حذف استریم کاربر هستید؟" })
         //this.handleDelete(id)
     }
     handleClose() {
@@ -58,11 +82,13 @@ export default class UserList extends Component {
     }
     handleDelete(id) {
         const { userId } = this.state;
+        console.log("id", userId);
         this.setState({ mode: 'submit' })
         // if (window.confirm("Do you want delete this User?")) {
-        axios.delete(`/api/customer/${userId}`)
+       
+        axios.delete(`http://185.194.76.58:1985/api/v1/clients/${userId}`)
             .then(response => {
-                this.setState({ open: true, message: "کاربر مورد نظر باموفقیت حذف شد" });
+                this.setState({ open: true, message: "استریم مورد نظر باموفقیت حذف شد" });
                 this.getUserList();
             })
             .catch((error) => {
@@ -100,7 +126,7 @@ export default class UserList extends Component {
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>id</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>stream</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>ip</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>swfUrl</th>
+                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>type</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>Url</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>publish</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>قطع ارتباط</th>
@@ -113,8 +139,8 @@ export default class UserList extends Component {
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.id}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.stream}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.ip}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.swfUrl}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.Url}</td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.type}</td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.url}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.publish}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(client.id) }}> قطع ارتباط</button></td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-warning" to={{ pathname: '/user-program', state: { userId: client.id, mode: 'add' } }} >نمایش </Link></td>
