@@ -10,10 +10,10 @@ export class Layout extends Component {
         return (
             <div>
                 <NavMenu />
-                <div className="Container-fluid">
+                <div>
                     {this.props.children}
                 </div>
-                <Footer />
+                <Footer className="footer" />
             </div>
         );
     }

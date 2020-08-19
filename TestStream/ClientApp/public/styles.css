@@ -13,6 +13,7 @@
 body{
     background-color:#000 !important;
     color:azure !important;
+
 }
 .navbar > .container, .navbar > .container-fluid {
     background-color: #171717 !important;
@@ -80,7 +81,7 @@ body{
     padding-top: 15%;
     padding-left: 46%;
     text-align: center;
-    font-size: 5vw;
+    font-size: 3vw;
     color: #9f9f9f;
     padding-bottom: 15%;
 }
@@ -97,10 +98,38 @@ body{
 
 .bgBarname {
     background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,.5)),url('./redback.png');
-    padding: 5% 10%;
+    padding: 6% 5%;
 }
 .player{
-    width:70%;
+    width:90%;
     height:auto;
     border-radius:10px;
+}
+
+.footer {
+    position: fixed;
+    height: 50px;
+    background-color: red;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+.vjs_video_3-dimensions {
+     width: auto!important; 
+     height: auto!important; 
+}
+
+.video-js {
+    width: 100%!important;
+    height: auto!important;
+    min-height:400px;
+}
+.mybtn-search {
+    height: 30px;
+    padding: 5px;
+    margin: 5px auto;
+    background-color: #4d4d4d;
+    color: #9f9f9f;
 }

@@ -31,9 +31,10 @@ export default class App extends Component {
       return (
           <div>
             <Layout>
-
+                  
                 <Route exact path='/' component={Home} />
-                <AuthorizeRoute path="/user-list" component={UserList} />
+                
+                      <AuthorizeRoute path="/user-list" component={UserList} />
                 <AuthorizeRoute path="/user-profile" component={User} />
                   <AuthorizeRoute path="/user-profile/:id" component={User} />
                   <AuthorizeRoute path="/user-program" component={UserProgram} />

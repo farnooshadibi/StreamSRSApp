@@ -14,7 +14,6 @@ export default class ProgramList extends Component{
                 <div className="carddetail">
                         <h3 style={{ textAlign: "center" }}>{customer.name}</h3>
                         
-
                         <p><i className="fa fa-location-arrow" style={{ fontSize: '15px', color: 'white' }}></i> {customer.name}</p>
                         <p><i className="fa fa-calendar" style={{ fontSize: '15px', color: 'white' }}></i> {customer.name}</p>
                 </div>

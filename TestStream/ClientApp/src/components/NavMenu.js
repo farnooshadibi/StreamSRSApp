@@ -137,7 +137,7 @@ export class NavMenu extends Component {
                                                     value={this.state.name}
                                                     onChange={(event) => { this.setState({ name: event.target.value }); }}
                                                 />
-                                                <Link className="btn btn-light" to={{pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} >جستجو </Link>
+                                                <Link className="btn btn-dark mybtn-search" to={{ pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} ><i className="fa fa-search" style={{ fontSize: '15px', color: 'white', padding: "2px 0 0 2px" }}></i> </Link>
                                                 {/*<SearchBox placeholder='جست و جو' handleSearch={this.handleSearch.bind(this)} />*/}
                                                 </div>
                                         </form>

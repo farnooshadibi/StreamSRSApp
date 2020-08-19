@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+﻿import React, {Component} from 'react';
 import axios from 'axios';
+import Countdown from 'react-sexy-countdown'
+
 import VideoPlayer from './Videojs'
 
 
@@ -9,7 +11,8 @@ export default class ShrineDetail extends Component{
         super(props);
         this.state ={
             video: {},
-            url2:''
+            url2: '',
+            play: false
         }
     }
 
@@ -32,7 +35,7 @@ export default class ShrineDetail extends Component{
     render(){
         //console.log(this.props);
         
-        const { video,url2 } = this.state;
+        const { video, url2, play } = this.state;
         let url = video.url
         console.log(url2)
         const videoJsOptions = {
@@ -53,7 +56,8 @@ export default class ShrineDetail extends Component{
                 <br />
                 <center>
                     <div class="player">
-                    <VideoPlayer {...videoJsOptions} />
+                        <VideoPlayer {...videoJsOptions} />
+                                             
                  </div>
                 </center>
 
