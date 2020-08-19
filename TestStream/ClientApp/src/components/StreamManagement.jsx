@@ -13,6 +13,11 @@ export default class UserList extends Component {
         super(props);
         this.state = {
             users: [],
+            client: {},
+            ip: '',
+            type: '',
+            url: '',
+            tcUrl:'',
             userId: 0,
             showPopup: false,
             setOpen: false,
@@ -70,12 +75,27 @@ export default class UserList extends Component {
                 })
                 .catch(error => console.log(error))
         }
-    handleClickOpen(id) {
-        this.setState({ mode: 'delete' })
+    handleClickOpen(id, client) {
+        console.log("clientttttt", client);
+        this.setState({ mode: 'delete', client: client });
+        console.log("client", this.state.client);
+      //  this.handleRequest();
         //console.log("mode:",this.state.mode)
         this.setState({ setOpen: true, open: true, userId: id })
         this.setState({ message: "آیا مایل به حذف استریم کاربر هستید؟" })
         //this.handleDelete(id)
+    }
+    handleRequest() {
+        //const { name, image } = this.state;
+        axios.post('/api/customer/PostBlockedIp', this.state.client )
+            .then(response => {
+                this.setState({ isSuccess: true, message: "ثبت  با موفقیت انجام شد" });
+            })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ isSuccess: true, mode: 'error', message: 'Error has occurred' })
+            }
+            )
     }
     handleClose() {
         this.setState({ setOpen: false, open: false })
@@ -83,9 +103,9 @@ export default class UserList extends Component {
     handleDelete(id) {
         const { userId } = this.state;
         console.log("id", userId);
-        this.setState({ mode: 'submit' })
+        this.setState({ mode: 'submit' });
         // if (window.confirm("Do you want delete this User?")) {
-       
+        this.handleRequest();
         axios.delete(`http://185.194.76.58:1985/api/v1/clients/${userId}`)
             .then(response => {
                 this.setState({ open: true, message: "استریم مورد نظر باموفقیت حذف شد" });
@@ -142,7 +162,7 @@ export default class UserList extends Component {
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.type}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.url}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{client.publish}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(client.id) }}> قطع ارتباط</button></td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(client.id, client) }}> قطع ارتباط</button></td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-warning" to={{ pathname: '/user-program', state: { userId: client.id, mode: 'add' } }} >نمایش </Link></td>
                             </tr>
                         </tbody>

@@ -351,6 +351,56 @@ namespace TestStream.Controllers
             }
         }
 
+        [HttpGet("GetBlockedIp")]
+        public ActionResult GetBlockedIp()
+        {
+            try
+            {
+                Response response = new Response();
+
+                var customerBlockList = db.blockedIPs.ToList();
+
+                response.Data = customerBlockList;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "GetBlockedIp", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+
+        // POST api/values
+        [HttpPost("PostBlockedIp")]
+        public ActionResult PostBlockedIp([FromBody] BlockedIP blockedIP)
+        {
+            try
+            {
+                Response response = new Response();
+                blockedIP.StreamKey = blockedIP.url.ToString().Replace("/live/", "");
+                blockedIP.Id = 0;
+                db.blockedIPs.Add(blockedIP);
+                db.SaveChanges();
+                response.Data = blockedIP;
+                response.Status = true;
+                response.Message = " Create successfully";
+
+
+                return Ok(response);
+            }
+
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Post", "Admin");
+                return this.NotFound("Dosnt Create successfully");
+            }
+        }
+
+
 
     }
 }
