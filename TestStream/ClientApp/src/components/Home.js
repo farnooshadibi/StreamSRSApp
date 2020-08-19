@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import VideoList from './VideoList';
+import ShrineList from './ShrineList';
 import ProgramList from './ProgramList';
 import Slider from "react-slick";
 import { type } from 'jquery';
@@ -120,7 +121,6 @@ export default class Home extends Component {
                             slidesToScroll: 1
                         }
                     }
-<<<<<<< HEAD
                 ]
             };
         }
@@ -128,24 +128,7 @@ export default class Home extends Component {
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
-||||||| merged common ancestors
-                }
-            ]
-        };
-       
-        const filteredCustomers = customers.filter(customer => {
-            return customer.name.toLowerCase().includes(searchField.toLowerCase());
-        });
-        console.log(this.state.customers)
-=======
-                }
-            ]
-        };
-       
-        const filteredCustomers = customers.filter(customer => {
-            return customer.name.toLowerCase().includes(searchField.toLowerCase());
-        });
->>>>>>> 47bbed743efb1d007b807c4cf0b867c6ffde2750
+
         return (
             <div>
             
@@ -167,7 +150,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
                     <div className="underline"></div>
                     <Slider {...settings2}>
-                        {shrines.map((shrine, index) => <VideoList key={index} customer={shrine} mode="shrine-detail" />)}
+                        {shrines.map((shrine, index) => <ShrineList key={index} customer={shrine} mode="shrine-detail" />)}
                     </Slider>
                 </div>
                 <div className="downStar">
@@ -178,7 +161,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>زمان پخش</h3>
                     <div className="underline"></div>
                     <div className="row">
-                        {shrines.map((shrine, index) => <ProgramList key={index} customer={shrine} mode="shrine-detail" />)}
+                            {customers.data.map((customer, index) => <ProgramList key={index} customer={customer} mode="shrine-detail" />)}
                     </div>
                 </div>
             </div>

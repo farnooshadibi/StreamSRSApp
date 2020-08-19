@@ -7,14 +7,14 @@ export default class VideoList extends Component{
     render(){
         const { customer, mode } = this.props;
         
-
+        
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
             return ('')
         else
             return (
                 <div >
-                <Link to={`${mode}/${customer.c.keyStream}`}>
+                <Link to={`${mode}/${customer.c.id}`}>
                 <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                     <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
                         <div className="card cardBg"  >

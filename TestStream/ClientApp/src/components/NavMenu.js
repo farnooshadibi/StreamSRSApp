@@ -105,7 +105,7 @@ export class NavMenu extends Component {
 
                                     <NavItem>
                                             <div className="text-center" style={{display:'flex'}}>
-                                                <input className='search'
+                                                <input className='searcho'
                                                     type='text'
                                                     placeholder="جستجو"
                                                     value={this.state.name}

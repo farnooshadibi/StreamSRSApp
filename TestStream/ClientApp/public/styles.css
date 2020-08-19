@@ -133,3 +133,10 @@ body{
     background-color: #4d4d4d;
     color: #9f9f9f;
 }
+.searcho {
+    height: 23%;
+    margin-top: 5px;
+    background-color: #343a40;
+    border-radius:8px;
+    border:0;
+}

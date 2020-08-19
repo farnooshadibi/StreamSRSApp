@@ -33,7 +33,8 @@ export default class VideoDetail extends Component{
     render(){
         //console.log(this.props);
         
-    const {video,play} =this.state;
+        const { video, play } = this.state;
+        
         const videoJsOptions = {
             autoplay: true,
             controls: true,
@@ -46,6 +47,7 @@ export default class VideoDetail extends Component{
         if (typeof video === 'undefined' || video === null)
             return ('')
         else
+            console.log(video.url)
             return(
                 <div className="rtl text-center">
                 <h3>{video.name}</h3>
