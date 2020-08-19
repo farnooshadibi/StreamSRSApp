@@ -18,9 +18,9 @@ export default class Home extends Component {
 
     componentDidMount() {
         axios.get('/api/customer/getfamouscustomer')
-            .then(response => {
-                console.log("responseeeeeeeee", response);
-               
+            .then(response => {            
+                console.log("response", response);
+                const { data } = response.data;
                 this.setState({
                     customers: response.data
                 })
@@ -31,7 +31,6 @@ export default class Home extends Component {
 
         axios.get('/api/shrine')
             .then(response => {
-                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     shrines: data
@@ -121,6 +120,7 @@ export default class Home extends Component {
                             slidesToScroll: 1
                         }
                     }
+<<<<<<< HEAD
                 ]
             };
         }
@@ -128,12 +128,30 @@ export default class Home extends Component {
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
+||||||| merged common ancestors
+                }
+            ]
+        };
+       
+        const filteredCustomers = customers.filter(customer => {
+            return customer.name.toLowerCase().includes(searchField.toLowerCase());
+        });
+        console.log(this.state.customers)
+=======
+                }
+            ]
+        };
+       
+        const filteredCustomers = customers.filter(customer => {
+            return customer.name.toLowerCase().includes(searchField.toLowerCase());
+        });
+>>>>>>> 47bbed743efb1d007b807c4cf0b867c6ffde2750
         return (
             <div>
             
             <div className="Container-fluid">
                 <div className="cover">
-                    <p className="heroquote"> به سایت سوگواران<br/> خوش آمدید.</p>
+                    <p className="heroquote"> به سایت سوگواران<br/> خوش آمدید</p>
                 </div>
                 <div className="bgMoharam">
                     <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>

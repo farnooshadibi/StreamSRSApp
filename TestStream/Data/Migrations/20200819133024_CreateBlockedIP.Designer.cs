@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestStream.Data;
 
 namespace TestStream.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819133024_CreateBlockedIP")]
+    partial class CreateBlockedIP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,33 +319,6 @@ namespace TestStream.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("TestStream.Models.BlockedIP", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("IP")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreamKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("tcUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("blockedIPs");
                 });
 
             modelBuilder.Entity("TestStream.Models.Customer", b =>

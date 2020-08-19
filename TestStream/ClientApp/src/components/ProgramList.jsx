@@ -1,7 +1,5 @@
-import React, {Component} from 'react'
-import { Telegram, Whatsapp } from 'react-social-sharing'
-import './programlist.css'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import './programlist.css';
 
 export default class ProgramList extends Component{
     
@@ -18,7 +16,7 @@ export default class ProgramList extends Component{
                         <p><i className="fa fa-calendar" style={{ fontSize: '15px', color: 'white' }}></i> {customer.name}</p>
                 </div>
                 <div className="cardimage">
-                        <img class="myimg" src={customer.image} alt={customer.name} />
+                        <img className="myimg" src={customer.image} alt={customer.name} />
                     </div>
                 </div>
             </div>
