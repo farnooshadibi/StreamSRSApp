@@ -39,7 +39,7 @@ export default class VideoDetail extends Component{
                 type: 'application/x-mpegURL'
             }]
         }
-        if (video.url === "")
+        if (typeof video === 'undefined' || video === null)
             return ('')
         return(
             <div className="rtl text-center">
