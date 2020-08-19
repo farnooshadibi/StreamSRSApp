@@ -130,16 +130,16 @@ export class NavMenu extends Component {
 
                                     <NavItem>
                                         <form onSubmit={this.handleSearch.bind(this)}>
-                                            <div className="text-center">
+                                            <div className="text-center" style={{display:'flex'}}>
                                                 <input className='search'
                                                     type='text'
                                                     placeholder="جستجو"
                                                     value={this.state.name}
                                                     onChange={(event) => { this.setState({ name: event.target.value }); }}
                                                 />
-                                                <button className="btn"> <Link className="btn btn-light " to={{pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} >جستجو </Link></button>
+                                                <Link className="btn btn-light" to={{pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} >جستجو </Link>
                                                 {/*<SearchBox placeholder='جست و جو' handleSearch={this.handleSearch.bind(this)} />*/}
-                                            </div>
+                                                </div>
                                         </form>
 
                                        

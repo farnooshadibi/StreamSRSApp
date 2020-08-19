@@ -12,6 +12,7 @@
 
 body{
     background-color:#000 !important;
+    color:azure !important;
 }
 .navbar > .container, .navbar > .container-fluid {
     background-color: #171717 !important;
