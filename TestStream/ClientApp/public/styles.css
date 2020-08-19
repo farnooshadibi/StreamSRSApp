@@ -11,10 +11,10 @@
 }
 
 body{
-    background-color:#000!important;
+    background-color:#000 !important;
 }
 .navbar > .container, .navbar > .container-fluid {
-    background-color: #171717!important;
+    background-color: #171717 !important;
 }
 
 .navbar-brand, .nav-link {
@@ -95,7 +95,7 @@ body{
 }
 
 .bgBarname {
-    background-image: url('./redback.png');
+    background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,.5)),url('./redback.png');
     padding: 5% 10%;
 }
 .player{

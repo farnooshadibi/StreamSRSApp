@@ -39,6 +39,7 @@ export default class VideoDetail extends Component{
                 type: 'application/x-mpegURL'
             }]
         }
+
         if (video.url === "")
             return ('')
         return(
