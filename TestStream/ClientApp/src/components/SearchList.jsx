@@ -17,11 +17,10 @@ export default class SearchList extends Component {
 
     
     componentWillReceiveProps(nextProps) {
-        // This will erase any local state updates!
-        // Do not do this.
         this.setState({ name: nextProps.location.state });
-        console.log(this.state.name);
-        axios.post('/api/customer/SearchByName', this.state.name)
+        console.log("nextProps", nextProps.location.state);
+        console.log("name", this.state.name);
+        axios.post('/api/customer/SearchByName', nextProps.location.state)
             .then(response => {
                 const { data } = response.data;
                 this.setState({ filteredCustomer: data });
@@ -34,7 +33,6 @@ export default class SearchList extends Component {
     }
 
     componentDidMount() {
-
         const name = this.props.location.state;
 
         axios.post('/api/customer/SearchByName', name)
@@ -49,10 +47,6 @@ export default class SearchList extends Component {
             })
     }
     render() {
-        //const { filteredCustomer, name } = this.props.location.state;
-        //console.log("nnnnn", name);
-        //const { filteredCustomer, mode } = this.props;
-
         return (
             <div>
                 <div className="row">
@@ -60,7 +54,7 @@ export default class SearchList extends Component {
                         نمایش نتایج جستجو
                     </p>
                 </div>
-                <div className="row">
+                <div className="row" style={{ marginBottom:"19%" }}>
                     {this.state.filteredCustomer.map((shrine, index) => <ProgramList key={index} customer={shrine} mode="shrine-detail" />)}
                 </div>
             </div>
