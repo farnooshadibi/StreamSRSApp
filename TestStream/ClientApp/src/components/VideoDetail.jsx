@@ -47,7 +47,7 @@ export default class VideoDetail extends Component{
         if (typeof video === 'undefined' || video === null)
             return ('')
         else
-            console.log(video.url)
+            console.log("saglgmlkmglksdmnfgsdklgklsdl;gjvklsnjklfnvsdhnjklvhnklsdnjk",video)
             return(
                 <div className="rtl text-center">
                 <h3>{video.name}</h3>
@@ -56,8 +56,8 @@ export default class VideoDetail extends Component{
                         <div class="player" >
                             {play ? <VideoPlayer {...videoJsOptions} /> : null}
                             
-                            {play ? null : <Countdown
-                                date="2020-08-19T15:03:00"
+                            {play ? null : <div className="mytimer"><Countdown
+                                date="2020-07-19T15:03:00"
                                 onEndCountdown={(count) => this.setState({ play: true })}
                                 lang="en"
                                 displayText={{
@@ -68,10 +68,10 @@ export default class VideoDetail extends Component{
                                     Sec: 'ثانیه',
                                 }}
                                 lastTextTime={{
-                                    Day: 'D'
                                 }}
                                 isDayDoubleZero={true}
-                            />}
+                            />
+                                </div>}
 
 
                         </div>

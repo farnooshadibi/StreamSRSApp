@@ -13,7 +13,6 @@ export default class Home extends Component {
         this.state = {
             customers: {},
             shrines:[],
-            searchField: ''
         }
     }
 
@@ -45,8 +44,10 @@ export default class Home extends Component {
 
 
     render() {
-        const { customers, searchField, shrines } = this.state;
+        const { customers, shrines } = this.state;
+        var firstSix = []
         let min = 3
+        let i =0
         console.log("customerrrrrrrrrrrrrrr", this.state.customers.data);
         if (typeof this.state.customers === 'undefined' || typeof this.state.customers.data === 'undefined')
             return ('')
@@ -128,11 +129,15 @@ export default class Home extends Component {
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
-
+        while (i < 6) {
+            firstSix.push(this.state.customers.data[i])
+            i++
+            }
+        
         return (
             <div>
-            
             <div className="Container-fluid">
+
                 <div className="cover">
                     <p className="heroquote"> به سایت سوگواران<br/> خوش آمدید</p>
                 </div>
@@ -161,7 +166,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>زمان پخش</h3>
                     <div className="underline"></div>
                     <div className="row">
-                            {customers.data.map((customer, index) => <ProgramList key={index} customer={customer} mode="shrine-detail" />)}
+                            {firstSix.map((customer, index) => customer ? <ProgramList key={index} customer={customer} mode="shrine-detail" /> : null)}
                     </div>
                 </div>
             </div>

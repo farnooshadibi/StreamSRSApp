@@ -8,7 +8,8 @@ export default class VideoList extends Component{
         const { customer, mode } = this.props;
         
         
-        let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
+        let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
+        let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
             return ('')
         else
@@ -22,12 +23,12 @@ export default class VideoList extends Component{
                                     <h3 className="card-title">{customer.c.name}</h3>
                                     <div className="row" style={{ padding: "5px", textAlign: 'right' }}>
                                         <div className="col-md-12" style={{display:"inline-flex"}}>
-                                            <i className="fa fa-location-arrow" style={{ fontSize: '15px', color: 'white', padding:"2px 0 0 2px" }}></i>
+                                            <i className="fa fa-map-marker" style={{ fontSize: '15px', color: 'white', padding:"2px 0 0 2px" }}></i>
                                             <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}> {customer.playList == null ? ' ثبت نشده' :customer.playList.eventPlace}</p>
                                 </div>
                                         <div className="col-md-12" style={{ display: "inline-flex" }}>
                                             <i className="fa fa-calendar" style={{ fontSize: '15px', color: 'white', padding: "2px 0 0 2px"  }}></i>
-                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>  {customer.playList == null ? ' ثبت نشده' : time} </p>
+                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>  {customer.playList == null ? ' ثبت نشده' : (time,'     ', date)} </p>
                                 </div>
                             </div>
                     </div>
