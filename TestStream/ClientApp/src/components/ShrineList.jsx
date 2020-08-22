@@ -18,7 +18,7 @@ export default class ShrineList extends Component{
                                 <div className="row" style={{ padding: "5px", textAlign: 'right' }}>
                                     <div className="col-md-12" style={{display:"inline-flex"}}>
                                         <i className="fa fa-map-marker" style={{ fontSize: '15px', color: 'white', padding:"2px 0 0 2px" }}></i>
-                                        <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}> {customer.name}</p>
+                                        <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}> {customer.description}</p>
                             </div>
 
                         </div>

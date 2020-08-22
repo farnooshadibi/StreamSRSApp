@@ -90,8 +90,8 @@ export default class UserList extends Component {
     }
     render() {
         return (
-            <div className="table-responsive box-body">
-                <Link className="btn btn-success" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
+            <div className="box-body user-listp">
+                <Link className="btn btn-success add-button" to={{ pathname: '/user-profile', state: { mode: 'add' } }}  >افزودن+</Link>
                 <br />
                 <table style={{
                     fontFamily: 'arial',

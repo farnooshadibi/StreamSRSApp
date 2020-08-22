@@ -3,7 +3,10 @@ import axios from 'axios';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import FileInputComponent from 'react-file-input-previews-base64';
+import moment from 'moment-jalaali'
+import DatePicker from 'react-datepicker2';
 const apiPost = '/api/PlayList';
+
 
 
 export default class UserProgram extends Component {
@@ -21,6 +24,7 @@ export default class UserProgram extends Component {
             startTime: new Date(),
             endTime: new Date(),
             description: new Date(),
+            value: moment(),
             performerName: '',
             lamenter: '',
             eventPlace: '',
@@ -100,6 +104,7 @@ export default class UserProgram extends Component {
         //this.setState({ customerId: userId });
         console.log("customerId:", this.state.customerId);
         const { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId } = this.state;
+        console.log("starttttttt", this.state.startTime);
         axios.post(apiPost, { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ثبت برنامه با موفقیت انجام شد" });
@@ -152,20 +157,18 @@ export default class UserProgram extends Component {
                     </div>
                     <div className="form-group rtl">
                         <label>زمان شروع </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="startTime"
-                            value={startTime}
-                            onChange={(event) => { this.setState({ startTime: event.target.value }); }}
+                        <DatePicker
+                            isGregorian={false}
+                            onChange={value => this.setState({ value })}
+                            value={this.state.value}
                         />
                     </div>
                     <div className="form-group rtl">
                         <label>زمان پایان </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="endTime"
-                            value={endTime}
-                            onChange={(event) => { this.setState({ endTime: event.target.value }); }}
+                        <DatePicker
+                            isGregorian={false}
+                            onChange={value => this.setState({ value })}
+                            value={this.state.value}
                         />
                     </div>
                     <div className="form-group rtl">
