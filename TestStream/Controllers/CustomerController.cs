@@ -116,12 +116,12 @@ namespace TestStream.Controllers
 
                 var customerPlayList = db.customers
                     .Where(c => c.IsActive == true && c.Famous == true)
-                    .Select( c => new
+                    .Select(c => new
                     {
-                        c ,
-                        PlayList = c.playLists .Where( p => p.EndTime > DateTime.Now)
-                        .OrderBy( p => p.StartTime)
-                        .FirstOrDefault()
+                        c,
+                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now)
+                       .OrderBy(p => p.StartTime)
+                       .FirstOrDefault()
                     })
                     .ToList();
 
@@ -272,17 +272,32 @@ namespace TestStream.Controllers
                 customerPlayListDto.Name = customer.Name;
                 customerPlayListDto.Url = customer.Url;
                 //customerPlayListDto.customers = customer;
-               // customerPlayListDto.StartTime = program.StartTime;
+                // customerPlayListDto.StartTime = program.StartTime;
 
-
-                if (customerPlayListDto == null)
+               var customerObj = db.customers
+                .Where(customer => customer.Id == id)
+                .Select(customer => new
                 {
-                    return this.NotFound("person doesnt exist");
+                    customer.Token,
+                    customer.Name,
+                    customer.Description,
+                    customer.Url,
+                    startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                .OrderBy(p => p.StartTime)
+                                .FirstOrDefault()
+                                .StartTime
+
+                })
+                 .FirstOrDefault();
+
+                if (customerObj == null)
+                {
+                    return this.NotFound(" doesnt exist");
                 }
                 else
                 {
 
-                    return Ok(customerPlayListDto);
+                    return Ok(customerObj);
                 }
             }
             catch (Exception e)
