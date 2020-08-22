@@ -179,7 +179,7 @@ namespace TestStream.Controllers
 
                 customer.KeyStream = Guid.NewGuid();
                 //customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.218:8080/live/{0}.m3u8", customer.KeyStream);
+                customer.Url = string.Format("http://185.194.76.58:8080/live/{0}.m3u8", customer.KeyStream);
                 customer.IsActive = true;
                 customer.Famous = true;
 
@@ -222,7 +222,11 @@ namespace TestStream.Controllers
         {
             try
             {
+
                 var customer = db.customers.Find(id);
+                //var program = db.playLists.Where(current => current.CustomerId == id && current.EndTime > DateTime.Now).OrderBy(c => c.StartTime)
+                //    .FirstOrDefault().StartTime;
+
                 if (customer == null)
                 {
                     return this.NotFound("person doesnt exist");
