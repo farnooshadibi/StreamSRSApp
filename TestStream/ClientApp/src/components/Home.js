@@ -139,7 +139,7 @@ export default class Home extends Component {
             <div className="Container-fluid">
 
                 <div className="cover">
-                    <p className="heroquote"> به سایت سوگواران<br/> خوش آمدید</p>
+                    <p className="heroquote"> به سایت راهیان<br/> خوش آمدید</p>
                 </div>
                 <div className="bgMoharam">
                     <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>

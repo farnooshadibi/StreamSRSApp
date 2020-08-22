@@ -24,7 +24,7 @@ export default class VideoList extends Component{
                                     <div className="row" style={{ padding: "5px", textAlign: 'right' }}>
                                         <div className="col-md-12" style={{display:"inline-flex"}}>
                                             <i className="fa fa-map-marker" style={{ fontSize: '15px', color: 'white', padding:"2px 0 0 2px" }}></i>
-                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}> {customer.playList == null ? ' ثبت نشده' :customer.playList.eventPlace}</p>
+                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}> {customer.playList == null || customer.playList.eventPlace==='' ? ' ثبت نشده' :customer.playList.eventPlace}</p>
                                 </div>
                                         <div className="col-md-12" style={{ display: "inline-flex" }}>
                                             <i className="fa fa-calendar" style={{ fontSize: '15px', color: 'white', padding: "2px 0 0 2px"  }}></i>
