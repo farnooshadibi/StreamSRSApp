@@ -14,6 +14,10 @@ namespace TestStream.Models
         public string Image { get; set; }
         public bool IsActive { get; set; }
         public bool Famous { get; set; }
+        public string Token { get; set; }
+        public string LatinName { get; set; }
+        public string Description { get; set; }
+        public string StreamKey { get; set; }
         public ICollection<PlayList> playLists { get; set; }
     }
 }

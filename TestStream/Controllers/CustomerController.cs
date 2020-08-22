@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using shortid;
 using TestStream.Data;
 using TestStream.Extra_Classes;
 using TestStream.Models;
@@ -114,12 +116,12 @@ namespace TestStream.Controllers
 
                 var customerPlayList = db.customers
                     .Where(c => c.IsActive == true && c.Famous == true)
-                    .Select( c => new
+                    .Select(c => new
                     {
-                        c ,
-                        PlayList = c.playLists .Where( p => p.EndTime > DateTime.Now)
-                        .OrderBy( p => p.StartTime)
-                        .FirstOrDefault()
+                        c,
+                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now)
+                       .OrderBy(p => p.StartTime)
+                       .FirstOrDefault()
                     })
                     .ToList();
 
@@ -178,8 +180,14 @@ namespace TestStream.Controllers
                 Response response = new Response();
 
                 customer.KeyStream = Guid.NewGuid();
+                customer.StreamKey = customer.KeyStream.ToString().Replace("-", "");
+                string id = ShortId.Generate(true, false);
+                customer.Token = id;
+                string key = customer.KeyStream.ToString().Replace("-", "");
+
+                //customer.Token = GenerateRandomToken.RandomToken();
                 //customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.58:8080/live/{0}.m3u8", customer.KeyStream);
+                customer.Url = string.Format("http://185.194.76.58:8080/live/{0}.m3u8", customer.StreamKey);
                 customer.IsActive = true;
                 customer.Famous = true;
 
@@ -215,7 +223,41 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Create successfully");
             }
         }
+        //renew Token
+        [HttpPost("RenewToken")]
+        public ActionResult RenewToken([FromBody] Customer customer)
+        {
+            try
+            {
+                Response objResponse = new Response();
 
+                var customerObj = db.customers.FirstOrDefault(x => x.Id == customer.Id);
+                if (customerObj == null)
+                {
+                    return this.NotFound("person doesnt exist");
+                }
+                else
+                {
+                    customerObj.Token = ShortId.Generate(true, false);
+                    db.customers.Update(customerObj);
+                    db.SaveChanges();
+                }
+
+
+                objResponse.Data = customerObj;
+                objResponse.Status = true;
+                objResponse.Message = " Edit Successfully";
+
+
+                return Ok(objResponse);
+            }
+
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Post", "Admin");
+                return this.NotFound("Dosnt Create successfully");
+            }
+        }
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
@@ -225,16 +267,37 @@ namespace TestStream.Controllers
 
                 var customer = db.customers.Find(id);
                 //var program = db.playLists.Where(current => current.CustomerId == id && current.EndTime > DateTime.Now).OrderBy(c => c.StartTime)
-                //    .FirstOrDefault().StartTime;
+                //    .FirstOrDefault();
+                CustomerPlayListDto customerPlayListDto = new CustomerPlayListDto();
+                customerPlayListDto.Name = customer.Name;
+                customerPlayListDto.Url = customer.Url;
+                //customerPlayListDto.customers = customer;
+                // customerPlayListDto.StartTime = program.StartTime;
 
-                if (customer == null)
+               var customerObj = db.customers
+                .Where(customer => customer.Id == id)
+                .Select(customer => new
                 {
-                    return this.NotFound("person doesnt exist");
+                    customer.Token,
+                    customer.Name,
+                    customer.Description,
+                    customer.Url,
+                    startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                .OrderBy(p => p.StartTime)
+                                .FirstOrDefault()
+                                .StartTime
+
+                })
+                 .FirstOrDefault();
+
+                if (customerObj == null)
+                {
+                    return this.NotFound(" doesnt exist");
                 }
                 else
                 {
 
-                    return Ok(customer);
+                    return Ok(customerObj);
                 }
             }
             catch (Exception e)
@@ -404,7 +467,32 @@ namespace TestStream.Controllers
             }
         }
 
+        [HttpGet("GetCustomersToken")]
+        public ActionResult GetCustomersToken()
+        {
+            try
+            {
+                Response response = new Response();
 
+                var customers = db.customers
+                    .Where(customer => customer.IsActive == true)
+                    .Select(customer => new { customer.Token, customer.StreamKey, customer.LatinName })
+                    .ToList();
+
+
+                response.Data = customers;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "GetFamousCustomer", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
 
     }
 }
