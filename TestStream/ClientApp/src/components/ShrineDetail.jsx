@@ -1,38 +1,41 @@
-import React, {Component} from 'react';
+﻿import React, { Component } from 'react';
 import axios from 'axios';
+import Countdown from 'react-sexy-countdown'
+
 import VideoPlayer from './Videojs'
 
 
-export default class ShrineDetail extends Component{
+export default class ShrineDetail extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             video: {},
-            url2:''
+            url2: '',
+            play: false
         }
     }
 
-    componentDidMount(){
-        const{params} = this.props.match;
+    componentDidMount() {
+        const { params } = this.props.match;
         axios.get(`/api/shrine/${params.id}`)
-        .then(response => {
-            console.log("r", response);
-            
-            this.setState ({
-                video: response.data,
-                url2: response.data.url
-            })
-        })
+            .then(response => {
+                console.log("r", response);
 
-        .catch( (error ) => console.log(error))
+                this.setState({
+                    video: response.data,
+                    url2: response.data.url
+                })
+            })
+
+            .catch((error) => console.log(error))
     }
 
 
-    render(){
+    render() {
         //console.log(this.props);
-        
-        const { video,url2 } = this.state;
+
+        const { video, url2, play } = this.state;
         let url = video.url
         console.log(url2)
         const videoJsOptions = {
@@ -47,18 +50,19 @@ export default class ShrineDetail extends Component{
         if (url2 === "")
             return ('')
 
-        return(
+        return (
             <div className="rtl text-center">
-            <h3>{video.name}</h3>
+                <h3>{video.name}</h3>
                 <br />
                 <center>
                     <div class="player">
-                    <VideoPlayer {...videoJsOptions} />
-                 </div>
+                        <VideoPlayer {...videoJsOptions} />
+
+                    </div>
                 </center>
 
-        </div>
-            
+            </div>
+
         )
     }
 }

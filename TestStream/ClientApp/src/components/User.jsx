@@ -127,7 +127,7 @@ export default class User extends Component{
         const { name, image} = this.state;
         const { errors } = this.state;
         return(
-            <div className="form-group rtl">
+            <div className="form-group rtl useriformation">
                 <h5 style={{ color:'green' }}>اطلاعات مشتری </h5>                
                 <form  className="col-lg-5" onSubmit={this.handleSubmit.bind(this)}  style={{ marginTop: 30 }}>
                     <div className="form-group rtl">

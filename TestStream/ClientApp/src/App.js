@@ -21,6 +21,7 @@ import StreamManagement from './components/StreamManagement';
 export default class App extends Component {
     static displayName = App.name;
 
+
     render() {
         return (
             <div>
@@ -39,6 +40,7 @@ export default class App extends Component {
                     <Route path="/search-list" component={SearchList} />
                     <Route path="/stream-list" component={StreamManagement} />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+
 
                 </Layout>
             </div >
