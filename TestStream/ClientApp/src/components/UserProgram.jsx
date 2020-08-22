@@ -2,6 +2,8 @@
 import axios from 'axios';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
+import DatePicker from 'react-datepicker2';
+import moment from 'moment-jalaali'
 import FileInputComponent from 'react-file-input-previews-base64';
 const apiPost = '/api/PlayList';
 
@@ -21,6 +23,7 @@ export default class UserProgram extends Component {
             startTime: new Date(),
             endTime: new Date(),
             description: new Date(),
+            value: moment('1399/1/1', 'jYYYY/jM/jD'),
             performerName: '',
             lamenter: '',
             eventPlace: '',
@@ -152,20 +155,18 @@ export default class UserProgram extends Component {
                     </div>
                     <div className="form-group rtl">
                         <label>زمان شروع </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="startTime"
-                            value={startTime}
-                            onChange={(event) => { this.setState({ startTime: event.target.value }); }}
+                        <DatePicker
+                            isGregorian={false}
+                            value={this.state.value}
+                            onChange={value => this.setState({ startTime:value })}
                         />
                     </div>
                     <div className="form-group rtl">
                         <label>زمان پایان </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="endTime"
-                            value={endTime}
-                            onChange={(event) => { this.setState({ endTime: event.target.value }); }}
+                        <DatePicker
+                            isGregorian={false}
+                            value={this.state.value}
+                            onChange={value => this.setState({ endTime:value })}
                         />
                     </div>
                     <div className="form-group rtl">

@@ -135,7 +135,7 @@ export default class UserList extends Component {
     }
     render() {
         return (
-            <div className="table-responsive box-body">
+            <div className="box-body user-listp">
                 <br />
                 <table style={{
                     fontFamily: 'arial',
