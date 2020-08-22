@@ -38,8 +38,11 @@ export default class VideoDetail extends Component{
         const videoJsOptions = {
             autoplay: true,
             controls: true,
+            poster: video.image,
+            language: 'fa',
             sources: [{
                 src: video.url,
+                
                 type: 'application/x-mpegURL'
             }]
         }
@@ -57,7 +60,7 @@ export default class VideoDetail extends Component{
                             {play ? <VideoPlayer {...videoJsOptions} /> : null}
                             
                             {play ? null : <div className="mytimer"><Countdown
-                                date="2020-07-19T15:03:00"
+                                date={video.startTime}
                                 onEndCountdown={(count) => this.setState({ play: true })}
                                 lang="en"
                                 displayText={{
