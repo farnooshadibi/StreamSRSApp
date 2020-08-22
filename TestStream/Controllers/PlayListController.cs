@@ -48,8 +48,8 @@ namespace TestStream.Controllers
             try
             {
                 Response response = new Response();
-                playList.StartTime = DateTime.Now;
-                playList.EndTime = DateTime.Now;
+                //playList.StartTime = DateTime.Now;
+                //playList.EndTime = DateTime.Now;
                 playList.Duration = DateTime.Now;
                 playList.IsActive = true;
 
