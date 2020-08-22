@@ -12,5 +12,8 @@ namespace TestStream.Models.ApiModels.Customer
         public int StreamKey { get; set; }
         public string Url { get; set; }
         public string Image { get; set; }
+        public string Token { get; set; }
+        public string LatinName { get; set; }
+        public Guid KeyStream { get; set; }
     }
 }
