@@ -92,9 +92,9 @@ export class NavMenu extends Component {
         return (
             <div>
                 <header>
-                    <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3">
+                    <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3" style={{fontSize:'120%'} }>
                         <Container>
-                            <NavbarBrand tag={Link} to="/">سوگواران</NavbarBrand>
+                            <NavbarBrand tag={Link} to="/">راهیان</NavbarBrand>
                             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                                 <ul className="navbar-nav flex-grow">

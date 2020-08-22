@@ -1,6 +1,7 @@
 import React from 'react';
 import videojs from 'video.js'
 
+
 export default class VideoPlayer extends React.Component {
   componentDidMount() {
     // instantiate Video.js
