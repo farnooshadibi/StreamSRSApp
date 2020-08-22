@@ -22,7 +22,7 @@ export default class UserProgram extends Component {
             image: '',
             startTime: new Date(),
             endTime: new Date(),
-            description: new Date(),
+            description: '',
             value: moment('1399/1/1', 'jYYYY/jM/jD'),
             performerName: '',
             lamenter: '',

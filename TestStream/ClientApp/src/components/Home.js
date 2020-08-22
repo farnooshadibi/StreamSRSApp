@@ -19,7 +19,7 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get('/api/customer/getfamouscustomer')
             .then(response => {            
-                console.log("response", response);
+               // console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: response.data
@@ -48,7 +48,6 @@ export default class Home extends Component {
         var firstSix = []
         let min = 3
         let i =0
-        console.log("customerrrrrrrrrrrrrrr", this.state.customers.data);
         if (typeof this.state.customers === 'undefined' || typeof this.state.customers.data === 'undefined')
             return ('')
         else {
@@ -125,7 +124,6 @@ export default class Home extends Component {
                 ]
             };
         }
-        console.log(this.state.customers.data)
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
@@ -163,7 +161,7 @@ export default class Home extends Component {
                 </div>
 
                 <div className="bgBarname">
-                    <h3 style={{ textAlign: "center", color: "#fff" }}>زمان پخش</h3>
+                    <h3 style={{ textAlign: "center", color: "#fff" }}>سایر برنامه ها</h3>
                     <div className="underline"></div>
                     <div className="row">
                             {firstSix.map((customer, index) => customer ? <ProgramList key={index} customer={customer} mode="shrine-detail" /> : null)}
