@@ -226,6 +226,7 @@ namespace TestStream.Controllers
         //renew Token
         [HttpPost("RenewToken")]
         public ActionResult RenewToken([FromBody] Customer customer)
+        
         {
             try
             {
@@ -278,7 +279,6 @@ namespace TestStream.Controllers
                 .Where(customer => customer.Id == id)
                 .Select(customer => new
                 {
-                    customer.Token,
                     customer.Name,
                     customer.Description,
                     customer.Url,
