@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { Layout } from './components/Layout';
 import Home from './components/Home';
 import { FetchData } from './components/FetchData';
@@ -25,6 +25,10 @@ export default class App extends Component {
     render() {
         return (
             <div>
+                <Switch>
+                    <Route exact path="/video-detail2/:id" component={VideoDetail} />
+                <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+                <Route path="/">
                 <Layout>
 
                     <Route exact path='/' component={Home} />
@@ -42,7 +46,9 @@ export default class App extends Component {
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
 
-                </Layout>
+                    </Layout>
+                    </Route>
+                </Switch>
             </div >
         );
     }

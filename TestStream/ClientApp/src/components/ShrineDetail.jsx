@@ -39,7 +39,7 @@ export default class ShrineDetail extends Component {
         let url = video.url
         console.log(url2)
         const videoJsOptions = {
-            autoplay: true,
+            autoplay: false,
             controls: true,
             sources: [{
                 src: url2,

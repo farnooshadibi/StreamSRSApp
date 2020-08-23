@@ -19,7 +19,7 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get('/api/customer/getfamouscustomer')
             .then(response => {            
-                console.log("response", response);
+               // console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: response.data
@@ -47,8 +47,11 @@ export default class Home extends Component {
         const { customers, shrines } = this.state;
         var firstSix = []
         let min = 3
+        var now = new Date();
+        now.getHours();
+        now.getMinutes();
+        now.getSeconds();
         let i =0
-        console.log("customerrrrrrrrrrrrrrr", this.state.customers.data);
         if (typeof this.state.customers === 'undefined' || typeof this.state.customers.data === 'undefined')
             return ('')
         else {
@@ -125,7 +128,6 @@ export default class Home extends Component {
                 ]
             };
         }
-        console.log(this.state.customers.data)
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
@@ -133,7 +135,7 @@ export default class Home extends Component {
             firstSix.push(this.state.customers.data[i])
             i++
             }
-        console.log(this.state.customers)
+        console.log("adasdasdasdasdasd",this.state.customers)
 
         return (
             <div>
@@ -146,7 +148,11 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>هیئت های معروف</h3>
                     <div className="underline"></div>
                     <Slider {...settings}>
-                        {customers.data.map((customer, index) => <VideoList key={index} customer={customer} mode="video-detail" />)}
+                            {
+                                customers.data.map((customer, index) =>
+                                    8<11 ?
+                                    <VideoList key={index} customer={customer} mode="video-detail" />: null
+                                )}
                     </Slider>
                 </div>
                 <div className="upstar">
@@ -164,7 +170,7 @@ export default class Home extends Component {
                 </div>
 
                 <div className="bgBarname">
-                    <h3 style={{ textAlign: "center", color: "#fff" }}>زمان پخش</h3>
+                    <h3 style={{ textAlign: "center", color: "#fff" }}>سایر برنامه ها</h3>
                     <div className="underline"></div>
                     <div className="row">
                             {firstSix.map((customer, index) => customer ? <ProgramList key={index} customer={customer} mode="shrine-detail" /> : null)}

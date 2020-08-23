@@ -19,7 +19,12 @@ export default class User extends Component{
             message:'',
             name: '',
             url: '',
-            image: ''
+            image: '',
+            isActive: true,
+            famous: true,
+            description: '',
+            latinName:''
+
         }
     }
     componentDidMount(){
@@ -50,7 +55,9 @@ export default class User extends Component{
                         ...prevState.fields,
                         name: response.data.name,
                         url: response.data.url,
-                        image: response.data.image
+                    image: response.data.image,
+                    latinName: response.data.latinName,
+                    description: response.data.description
                 })
                 )
             }
@@ -90,8 +97,8 @@ export default class User extends Component{
         })
     }
     handleRequest() {
-            const {name,image} = this.state;
-            axios.post(apiPost, {name,image})
+        const { name, image, description, latinName, isActive, famous } = this.state;
+        axios.post(apiPost, { name, image, description, latinName, isActive, famous})
                 .then(response => { 
                     this.setState({isSuccess:true, message:"ثبت کاربر با موفقیت انجام شد"} );                           
                 })   
@@ -102,8 +109,8 @@ export default class User extends Component{
             )
     }
     handleSubmitEdit() {        
-        const {Id, name,url, image} = this.state;
-        axios.put(`/api/customer/`, {Id, name,url, image})
+        const { Id, name, url, image, latinName, isActive, famous} = this.state;
+        axios.put(`/api/customer/`, { Id, name, url, image, latinName, isActive, famous})
             .then(response => { 
              //alert(response.data.message);
 
@@ -123,8 +130,8 @@ export default class User extends Component{
     handleCloseCustomizadSnack(){
         this.setState({ isSuccess : false})
     }
-    render(){
-        const { name, image} = this.state;
+    render() {
+        const { name, image, latinName, description, url } = this.state;
         const { errors } = this.state;
         return(
             <div className="form-group rtl useriformation">
@@ -142,6 +149,35 @@ export default class User extends Component{
                         <span className="invalid-feedback rtl" style={{ display: errors["name"] ? 'block' : 'none' }}>{errors["name"]} </span>
                     </div>
                     <div className="form-group rtl">
+                        <label>نام لاتین </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="latinName"
+                            value={latinName}
+                            onChange={(event) => { this.setState({ latinName: event.target.value }); }}
+                        />
+                    </div>
+                    <div className="form-group rtl">
+                        <label>توضیحات </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="description"
+                            value={description}
+                            onChange={(event) => { this.setState({ description: event.target.value }); }}
+                        />
+                    </div>
+                    {this.state.mode === 'edit' ?
+                        <div className="form-group rtl">
+                            <label>url </label>
+                            <input type="text"
+                                className="form-control rtl"
+                                name="url"
+                                value={url}
+                                onChange={(event) => { this.setState({ url: event.target.value }); }}
+                            />
+                        </div>
+                        : null}
+                    <div className="form-group rtl">
                         <label> عکس: </label>
                         {this.state.mode === 'edit'?
                         <img src={image} style={{width:"100%" , height:'15rem' }}/>
@@ -156,7 +192,6 @@ export default class User extends Component{
                     accept="image/*" 
                     />            
                     </div>
-
 
                     <div className="form-group" style={{ marginBottom:220 }}>
                     <br />

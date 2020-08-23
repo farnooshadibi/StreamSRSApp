@@ -16,13 +16,15 @@ export default class VideoDetail extends Component{
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         const{params} = this.props.match;
         axios.get(`/api/customer/${params.id}`)
         .then(response => {
             console.log("r", response);
             this.setState ({
-                video : response.data
+                video: response.data
+
+
             })
         })
 
@@ -34,31 +36,38 @@ export default class VideoDetail extends Component{
         //console.log(this.props);
         
         const { video, play } = this.state;
-        
+        //const isSafari = navigator.userAgent.indexOf("Safari");
+
         const videoJsOptions = {
             autoplay: true,
             controls: true,
             poster: video.image,
-            language: 'fa',
             sources: [{
                 src: video.url,
                 
                 type: 'application/x-mpegURL'
-            }]
+            }],
+            html5: {
+                hls: {
+                    overrideNative: true
+                },
+                nativeVideoTracks: true,
+                nativeAudioTracks: true,
+                nativeTextTracks: true,
+            }
         }
-
-        if (typeof video === 'undefined' || video === null)
-            return ('')
-        else
-            console.log("saglgmlkmglksdmnfgsdklgklsdl;gjvklsnjklfnvsdhnjklvhnklsdnjk",video)
-            return(
+        //debugger;
+        if (this.state && this.state.video) {
+            //videoJsOptions.
+            console.log("saglgmlkmglksdmnfgsdklgklsdl;gjvklsnjklfnvsdhnjklvhnklsdnjk", video)
+            return (
                 <div className="rtl text-center">
-                <h3>{video.name}</h3>
-                <br />
+                    <h3>{video.name}</h3>
+                    <br />
                     <center>
                         <div class="player" >
                             {play ? <VideoPlayer {...videoJsOptions} /> : null}
-                            
+
                             {play ? null : <div className="mytimer"><Countdown
                                 date={video.startTime}
                                 onEndCountdown={(count) => this.setState({ play: true })}
@@ -74,13 +83,16 @@ export default class VideoDetail extends Component{
                                 }}
                                 isDayDoubleZero={true}
                             />
-                                </div>}
+                            </div>}
 
 
                         </div>
-                     </center>       
-                   
+                    </center>
+
                 </div>
             )
+        } else {
+            return (<div>در حال بارگزاری</div>);
+        }
     }
 }

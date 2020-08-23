@@ -5,7 +5,7 @@ import videojs from 'video.js'
 export default class VideoPlayer extends React.Component {
   componentDidMount() {
     // instantiate Video.js
-    this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
+      this.player = videojs(this.videoNode, this.props, videojs.addLanguage('fa'), function onPlayerReady() {
       console.log('onPlayerReady', this)
     });
   }
@@ -24,7 +24,7 @@ export default class VideoPlayer extends React.Component {
     return (
       <div className="videojsplayer">	
             <div data-vjs-player>
-                <video ref={node => this.videoNode = node} className="video-js"></video>
+                <video ref={node => this.videoNode = node} className="video-js" data-setup='{"language":"fa"}'></video>
         </div>
       </div>
     )

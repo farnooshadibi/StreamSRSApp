@@ -226,6 +226,7 @@ namespace TestStream.Controllers
         //renew Token
         [HttpPost("RenewToken")]
         public ActionResult RenewToken([FromBody] Customer customer)
+        
         {
             try
             {
@@ -278,10 +279,10 @@ namespace TestStream.Controllers
                 .Where(customer => customer.Id == id)
                 .Select(customer => new
                 {
-                    customer.Token,
                     customer.Name,
                     customer.Description,
                     customer.Url,
+                    customer.LatinName,
                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault()
@@ -327,6 +328,8 @@ namespace TestStream.Controllers
                     customerObj.Name = customerDto.Name;
                     customerObj.Url = customerDto.Url;
                     customerObj.Image = customerDto.Image;
+                    customerObj.LatinName = customerDto.LatinName;
+                    customerObj.Description = customerDto.Description;
                     db.customers.Update(customerObj);
                     //db.Entry(customerObj).State = EntityState.Modified;
                     db.SaveChanges();
