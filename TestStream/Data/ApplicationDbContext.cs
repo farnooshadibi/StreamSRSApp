@@ -22,5 +22,6 @@ namespace TestStream.Data
         public DbSet<Shrine> shrines { get; set; }
         public DbSet<PlayList> playLists { get; set; }
         public DbSet<BlockedIP> blockedIPs { get; set; }
+        public DbSet<Requester> requesters { get; set; }
     }
 }
