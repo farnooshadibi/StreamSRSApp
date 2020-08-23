@@ -15,5 +15,8 @@ namespace TestStream.Models.ApiModels.Customer
         public string Description { get; set; }
         public string LatinName { get; set; }
         public Guid KeyStream { get; set; }
+        public bool Famous { get; set; }
+        public bool IsActive { get; set; }
+        public string StreamUrl { get; set; }
     }
 }

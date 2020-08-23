@@ -33,28 +33,8 @@ namespace TestStream.Controllers
                 List<CustomerProgramDto> list = new List<CustomerProgramDto>();
                 CustomerProgramDto customerDto = new CustomerProgramDto();
 
-                var customerPlayList = db.customers
-                    .Where(c => c.IsActive == true)
-                    .Include(c => c.playLists)
-                    .ToList();
+                var customerPlayList = db.customers.ToList();
 
-
-
-                //var customers = db.customers.Where(c => c.IsActive == true).ToList();
-                //foreach (var c in customers)
-                //{
-                //    var program = db.playLists.Where(item => item.CustomerId == c.Id).FirstOrDefault();
-
-                //    list.Add(new CustomerProgramDto
-                //    {
-                //        Image = c.Image,
-                //        Url = c.Url,
-                //        Name = c.Name,
-                //        Id = c.Id,
-                //        PlayList = program
-                //    });
-
-                //}
                 response.Data = customerPlayList;
                 response.Status = true;
                 response.Message = "Received successfully";
@@ -187,25 +167,10 @@ namespace TestStream.Controllers
 
                 //customer.Token = GenerateRandomToken.RandomToken();
                 //customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.58:8080/live/{0}.m3u8", customer.StreamKey);
+                customer.Url = string.Format("http://185.194.76.214/live/{0}.m3u8", customer.StreamKey);
+                customer.StreamUrl = string.Format("http://185.194.76.58/live/{0}?token={1}",customer.LatinName, customer.Token);
                 customer.IsActive = true;
                 customer.Famous = true;
-
-                //if (customer.Image != null)
-                //{
-                //    if (customer.Image.Length > 0)//Convert Image to byte and save to database
-                //    {
-                //        byte[] p1 = null;
-                //        using (var fs1 = Image.OpenReadStream())
-                //        using (var ms1 = new MemoryStream())
-                //        {
-                //            fs1.CopyTo(ms1);
-                //            p1 = ms1.ToArray();
-                //        }
-                //        customer.Image = p1;
-                //    }
-                //}
-
 
                 db.customers.Add(customer);
                 db.SaveChanges();
@@ -265,15 +230,10 @@ namespace TestStream.Controllers
         {
             try
             {
-
                 var customer = db.customers.Find(id);
-                //var program = db.playLists.Where(current => current.CustomerId == id && current.EndTime > DateTime.Now).OrderBy(c => c.StartTime)
-                //    .FirstOrDefault();
                 CustomerPlayListDto customerPlayListDto = new CustomerPlayListDto();
                 customerPlayListDto.Name = customer.Name;
                 customerPlayListDto.Url = customer.Url;
-                //customerPlayListDto.customers = customer;
-                // customerPlayListDto.StartTime = program.StartTime;
 
                var customerObj = db.customers
                 .Where(customer => customer.Id == id)
@@ -283,6 +243,10 @@ namespace TestStream.Controllers
                     customer.Description,
                     customer.Url,
                     customer.LatinName,
+                    customer.IsActive,
+                    customer.Famous,
+                    customer.Image,
+                    customer.StreamUrl,
                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault()
@@ -330,6 +294,9 @@ namespace TestStream.Controllers
                     customerObj.Image = customerDto.Image;
                     customerObj.LatinName = customerDto.LatinName;
                     customerObj.Description = customerDto.Description;
+                    customerObj.IsActive = customerDto.IsActive;
+                    customerObj.Famous = customerDto.Famous;
+                    customerObj.StreamUrl = customerDto.StreamUrl;
                     db.customers.Update(customerObj);
                     //db.Entry(customerObj).State = EntityState.Modified;
                     db.SaveChanges();
@@ -352,7 +319,6 @@ namespace TestStream.Controllers
 
         }
 
-
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
@@ -360,14 +326,19 @@ namespace TestStream.Controllers
             try
             {
                 var customer = db.customers.SingleOrDefault(x => x.Id == id);
+                var program = db.playLists.Where(c => c.CustomerId == id).FirstOrDefault();
 
 
-                if (customer != null)
+                if (customer != null && program == null)
                 {
                     db.customers.Remove(customer);
                     db.SaveChanges();
 
                     return Ok("Delete successfully");
+                }
+                else if(customer != null && program != null)
+                {
+                    return this.NotFound("برای مشتریانی که برنامه ثبت شده، امکان حذف وجود ندارد");
                 }
                 else
                 {
@@ -382,7 +353,6 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Delete successfully");
             }
         }
-
 
         // POST api/values
         [HttpPost("SearchByName")]

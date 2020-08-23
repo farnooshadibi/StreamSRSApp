@@ -18,6 +18,7 @@ namespace TestStream.Models
         public string LatinName { get; set; }
         public string Description { get; set; }
         public string StreamKey { get; set; }
+        public string StreamUrl { get; set; }
         public ICollection<PlayList> playLists { get; set; }
     }
 }

@@ -47,11 +47,7 @@ export default class UserList extends Component {
             .catch(error => console.log(error))
     }
     handleClickOpen(id) {
-        this.setState({ mode: 'delete' })
-        //console.log("mode:",this.state.mode)
-        this.setState({ setOpen: true, open: true, userId: id })
-        this.setState({ message: "آیا مایل به حذف کاربر هستید؟" })
-        //this.handleDelete(id)
+        this.setState({ mode: 'delete', setOpen: true, open: true, userId: id, message: "آیا مایل به حذف کاربر هستید؟" });
     }
     handleClose() {
         this.setState({ setOpen: false, open: false })
