@@ -247,6 +247,7 @@ namespace TestStream.Controllers
                     customer.Famous,
                     customer.Image,
                     customer.StreamUrl,
+                    customer.Token,
                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault()

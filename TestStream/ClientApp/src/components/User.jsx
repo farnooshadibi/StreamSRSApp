@@ -23,7 +23,9 @@ export default class User extends Component {
             isActive: false,
             famous: false,
             description: '',
-            latinName: ''
+            latinName: '',
+            streamUrl: '',
+            token:''
 
         }
     }
@@ -59,7 +61,9 @@ export default class User extends Component {
                         latinName: response.data.latinName,
                         description: response.data.description,
                         isActive: response.data.isActive,
-                        famous: response.data.famous
+                        famous: response.data.famous,
+                        streamUrl: response.data.streamUrl,
+                        token: response.data.token
                     })
                     )
                 }
@@ -100,7 +104,7 @@ export default class User extends Component {
     }
     handleRequest() {
         const { name, image, description, latinName, isActive, famous } = this.state;
-        axios.post(apiPost, { name, image, description, latinName, isActive, famous })
+        axios.post(apiPost, { name, image, description, latinName, isActive, famous,  })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ثبت کاربر با موفقیت انجام شد" });
             })
@@ -111,8 +115,8 @@ export default class User extends Component {
             )
     }
     handleSubmitEdit() {
-        const { Id, name, url, image, latinName, isActive, famous } = this.state;
-        axios.put(`/api/customer/`, { Id, name, url, image, latinName, isActive, famous })
+        const { Id, name, url, image, latinName, isActive, famous, streamUrl } = this.state;
+        axios.put(`/api/customer/`, { Id, name, url, image, latinName, isActive, famous, streamUrl })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });
             })
@@ -131,7 +135,7 @@ export default class User extends Component {
         this.setState({ isSuccess: false })
     }
     render() {
-        const { name, image, latinName, description, url, famous, isActive } = this.state;
+        const { name, image, latinName, description, url, famous, isActive, streamUrl, token } = this.state;
         const { errors } = this.state;
         return (
             <div className="form-group rtl useriformation">
@@ -183,7 +187,8 @@ export default class User extends Component {
                             </label>
                     </div>
 
-                        {this.state.mode === 'edit' ?
+                    {this.state.mode === 'edit' ?
+                        <div>
                             <div className="form-group rtl">
                                 <label>url </label>
                                 <input type="text"
@@ -192,7 +197,27 @@ export default class User extends Component {
                                     value={url}
                                     onChange={(event) => { this.setState({ url: event.target.value }); }}
                                 />
+                        </div>
+                        <div className="form-group rtl">
+                            <label>StreamUrl </label>
+                            <input type="text"
+                                className="form-control rtl"
+                                name="url"
+                                value={streamUrl}
+                                onChange={(event) => { this.setState({ streamUrl: event.target.value }); }}
+                            />
                             </div>
+                            <div className="form-group rtl">
+                                <label>توکن </label>
+                                <input type="text"
+                                    className="form-control rtl"
+                                    name="token"
+                                    value={token}
+                                    disabled
+                                    onChange={(event) => { this.setState({ token: event.target.value }); }}
+                                />
+                            </div>
+                        </div>
                         : null}
                     <br />
                         <div className="form-group rtl">

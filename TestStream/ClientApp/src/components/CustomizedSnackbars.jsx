@@ -194,7 +194,35 @@ export default class CustomizedSnackbars extends Component {
          </Snackbar>
          :(
           null
-        )}        
+                )}  
+
+            {action === "reNewToken" ?
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={5000}
+                    onClose={this.handleClose.bind(this)}
+                >
+                    <MySnackbarContentWrapper
+                        onClose={this.handleClose.bind(this)}
+                        variant="warning"
+                        message={message}
+                        action={[
+                            <Button key="ok" color="secondary" size="small" onClick={this.props.handleReNewToken}>
+                                بله
+        </Button>,
+                            <Button key="close" color="secondary" size="small" onClick={this.handleClose.bind(this)}>
+                                خیر
+    </Button>
+                        ]}
+                    />
+                </Snackbar>
+                : (
+                    null
+                )} 
       </div>   
     );
   }
