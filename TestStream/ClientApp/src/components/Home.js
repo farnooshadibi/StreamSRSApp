@@ -133,7 +133,8 @@ export default class Home extends Component {
             firstSix.push(this.state.customers.data[i])
             i++
             }
-        
+        console.log(this.state.customers)
+
         return (
             <div>
             <div className="Container-fluid">
