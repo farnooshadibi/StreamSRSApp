@@ -28,7 +28,7 @@ export default class VideoList extends Component{
                                 </div>
                                         <div className="col-md-12" style={{ display: "inline-flex" }}>
                                             <i className="fa fa-calendar" style={{ fontSize: '15px', color: 'white', padding: "11px 0px 3px 10px"  }}></i>
-                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px", direction: 'rtl' }}>  {customer.playList == null ? ' ثبت نشده' : (time,'     ', date)} </p>
+                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px", direction: 'rtl' }}>  {customer.playList == null ? ' ثبت نشده' : `${date}      ${time}`} </p>
                                 </div>
                             </div>
                     </div>

@@ -184,3 +184,11 @@ body{
 .footer-copyright > * {
         font-size: .6rem;
 }
+
+.vjs-modal-dialog-content {
+    font-size: 84%!important;
+}
+
+.myimg {
+    transform: translateX(25%);
+}
