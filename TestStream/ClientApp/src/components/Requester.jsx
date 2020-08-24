@@ -2,9 +2,6 @@
 import axios from 'axios';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-import '../../node_modules/react-dropdown/style.css';
 import { Container } from 'reactstrap';
 const apiPost = '/api/requester';
 
