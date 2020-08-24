@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom'
 export default class ShrineList extends Component{
     
     render(){
-        const { customer, mode } = this.props;
-
+        const { customer, mode, webView } = this.props;
+        let router = webView === true ? '2' : ''
         return (
             <div >
-                <Link style={{ textDecoration: 'none' }} to={`${mode}/${customer.id}`}>
+                <Link style={{ textDecoration: 'none' }} to={`${mode}${router}/${customer.id}`}>
             <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                 <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
                     <div className="card cardBg"  >

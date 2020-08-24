@@ -12,7 +12,8 @@ export default class Home extends Component {
         super(props);
         this.state = {
             customers: {},
-            shrines:[],
+            shrines: [],
+            unfamous:[]
         }
     }
 
@@ -39,11 +40,22 @@ export default class Home extends Component {
             })
             .catch((error) => console.log(error))
 
+        axios.get('/api/customer/getothercustomer')
+            .then(response => {
+                const { data } = response.data;
+                this.setState({
+                    unfamous: data
+                })
+
+            })
+            .catch((error) => console.log(error))
+
     }
 
 
 
     render() {
+        console.log('2+2+2+2+', this.state.unfamous)
         const { customers, shrines } = this.state;
         var firstSix = []
         let min = 3
@@ -131,11 +143,11 @@ export default class Home extends Component {
         if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
             return ('')
         else
-        while (i < 6) {
-            firstSix.push(this.state.customers.data[i])
-            i++
+            while (i < 6) {
+                firstSix.push(this.state.unfamous[i])
+                i++
             }
-        console.log("adasdasdasdasdasd",this.state.customers)
+        console.log("adasdasdasdasdasd",firstSix)
         
         return (
             <div>
@@ -151,7 +163,7 @@ export default class Home extends Component {
                             {
                                 customers.data.map((customer, index) =>
                                     8<11 ?
-                                        <VideoList webview={this.props.webView} key={index} customer={customer} mode="video-detail" />: null
+                                        <VideoList webView={this.props.webView} key={index} customer={customer} mode="video-detail" />: null
                                 )}
                     </Slider>
                 </div>
@@ -162,7 +174,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
                     <div className="underline"></div>
                     <Slider {...settings2}>
-                            {shrines.map((shrine, index) => <ShrineList webview={this.props.webView} key={index} customer={shrine} mode="shrine-detail" />)}
+                            {shrines.map((shrine, index) => <ShrineList webView={this.props.webView} key={index} customer={shrine} mode="shrine-detail" />)}
                     </Slider>
                 </div>
                 <div className="downStar">

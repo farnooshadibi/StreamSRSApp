@@ -5,9 +5,10 @@ import {Link} from 'react-router-dom'
 export default class VideoList extends Component{
     
     render(){
-        const { customer, mode,webView } = this.props;
+        const { customer, mode, webView } = this.props;
         
-        let router=webView ? '2' : ''
+        
+        let router=webView===true ? '2' : ''
         let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )

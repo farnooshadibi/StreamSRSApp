@@ -28,15 +28,13 @@ export default class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/video-detail2/:id" component={VideoDetail} />
-                    <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
-                    <Route path="/requester2" component={Requester} />
-                    <Route exact path="/home2" component={Home} webView='false' />
-
-                    <Route path="/">
-                        <Layout>
-
-                            <Route exact path='/' component={Home} />
+                    <Route path="/app">
+                        <Route exact path="/video-detail2/:id" component={VideoDetail} />
+                        <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+                        <Route path="/requester2" component={Requester} />
+                        <Route exact path="/home2" component={() => <Home webView={true} />} />
+                <Layout>
+                           <Route exact path='/' component={Home} />
                             <AuthorizeRoute path="/user-list" component={UserList} />
                             <AuthorizeRoute path="/user-profile" component={User} />
                             <AuthorizeRoute path="/user-profile/:id" component={User} />
@@ -58,7 +56,7 @@ export default class App extends Component {
                         </Layout>
                     </Route>
                 </Switch>
-            </div >
+            </div>
         );
     }
 }

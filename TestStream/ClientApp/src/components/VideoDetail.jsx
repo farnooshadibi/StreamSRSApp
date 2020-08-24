@@ -35,7 +35,7 @@ export default class VideoDetail extends Component{
 
     render(){
         //console.log(this.props);
-        
+        const { webView } = this.props
         const { video, play } = this.state;
         //const isSafari = navigator.userAgent.indexOf("Safari");
 
@@ -62,7 +62,7 @@ export default class VideoDetail extends Component{
             console.log('reinit:::::::::::::', this.state.reInit, this.state.video.url)
            return (
                 <div className="rtl text-center">
-                    <h3>{this.state.video.name}</h3>
+                    <h3>{webView ? '' : this.state.video.name}</h3>
                     <br />
                     <center>
                        <div class="player" >
