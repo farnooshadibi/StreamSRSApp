@@ -12,6 +12,7 @@ import User from './components/User';
 import UserList from './components/UserList';
 import VideoDetail from './components/VideoDetail';
 import ShrineDetail from './components/ShrineDetail';
+import Requester from './components/Requester'
 import ShrineList from './components/ShrineList';
 import UserProgram from './components/UserProgram';
 import './custom.css';
@@ -28,7 +29,7 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path="/video-detail2/:id" component={VideoDetail} />
                     <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
-
+                    <Route path="/requester2" component={Requester} />
                     <Route exact path="/home2" component={home} webView='false' />
                     
                 <Route path="/">
@@ -46,6 +47,7 @@ export default class App extends Component {
                     <Route path="/shrine-detail/:id" component={ShrineDetail} />
                     <Route path="/search-list" component={SearchList} />
                     <Route path="/stream-list" component={StreamManagement} />
+                    <Route path="/requester" component={Requester} />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
 
