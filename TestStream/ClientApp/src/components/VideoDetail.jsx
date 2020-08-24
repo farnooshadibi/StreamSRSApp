@@ -58,6 +58,7 @@ export default class VideoDetail extends Component{
         }
         //debugger;
         if (this.state && this.state.video) {
+            console.log("ddddd", this.state, this.state.video);
             //videoJsOptions.
             console.log("saglgmlkmglksdmnfgsdklgklsdl;gjvklsnjklfnvsdhnjklvhnklsdnjk", video)
             return (
