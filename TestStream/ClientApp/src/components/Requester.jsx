@@ -115,7 +115,7 @@ export default class Requester extends Component {
         const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, description, eventCity } = this.state;
         axios.post(apiPost, { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, description, eventCity })
             .then(response => {
-                this.setState({ isSuccess: true, message: "ثبت اطلاعات با موفقیت انجام شد" });
+                this.setState({ isSuccess: true, message: "ثبت اطلاعات با موفقیت انجام شد، کارشناسان در اسرع وقت با شما تماس می گیرند" });
             })
             .catch((error) => {
                 console.log(error)
