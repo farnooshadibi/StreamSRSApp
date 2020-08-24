@@ -136,7 +136,7 @@ export default class Home extends Component {
             i++
             }
         console.log("adasdasdasdasdasd",this.state.customers)
-
+        
         return (
             <div>
             <div className="Container-fluid">
@@ -151,7 +151,7 @@ export default class Home extends Component {
                             {
                                 customers.data.map((customer, index) =>
                                     8<11 ?
-                                    <VideoList key={index} customer={customer} mode="video-detail" />: null
+                                        <VideoList webview={this.props.webView} key={index} customer={customer} mode="video-detail" />: null
                                 )}
                     </Slider>
                 </div>
@@ -162,7 +162,7 @@ export default class Home extends Component {
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
                     <div className="underline"></div>
                     <Slider {...settings2}>
-                        {shrines.map((shrine, index) => <ShrineList key={index} customer={shrine} mode="shrine-detail" />)}
+                            {shrines.map((shrine, index) => <ShrineList webview={this.props.webView} key={index} customer={shrine} mode="shrine-detail" />)}
                     </Slider>
                 </div>
                 <div className="downStar">

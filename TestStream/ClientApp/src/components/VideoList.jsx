@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom'
 export default class VideoList extends Component{
     
     render(){
-        const { customer, mode } = this.props;
+        const { customer, mode,webView } = this.props;
         
-        
+        let router=webView ? '2' : ''
         let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
@@ -15,10 +15,10 @@ export default class VideoList extends Component{
         else
             return (
                 <div >
-                    <Link style={{textDecoration:'none'}} to={`${mode}/${customer.c.id}`}>
+                    <Link style={{textDecoration:'none'}} to={`${mode}${router}/${customer.c.id}`}>
                 <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                     <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
-                        <div className="card cardBg"  >
+                        <div className="card cardBg">
                                     <img src={customer.c.image} style={{ height: "270px", width: "auto", borderRadius:"26px 26px 0 0"}} className="card-img-top" alt={customer.c.name}/>
                                     <h3 className="card-title">{customer.c.name}</h3>
                                     <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>

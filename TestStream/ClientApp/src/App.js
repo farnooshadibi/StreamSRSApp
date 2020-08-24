@@ -12,12 +12,12 @@ import User from './components/User';
 import UserList from './components/UserList';
 import VideoDetail from './components/VideoDetail';
 import ShrineDetail from './components/ShrineDetail';
+import Requester from './components/Requester'
 import ShrineList from './components/ShrineList';
 import UserProgram from './components/UserProgram';
 import './custom.css';
 import SearchList from './components/SearchList';
 import StreamManagement from './components/StreamManagement';
-import Requester from './components/Requester';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -30,26 +30,28 @@ export default class App extends Component {
                     <Route exact path="/video-detail2/:id" component={VideoDetail} />
                     <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
                     <Route path="/requester2" component={Requester} />
-                    <Route path="/">
-                        <Layout>
+                    <Route exact path="/home2" component={home} webView='false' />
+                    
+                <Route path="/">
+                <Layout>
 
-                            <Route exact path='/' component={Home} />
-                            <AuthorizeRoute path="/user-list" component={UserList} />
-                            <AuthorizeRoute path="/user-profile" component={User} />
-                            <AuthorizeRoute path="/user-profile/:id" component={User} />
-                            <AuthorizeRoute path="/user-program" component={UserProgram} />
-                            <Route path="/video-detail/:id" component={VideoDetail} />
-                            <Route path='/counter' component={Counter} />
-                            <AuthorizeRoute path='/fetch-data' component={FetchData} />
-                            <Route path="/shrine-list" component={ShrineList} />
-                            <Route path="/shrine-detail/:id" component={ShrineDetail} />
-                            <Route path="/search-list" component={SearchList} />
-                            <Route path="/stream-list" component={StreamManagement} />
-                            <Route path="/requester" component={Requester} />
-                            <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+                    <Route exact path='/' component={Home} />
+                    <AuthorizeRoute path="/user-list" component={UserList} />
+                    <AuthorizeRoute path="/user-profile" component={User} />
+                    <AuthorizeRoute path="/user-profile/:id" component={User} />
+                    <AuthorizeRoute path="/user-program" component={UserProgram} />
+                    <Route path="/video-detail/:id" component={VideoDetail} />
+                    <Route path='/counter' component={Counter} />
+                    <AuthorizeRoute path='/fetch-data' component={FetchData} />
+                    <Route path="/shrine-list" component={ShrineList} />
+                    <Route path="/shrine-detail/:id" component={ShrineDetail} />
+                    <Route path="/search-list" component={SearchList} />
+                    <Route path="/stream-list" component={StreamManagement} />
+                    <Route path="/requester" component={Requester} />
+                    <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
 
-                        </Layout>
+                    </Layout>
                     </Route>
                 </Switch>
             </div >
