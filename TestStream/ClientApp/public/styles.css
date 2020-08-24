@@ -46,9 +46,14 @@ body{
     -webkit-backdrop-filter: blur(8px) !important;
     background-color: #e000008a !important;
 }
-.card-title, .card-name{
-    color:white;
-    text-decoration:none;
+.card-title, .card-name {
+    color: white;
+    text-decoration: none;
+}
+
+.card-title, .card-name {
+    font-size: 100%;
+    margin-top: 9px;
 }
 
 .underline {

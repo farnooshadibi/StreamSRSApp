@@ -41,9 +41,9 @@ export default class VideoDetail extends Component{
         const videoJsOptions = {
             autoplay: true,
             controls: true,
-            poster: video.image,
+            poster: this.state.video.image,
             sources: [{
-                src: video.url,
+                src: this.state.video.url,
                 
                 type: 'application/x-mpegURL'
             }],
@@ -60,8 +60,7 @@ export default class VideoDetail extends Component{
         if (this.state && this.state.video) {
             console.log("ddddd", this.state, this.state.video);
             //videoJsOptions.
-            console.log("saglgmlkmglksdmnfgsdklgklsdl;gjvklsnjklfnvsdhnjklvhnklsdnjk", video)
-            return (
+           return (
                 <div className="rtl text-center">
                     <h3>{video.name}</h3>
                     <br />

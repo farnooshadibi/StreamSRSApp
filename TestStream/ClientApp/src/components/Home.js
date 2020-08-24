@@ -16,7 +16,7 @@ export default class Home extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         axios.get('/api/customer/getfamouscustomer')
             .then(response => {            
                // console.log("response", response);
