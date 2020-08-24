@@ -99,7 +99,7 @@ namespace TestStream.Controllers
                     .Select(c => new
                     {
                         c,
-                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now)
+                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now.AddHours(2))
                        .OrderBy(p => p.StartTime)
                        .FirstOrDefault()
                     })
@@ -175,7 +175,7 @@ namespace TestStream.Controllers
 
                 //customer.Token = GenerateRandomToken.RandomToken();
                 //customer.StreamKey = customer.Id;
-                customer.Url = string.Format("http://185.194.76.214/live/{0}.m3u8", customer.StreamKey);
+                customer.Url = string.Format("http://185.194.76.214/live/{0}.m3u8", customer.LatinName);
                 customer.StreamUrl = string.Format("http://185.194.76.58/live/{0}?token={1}",customer.LatinName, customer.Token);
                 customer.IsActive = true;
                 customer.Famous = true;
@@ -256,6 +256,9 @@ namespace TestStream.Controllers
                     customer.Image,
                     customer.StreamUrl,
                     customer.Token,
+                    PlayList= customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                .OrderBy(p => p.StartTime)
+                                .FirstOrDefault(),
                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault()

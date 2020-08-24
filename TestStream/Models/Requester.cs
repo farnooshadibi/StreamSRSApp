@@ -14,9 +14,12 @@ namespace TestStream.Models
         public string PhoneNumber  { get; set; }
         public string Email { get; set; }
         public string DailySchedule { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public bool Processed { get; set; }
+        public string eventCity { get; set; }
+        public string Description { get; set; }
+        public string ReviewerOpinion { get; set; }
 
     }
 }

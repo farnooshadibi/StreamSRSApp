@@ -102,6 +102,9 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} to="/">خانه</NavLink>
                                         <div className="active"></div>
                                     </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/requester">ثبت اطلاعات </NavLink>
+                                    </NavItem>
 
                                     <NavItem>
                                             <div className="text-center" style={{display:'flex'}}>

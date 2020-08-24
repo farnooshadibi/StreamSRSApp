@@ -2,7 +2,9 @@
   font-family: bbc;
   src: url(bbc.woff);
 }
-
+.requester label {
+    font-size: .9rem;
+}
 
 * {
     font-family: bbc, Arial, tahoma;

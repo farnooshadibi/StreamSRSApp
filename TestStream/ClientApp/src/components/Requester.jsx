@@ -2,86 +2,71 @@
 import axios from 'axios';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
-import FileInputComponent from 'react-file-input-previews-base64';
-//import Cookies from 'universal-cookie';
-//import {Redirect} from 'react-router-dom';
-const apiPost = '/api/customer';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import '../../node_modules/react-dropdown/style.css';
+import { Container } from 'reactstrap';
+const apiPost = '/api/requester';
+
+//const options = [
+//    'هر روز', 'فقط امروز', 'روزهای زوج', 'روزهای فرد'
+//];
+//const defaultOption = options[0]
+//const options1 = [
+//    '00:00', '01:00', '02:00', '03:00'
+//];
+//const defaultOption1 = options[0]
 
 
-export default class User extends Component {
+export default class Requester extends Component {
     constructor(props) {
         super(props);
         this.state = {
             errors: {},
             Id: 0,
-            mode: '',
+            mode: 'add',
             isSuccess: false,
             message: '',
-            name: '',
-            url: '',
-            image: '',
-            isActive: false,
-            famous: false,
+            boardName: '',
+            trusteeName: '',
+            agentName: '',
+            phoneNumber: '',
+            email: '',
+            dailySchedule: '',
+            startTime: '',
+            endTime:'',
             description: '',
-            latinName: '',
-            streamUrl: '',
-            token: ''
+            eventCity: '',
+            options:[
+    'هر روز', 'فقط امروز', 'روزهای زوج', 'روزهای فرد'
+],
+            optionss: [
+                { name: 'هر روز', value: 'هر روز' },
+                { name: 'فقط امروز', value: 'فقط امروز' },
+                { name: 'روزهای زوج', value: 'روزهای زوج' }
+            ],
+            defaultOption: 'هر روز',
+            handleSelect: (value: string) => console.log(value)
 
         }
     }
+
+
     componentDidMount() {
-        //with Passing props
-        const { mode } = this.props.location.state
-        if (mode === 'edit') {
-            this.state.mode = 'edit'
-            const { userId } = this.props.location.state
-            this.state.Id = userId
-            this.handleEdit(userId);
-        }
-        else if (mode === 'add') {
-            this.state.mode = 'add'
-        }
-        //with url
-        //const {id} = this.props.match.params
-        //console.log("id:", id) // "foo"
-        //with cookie
-        //const cookies = new Cookies();
-        //console.log("cookie",cookies.get('userId'))
+
     }
-    handleEdit(userId) {
-        axios.get(`/api/customer/${userId}`)
-            .then(
-                response => {
-                    console.log("response", response);
-                    this.setState(prevState => ({
-                        ...prevState.fields,
-                        name: response.data.name,
-                        url: response.data.url,
-                        image: response.data.image,
-                        latinName: response.data.latinName,
-                        description: response.data.description,
-                        isActive: response.data.isActive,
-                        famous: response.data.famous,
-                        streamUrl: response.data.streamUrl,
-                        token: response.data.token
-                    })
-                    )
-                }
-            )
-            .catch((error) => {
-                console.log(error)
-                this.setState({ isSuccess: true, mode: 'error', message: 'ثبت با خطا مواجه شد' })
-            })
+    handleCloseCustomizadSnack() {
+        this.setState({ isSuccess: false })
     }
     handleValidation(callback) {
-        let name = this.state.name;
+        let boardName = this.state.boardName;
         let errors = {};
         let formIsValid = true;
 
         //Name
-        if (validator.isEmpty(name)) {
+        if (validator.isEmpty(boardName)) {
             formIsValid = false;
-            errors["name"] = "نام نمیتواند خالی باشد";
+            errors["name"] = "نام هیئت نمیتواند خالی باشد";
         }
         this.setState({ errors }, () => {
             return callback(formIsValid);
@@ -103,150 +88,152 @@ export default class User extends Component {
         })
     }
     handleRequest() {
-        const { name, image, description, latinName, isActive, famous } = this.state;
-        axios.post(apiPost, { name, image, description, latinName, isActive, famous, })
+        const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, description, eventCity } = this.state;
+        axios.post(apiPost, { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, description, eventCity })
             .then(response => {
-                this.setState({ isSuccess: true, message: "ثبت کاربر با موفقیت انجام شد" });
+                this.setState({ isSuccess: true, message: "ثبت اطلاعات با موفقیت انجام شد" });
             })
             .catch((error) => {
                 console.log(error)
-                this.setState({ isSuccess: true, mode: 'error', message: 'Error has occurred' })
+                this.setState({ isSuccess: true, mode: 'error', message: 'خطا رخ داد' })
             }
             )
     }
-    handleSubmitEdit() {
-        const { Id, name, url, image, latinName, isActive, famous, streamUrl } = this.state;
-        axios.put(`/api/customer/`, { Id, name, url, image, latinName, isActive, famous, streamUrl })
-            .then(response => {
-                this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });
-            })
-            // .then(this.props.history.push('/user'))
-            .catch(error => {
-                console.log(error);
-                this.setState({ isSuccess: true, mode: 'error', message: 'ثبت با خطا مواجه شد' })
 
-            })
-    }
-    backToList() {
-        return this.props.history.push('/user-list')
-        // return <Redirect to="/user" />
-    }
-    handleCloseCustomizadSnack() {
-        this.setState({ isSuccess: false })
-    }
     render() {
-        const { name, image, latinName, description, url, famous, isActive, streamUrl, token } = this.state;
+        const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, description, eventCity, options } = this.state;
         const { errors } = this.state;
         return (
-            <div className="form-group rtl useriformation">
-                <h5 style={{ color: 'green' }}>اطلاعات مشتری </h5>
-                <form className="col-lg-5" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }}>
-                    <div className="form-group rtl">
-                        <label> نام: </label>
+            <Container>
+                <div className="form-group rtl requester">
+                    <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >ثبت اطلاعات درخواست دهنده </h5>
+                <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }}>
+                    <div className="row">
+                    <div className=" col-lg-4 form-group rtl">
+                        <label> نام هیئت </label>
                         <input type="text"
                             className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
-                            name="name"
-                            value={name}
-                            onChange={(event) => { this.setState({ name: event.target.value }); }}
-                            placeholder="لطفا نام خود را وارد نمائید"
+                            name="boardName"
+                            value={boardName}
+                            onChange={(event) => { this.setState({ boardName: event.target.value }); }}
                         />
                         <span className="invalid-feedback rtl" style={{ display: errors["name"] ? 'block' : 'none' }}>{errors["name"]} </span>
-                    </div>
-                    <div className="form-group rtl">
-                        <label>نام لاتین </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="latinName"
-                            value={latinName}
-                            onChange={(event) => { this.setState({ latinName: event.target.value }); }}
-                        />
-                    </div>
-                    <div className="form-group rtl">
-                        <label>توضیحات </label>
-                        <input type="text"
-                            className="form-control rtl"
-                            name="description"
-                            value={description}
-                            onChange={(event) => { this.setState({ description: event.target.value }); }}
-                        />
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" id="famous" checked={famous}
-                            onChange={(event) => { this.setState({ famous: event.target.checked }); }}
-                        />
-                        <label className="form-check-label" htmlFor="defaultCheck1">
-                            معروف
-                            </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" id="isActive" checked={isActive}
-                            onChange={(event) => { this.setState({ isActive: event.target.checked }); }}
-                        />
-                        <label className="form-check-label" htmlFor="defaultCheck1">
-                            فعال
-                            </label>
-                    </div>
-
-                    {this.state.mode === 'edit' ?
-                        <div>
-                            <div className="form-group rtl">
-                                <label>url </label>
-                                <input type="text"
-                                    className="form-control rtl"
-                                    name="url"
-                                    value={url}
-                                    onChange={(event) => { this.setState({ url: event.target.value }); }}
-                                />
-                            </div>
-                            <div className="form-group rtl">
-                                <label>StreamUrl </label>
-                                <input type="text"
-                                    className="form-control rtl"
-                                    name="url"
-                                    value={streamUrl}
-                                    onChange={(event) => { this.setState({ streamUrl: event.target.value }); }}
-                                />
-                            </div>
-                            <div className="form-group rtl">
-                                <label>توکن </label>
-                                <input type="text"
-                                    className="form-control rtl"
-                                    name="token"
-                                    value={token}
-                                    disabled
-                                    onChange={(event) => { this.setState({ token: event.target.value }); }}
-                                />
-                            </div>
                         </div>
-                        : null}
-                    <br />
-                    <div className="form-group rtl">
-                        <label> عکس: </label>
-                        {this.state.mode === 'edit' ?
-                            <img src={image} style={{ width: "100%", height: '15rem' }} />
-                            : null
-                        }
-                        <FileInputComponent
-                            labelText="انتخاب عکس"
-                            labelStyle={{ fontSize: 14 }}
-                            multiple={false}
-                            value={image}
-                            callbackFunction={(file_arr) => { this.setState({ image: file_arr.base64 }); }}
-                            accept="image/*"
+                    <div className="col-lg-4 form-group rtl">
+                        <label>نام و نام خانوادگی متولی </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="trusteeName"
+                            value={trusteeName}
+                            onChange={(event) => { this.setState({ trusteeName: event.target.value }); }}
                         />
                     </div>
+                    <div className="col-lg-4 form-group rtl">
+                        <label>نام و نام خانوادگی نماینده </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="agentName"
+                            value={agentName}
+                            onChange={(event) => { this.setState({ agentName: event.target.value }); }}
+                        />
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-lg-4 form-group rtl">
+                        <label>شماره موبایل </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="phoneNumber"
+                            value={phoneNumber}
+                            onChange={(event) => { this.setState({ phoneNumber: event.target.value }); }}
+                        />
+                    </div>
+                    <div className="col-lg-4 form-group rtl">
+                        <label>ایمیل </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="email"
+                            value={email}
+                            onChange={(event) => { this.setState({ email: event.target.value }); }}
+                        />
+                    </div>
+                    <div className="col-lg-4 form-group rtl">
+                        <label>شهر برگزاری </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="eventCity"
+                            value={eventCity}
+                            onChange={(event) => { this.setState({ eventCity: event.target.value }); }}
+                        />
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-lg-4 form-group rtl">
+                        <label>برنامه زمانبندی   </label>
+                            <select className="form-control rtl" 
+                            value={this.state.dailySchedule}
+                            onChange={(event) => { this.setState({ dailySchedule: event.target.value }); }}
+                        >
+                            <option value="هر روز">هر روز</option>
+                            <option value="فقط امروز">فقط امروز </option>
+                            <option value="روزهای زوج">روزهای زوج</option>
+                            <option value="روزهای فرد">روزهای فرد</option>
+                        </select>
+                        {/* <Dropdown options={options} onChange={this._onSelect} value={options[0]} placeholder="انتخاب کنید" />*/}
+                    {/*    <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                Dropdown button
+  </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div> */}                  
+                    </div>
+                    <div className="col-lg-4 form-group rtl">
+                        <label>ساعت شروع </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="startTime"
+                            value={startTime}
+                            onChange={(event) => { this.setState({ startTime: event.target.value }); }}
+                            placeholder="مثال 10:00"
+                        />
+                    </div>
+                    <div className="col-lg-4 form-group rtl">
+                        <label>ساعت پایان </label>
+                        <input type="text"
+                            className="form-control rtl"
+                            name="endTime"
+                            value={endTime}
+                            onChange={(event) => { this.setState({ endTime: event.target.value }); }}
+                            placeholder="مثال 12:00"
+                        />
+                        </div>
+                    </div>
+                        <div className="form-group rtl">
+                            <label>توضیحات </label>
+                            <textarea type="text"
+                                className="form-control rtl"
+                                name="description"
+                                value={description}
+                                onChange={(event) => { this.setState({ description: event.target.value }); }}
+                            />
+                        </div>
 
+                    <br />
                     <div className="form-group" style={{ marginBottom: 220 }}>
                         <br />
-                        <button type="submit" className="btn btn-success" style={{ marginLeft: 10 }}>ثبت </button>
-                        <button className="btn btn-info" onClick={this.backToList.bind(this)} > بازگشت به لیست مشتریان</button>
+                        <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10 }}>ثبت </button>
                     </div>
                 </form>
 
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
 
 
-            </div>
+                </div>
+            </Container>
         )
     }
 }
