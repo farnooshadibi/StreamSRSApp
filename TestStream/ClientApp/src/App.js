@@ -28,20 +28,21 @@ export default class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path="/app">
                         <Route exact path="/video-detail2/:id" component={VideoDetail} />
                         <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
                         <Route path="/requester2" component={Requester} />
-                        <Route exact path="/home2" component={() => <Home webView={true} />} />
-                <Layout>
+                    <Route exact path="/home2" component={() => <Home webView={true} />} />
+                    <Route path="/">
+                    <Layout>
+                        
                            <Route exact path='/' component={Home} />
                             <AuthorizeRoute path="/user-list" component={UserList} />
                             <AuthorizeRoute path="/user-profile" component={User} />
                             <AuthorizeRoute path="/user-profile/:id" component={User} />
                             <AuthorizeRoute path="/user-program" component={UserProgram} />
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
-                            <AuthorizeRoute path="/requester-admin" component={Requester} />
-                            <AuthorizeRoute path="/requester/:id" component={Requester} />
+                            <AuthorizeRoute path="/requestReview" component={Requester} />
+                            <AuthorizeRoute path="/requestReview/:id" component={Requester} />
                             <Route path="/video-detail/:id" component={VideoDetail} />
                             <Route path='/counter' component={Counter} />
                             <AuthorizeRoute path='/fetch-data' component={FetchData} />

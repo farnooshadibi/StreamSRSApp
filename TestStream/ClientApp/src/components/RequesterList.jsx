@@ -109,7 +109,7 @@ export default class RequesterList extends Component {
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{req.phoneNumber}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{req.eventCity}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{req.dailySchedule}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/requester/:id', state: { reqId: req.id, mode: 'edit' } }} >بررسی </Link></td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/requestReview', state: { reqId: req.id, mode: 'edit' } }} >بررسی </Link></td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(req.id) }}> حذف</button></td>
                             </tr>
                         </tbody>

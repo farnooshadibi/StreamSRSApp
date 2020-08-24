@@ -35,8 +35,8 @@ export default class Requester extends Component {
             endTime: '',
             description: '',
             eventCity: '',
-            ReviewerOpinion: '',
-            Processed:false,
+            reviewerOpinion: '',
+            processed:false,
             options: [
                 'هر روز', 'فقط امروز', 'روزهای زوج', 'روزهای فرد'
             ],
@@ -68,7 +68,7 @@ export default class Requester extends Component {
         axios.get(`/api/requester/${reqId}`)
             .then(
                 response => {
-                    console.log("response", response);
+                    console.log("response:::::", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         boardName: response.data.boardName,
@@ -80,8 +80,8 @@ export default class Requester extends Component {
                         startTime: response.data.startTime,
                         description: response.data.description,
                         eventCity: response.data.eventCity,
-                        Processed: response.data.Processed,
-                        ReviewerOpinion: response.data.ReviewerOpinion
+                        processed: response.data.processed,
+                        reviewerOpinion: response.data.reviewerOpinion
                     })
                     )
                 }
@@ -92,9 +92,9 @@ export default class Requester extends Component {
             })
     }
     handleSubmitEdit() {
-        this.state.mode = 'edit';
-        const { Id,boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, ReviewerOpinion, description, Processed, eventCity, options } = this.state;
-        axios.put(`/api/requester/`, { Id, boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, ReviewerOpinion, description, Processed, eventCity, options })
+        //this.state.mode = 'edit';
+        const { Id,boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, reviewerOpinion, description, processed, eventCity, options } = this.state;
+        axios.put(`/api/requester/`, { Id, boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, reviewerOpinion, description, processed, eventCity, options })
             .then(response => {
                 this.setState({ isSuccess: true, message: "بررسی اطلاعات با موفقیت انجام شد" });
             })
@@ -179,9 +179,11 @@ export default class Requester extends Component {
     }
 
     render() {
-        const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, ReviewerOpinion, description, Processed, eventCity, options } = this.state;
+        const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, reviewerOpinion, description, processed, eventCity, options } = this.state;
         const { errors } = this.state;
+        console.log(boardName,reviewerOpinion, processed)
         return (
+            
             <Container>
                 <div className="form-group rtl requester">
                     <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >ثبت اطلاعات درخواست دهنده </h5>
@@ -295,8 +297,8 @@ export default class Requester extends Component {
                         {this.state.mode === 'edit' ?
                             <div>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id="Processed" checked={Processed}
-                                        onChange={(event) => { this.setState({ Processed: event.target.checked }); }}
+                                    <input className="form-check-input" type="checkbox" id="processed" checked={processed}
+                                        onChange={(event) => { this.setState({ processed: event.target.checked }); }}
                                     />
                                     <label className="form-check-label" htmlFor="defaultCheck1">
                                         بررسی شده
@@ -306,9 +308,9 @@ export default class Requester extends Component {
                                     <label>نظر بررسی کننده </label>
                                     <textarea type="text"
                                         className="form-control rtl"
-                                        name="ReviewerOpinion"
-                                        value={ReviewerOpinion}
-                                        onChange={(event) => { this.setState({ ReviewerOpinion: event.target.value }); }}
+                                        name="reviewerOpinion"
+                                        value={reviewerOpinion}
+                                        onChange={(event) => { this.setState({ reviewerOpinion: event.target.value }); }}
                                     />
                                 </div>
                             </div>
