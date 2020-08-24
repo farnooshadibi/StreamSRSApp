@@ -27,7 +27,10 @@ export default class App extends Component {
             <div>
                 <Switch>
                     <Route exact path="/video-detail2/:id" component={VideoDetail} />
-                <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+                    <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+
+                    <Route exact path="/home2" component={home} webView='false' />
+                    
                 <Route path="/">
                 <Layout>
 
