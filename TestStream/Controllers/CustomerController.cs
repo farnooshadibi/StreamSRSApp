@@ -105,7 +105,9 @@ namespace TestStream.Controllers
                     })
                     .ToList();
 
-                response.Data = customerPlayList;
+                var customerList = customerPlayList.Where(c => c.PlayList != null).ToList();
+
+                response.Data = customerList;
                 response.Status = true;
                 response.Message = "Received successfully";
                 return Ok(response);
@@ -128,14 +130,20 @@ namespace TestStream.Controllers
 
                 var customerPlayList = db.customers
                     .Where(c => c.IsActive == true && c.Famous == false)
-                    .Select(c => new
+                    .Select(customer => new
                     {
-                        c,
-                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now)
-                       .OrderBy(p => p.StartTime)
-                       .FirstOrDefault()
-                    })
-                    .ToList();
+                        customer.Name,
+                        customer.Description,
+                        customer.Url,
+                        customer.LatinName,
+                        customer.IsActive,
+                        customer.Image,
+                        customer.StreamUrl,
+                        PlayList = customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                .OrderBy(p => p.StartTime)
+                                .FirstOrDefault()
+
+                    }) .ToList();
 
                 response.Data = customerPlayList;
                 response.Status = true;
