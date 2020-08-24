@@ -29,6 +29,7 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path="/video-detail2/:id" component={VideoDetail} />
                     <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+                    <Route path="/requester2" component={Requester} />
                     <Route path="/">
                         <Layout>
 

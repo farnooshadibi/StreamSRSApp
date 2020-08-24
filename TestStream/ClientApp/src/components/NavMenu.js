@@ -104,6 +104,7 @@ export class NavMenu extends Component {
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/requester">ثبت اطلاعات </NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
 
                                     <NavItem>
