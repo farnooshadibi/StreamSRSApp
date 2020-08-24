@@ -12,11 +12,12 @@ export default class VideoDetail extends Component{
         super(props);
         this.state ={
             video: {},
-            play: false
+            play: false,
+            reInit: false
         }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         const{params} = this.props.match;
         axios.get(`/api/customer/${params.id}`)
         .then(response => {
@@ -57,18 +58,17 @@ export default class VideoDetail extends Component{
             }
         }
         //debugger;
-        if (this.state && this.state.video) {
-            console.log("ddddd", this.state, this.state.video);
-            //videoJsOptions.
+        if (this.state && this.state.video.url) {
+            console.log('reinit:::::::::::::', this.state.reInit, this.state.video.url)
            return (
                 <div className="rtl text-center">
-                    <h3>{video.name}</h3>
+                    <h3>{this.state.video.name}</h3>
                     <br />
                     <center>
-                        <div class="player" >
-                            {play ? <VideoPlayer {...videoJsOptions} /> : null}
+                       <div class="player" >
+                           {play ? <VideoPlayer error={this.state.reInit = !this.state.reInit} {...videoJsOptions} /> : null}
 
-                            {play ? null : <div className="mytimer"><Countdown
+                            {play ? false : <div className="mytimer"><Countdown
                                 date={video.startTime}
                                 onEndCountdown={(count) => this.setState({ play: true })}
                                 lang="en"
