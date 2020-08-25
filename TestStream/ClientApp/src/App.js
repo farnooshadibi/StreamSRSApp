@@ -19,6 +19,8 @@ import './custom.css';
 import SearchList from './components/SearchList';
 import StreamManagement from './components/StreamManagement';
 import RequesterList from './components/RequesterList';
+import UserProgramList from './components/UserProgramList';
+
 
 export default class App extends Component {
     static displayName = App.name;
