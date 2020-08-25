@@ -26,7 +26,6 @@ export default class UserProgramList extends Component {
             startTime: new Date(),
             endTime: new Date(),
             description: '',
-            value: moment('1399/1/1', 'jYYYY/jM/jD'),
             performerName: '',
             lamenter: '',
             eventPlace: '',
