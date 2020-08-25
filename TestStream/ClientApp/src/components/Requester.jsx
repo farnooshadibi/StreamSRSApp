@@ -311,24 +311,12 @@ export default class Requester extends Component {
                                 </div>
                                 : null}
                             <br />
-<<<<<<< HEAD
-                            <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10, width:'115px',padding:'10px' }}>ثبت </button>
-                            <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} style={{ marginLeft: 10, width: '115px', padding: '10px'}} > بازگشت </button>
-                        </div>
-                    </form>
-||||||| merged common ancestors
-                            <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10 }}>ثبت </button>
-                            <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} > بازگشت </button>
-                        </div>
-                    </form>
-=======
                             <div className="form-group" style={{ marginBottom: 220 }}>
                                 <br />
                                 <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10 }}>ثبت </button>
                                 <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} > بازگشت </button>
                             </div>
                         </form>
->>>>>>> 27d65a0b5215db206436b14b632db2d1cb000c00
 
                        <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
 
