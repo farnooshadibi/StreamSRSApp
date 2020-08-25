@@ -37,6 +37,7 @@ export default class UserProgram extends Component {
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { programId } = this.props.location.state;
+            console.log("programId", programId)
             this.state.Id = programId;
             this.handleEdit(programId);
         }
@@ -118,8 +119,8 @@ export default class UserProgram extends Component {
             )
     }
     handleSubmitEdit() {
-        const { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive} = this.state;
-        axios.put(`/api/playList/`, { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive })
+        const { Id, name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive} = this.state;
+        axios.put(`/api/playList/`, { Id, name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });
             })

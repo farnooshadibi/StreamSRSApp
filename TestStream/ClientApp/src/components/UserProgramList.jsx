@@ -104,7 +104,7 @@ export default class UserProgramList extends Component {
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.lamenter}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.performerName}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.eventPlace}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/user-program', state: { ProgramId: program.id, mode: 'edit' } }} >ویرایش </Link></td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <Link className="btn btn-primary" to={{ pathname: '/user-program', state: { programId: program.id, mode: 'edit' } }} >ویرایش </Link></td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}> <button className="btn btn-danger" color="red" onClick={() => { this.handleClickOpen(program.id) }}> حذف</button></td>
                         </tr>
                     </tbody>
