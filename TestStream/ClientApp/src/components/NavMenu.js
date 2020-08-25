@@ -76,6 +76,9 @@ export class NavMenu extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} to="/stream-list">مدیریت استریم ها</NavLink>
                                     </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/requester-list">مدیریت درخواست ها</NavLink>
+                                    </NavItem>
                                     <LoginMenu>
                                     </LoginMenu>
                                 </ul>
@@ -103,7 +106,8 @@ export class NavMenu extends Component {
                                         <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink tag={Link} to="/requester">ثبت اطلاعات </NavLink>
+                                        
+                                        <NavLink tag={Link} to={{ pathname: '/requester', state: { mode: 'add' } }} >ثبت اطلاعات </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
 

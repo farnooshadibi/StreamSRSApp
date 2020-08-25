@@ -49,6 +49,7 @@ export default class App extends Component {
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                     <Route exact path="/home2" component={() => <Home webView={true} />} />
 
+
                     </Layout>
                     </Route>
                 </Switch>
