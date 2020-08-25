@@ -40,6 +40,8 @@ export default class App extends Component {
                             <AuthorizeRoute path="/user-profile" component={User} />
                             <AuthorizeRoute path="/user-profile/:id" component={User} />
                             <AuthorizeRoute path="/user-program" component={UserProgram} />
+                            <AuthorizeRoute path="/user-program/:id" component={UserProgram} />
+                            <AuthorizeRoute path="/user-program-list" component={UserProgramList} />
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
                             <AuthorizeRoute path="/requestReview" component={Requester} />
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />

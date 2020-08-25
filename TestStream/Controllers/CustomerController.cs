@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
@@ -11,6 +12,7 @@ using TestStream.Data;
 using TestStream.Extra_Classes;
 using TestStream.Models;
 using TestStream.Models.ApiModels.Customer;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TestStream.Controllers
 {
@@ -30,8 +32,8 @@ namespace TestStream.Controllers
             try
             {
                 Response response = new Response();
-                List<CustomerProgramDto> list = new List<CustomerProgramDto>();
-                CustomerProgramDto customerDto = new CustomerProgramDto();
+                //List<CustomerProgramDto> list = new List<CustomerProgramDto>();
+                //CustomerProgramDto customerDto = new CustomerProgramDto();
 
                 var customerPlayList = db.customers.ToList();
 
@@ -179,14 +181,56 @@ namespace TestStream.Controllers
                 customer.StreamUrl = string.Format("http://185.194.76.58/live/{0}?token={1}",customer.LatinName, customer.Token);
                 customer.IsActive = true;
                 customer.Famous = true;
-
-                db.customers.Add(customer);
-                db.SaveChanges();
-                response.Data = customer;
-                response.Status = true;
-                response.Message = " Create successfully";
+                //
 
 
+                //
+                //1
+
+                //if (!string.IsNullOrEmpty(customer.Image))
+                //{
+                //    var dataparts = customer.Image.Split(',');
+                //    if (dataparts.Length > 1)
+                //    {
+                //        customer.Image = dataparts[1];
+                //    }
+
+                //    var convertImage = Convert.FromBase64String(customer.Image);
+                //    string imageName = customer.Id + "-" + Guid.NewGuid().ToString();
+                //    string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + Path.GetFileName(imageName));
+                //    System.IO.File.WriteAllBytes(filePath, convertImage);
+
+
+                    //string imageName = customer.Id + "-" + Guid.NewGuid().ToString();
+                    //string path = System.Web.HttpContext.Current.Server.MapPath("~/Images/Customers");
+                    //string fullPath = path + imageName + "." + ".jpg";
+                    //File.WriteAllBytes(fullPath, convertImage);
+
+                    //2
+                    //var path = Path.Combine(Server.MapPath("~/Images/Customers"), imageName);
+                    //                    image.SaveAs(path);
+                    //
+
+                    //3
+                    //string DefaultImagePath = HttpContext.Current.Server.MapPath("~/Images/Customers");
+
+                    //byte[] bytes = Convert.FromBase64String(customer.Image);
+
+                    //using (MemoryStream ms = new MemoryStream(bytes))
+                    //{
+                    //    Image pic = Image.FromStream(ms);
+
+                    //    pic.Save(DefaultImagePath + imageName + ".jpg");
+                    //}
+                    //
+
+                    db.customers.Add(customer);
+                    db.SaveChanges();
+                    response.Data = customer;
+                    response.Status = true;
+                    response.Message = " Create successfully";
+
+                //}
                 return Ok(response);
             }
 
