@@ -27,7 +27,8 @@ export default class UserProgram extends Component {
             performerName: '',
             lamenter: '',
             eventPlace: '',
-            customerId:0
+            customerId: 0,
+            isActive: false
         }
     }
     componentDidMount() {
@@ -35,31 +36,34 @@ export default class UserProgram extends Component {
         const { mode } = this.props.location.state
         if (mode === 'edit') {
             this.state.mode = 'edit'
-            const { userId } = this.props.location.state;
-            this.state.Id = userId;
-            this.handleEdit(userId);
+            const { programId } = this.props.location.state;
+            this.state.Id = programId;
+            this.handleEdit(programId);
         }
         else if (mode === 'add') {
             this.state.mode = 'add';
-            const { userId } = this.props.location.state
-            this.state.customerId = userId;
+            const { programId } = this.props.location.state
+            this.state.customerId = programId;
         }
-        //with url
-        //const {id} = this.props.match.params
-        //console.log("id:", id) // "foo"
-        //with cookie
-        //const cookies = new Cookies();
-        //console.log("cookie",cookies.get('userId'))
+
     }
-    handleEdit(userId) {
-        axios.get(`/api/customer/${userId}`)
+    handleEdit(programId) {
+        axios.get(`/api/playList/${programId}`)
             .then(
                 response => {
                     this.setState(prevState => ({
                         ...prevState.fields,
                         name: response.data.name,
                         url: response.data.url,
-                        image: response.data.image
+                        image: response.data.image,
+                        startTime: response.data.startTime,
+                        endTime: response.data.endTime,
+                        description: response.data.description,
+                        performerName: response.data.performerName,
+                        lamenter: response.data.lamenter,
+                        eventPlace: response.data.eventPlace,
+                        customerId: response.data.customerId,
+                        isActive: response.data.isActive
                     })
                     )
                 }
@@ -114,11 +118,9 @@ export default class UserProgram extends Component {
             )
     }
     handleSubmitEdit() {
-        const { Id, name, url, image } = this.state;
-        axios.put(`/api/customer/`, { Id, name, url, image })
+        const { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive} = this.state;
+        axios.put(`/api/playList/`, { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive })
             .then(response => {
-                //alert(response.data.message);
-
                 this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });
             })
             // .then(this.props.history.push('/user'))
@@ -129,7 +131,7 @@ export default class UserProgram extends Component {
             })
     }
     backToList() {
-        return this.props.history.push('/user-list')
+        return this.props.history.push('/user-program-list')
         // return <Redirect to="/user" />
     }
     handleCloseCustomizadSnack() {

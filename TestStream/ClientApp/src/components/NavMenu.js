@@ -69,15 +69,23 @@ export class NavMenu extends Component {
                                 <ul className="navbar-nav flex-grow">
                                     <NavItem>
                                         <NavLink tag={Link} to="/">خانه</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/user-list">مشتریان</NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/user-program-list">مدیریت برنامه های پخش</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/stream-list">مدیریت استریم ها</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/requester-list">مدیریت درخواست ها</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <LoginMenu>
                                     </LoginMenu>

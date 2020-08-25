@@ -30,8 +30,6 @@ namespace TestStream.Controllers
             {
                 Response response = new Response();
 
-
-
                 db.requesters.Add(requester);
                 db.SaveChanges();
                 response.Data = requester;

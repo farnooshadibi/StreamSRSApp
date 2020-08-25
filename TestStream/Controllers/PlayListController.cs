@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestStream.Data;
 using TestStream.Extra_Classes;
 using TestStream.Models;
+using TestStream.Models.ApiModels.PlayList;
 
 namespace TestStream.Controllers
 {
@@ -67,6 +68,106 @@ namespace TestStream.Controllers
             {
                 writeException.Write(e.Message, DateTime.Now, "PlayList", "Post", "Admin");
                 return this.NotFound("Dosnt Create successfully");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            try
+            {
+                var playList = db.playLists.Find(id);
+
+
+                if (playList == null)
+                {
+                    return this.NotFound(" doesnt exist");
+                }
+                else
+                {
+
+                    return Ok(playList);
+                }
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Get", "Admin");
+                return this.NotFound("Dosnt Get Customer successfully");
+            }
+
+
+        }
+        // POST api/values/5
+        [HttpPut]
+        public ActionResult Put([FromBody] PlayListDto playListDto)
+        {
+            try
+            {
+                Response objResponse = new Response();
+
+                var customerObj = db.playLists.FirstOrDefault(x => x.Id == playListDto.Id);
+                if (customerObj == null)
+                {
+                    return this.NotFound("Request doesnt exist");
+                }
+                else
+                {
+                    customerObj.Name = playListDto.Name;
+                    customerObj.StartTime = playListDto.StartTime;
+                    customerObj.EndTime = playListDto.EndTime;
+                    customerObj.Description = playListDto.Description;
+                    customerObj.Image = playListDto.Image;
+                    customerObj.PerformerName = playListDto.PerformerName;
+                    customerObj.Lamenter = playListDto.Lamenter;
+                    customerObj.EventPlace = playListDto.EventPlace;
+                    customerObj.IsActive = playListDto.IsActive;
+                    customerObj.Duration = DateTime.Now;
+
+                    db.playLists.Update(customerObj);
+                    db.SaveChanges();
+                }
+
+
+                objResponse.Data = customerObj;
+                objResponse.Status = true;
+                objResponse.Message = " Edit Successfully";
+
+
+                return Ok(objResponse);
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Put", "Admin");
+                return this.NotFound("Dosnt Edit successfully");
+            }
+
+
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var playlist = db.playLists.SingleOrDefault(x => x.Id == id);
+
+                if (playlist != null)
+                {
+                    db.playLists.Remove(playlist);
+                    db.SaveChanges();
+
+                    return Ok("Delete successfully");
+                }
+                else
+                {
+                    return this.NotFound("Dosnt Delete successfully");
+                }
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Playlist", "Delete", "Admin");
+                return this.NotFound("Dosnt Delete successfully");
             }
         }
     }
