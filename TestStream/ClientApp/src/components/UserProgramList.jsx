@@ -81,7 +81,6 @@ export default class UserProgramList extends Component {
                         <tr>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>URL</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>زمان شروع</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>زمان پایان</th>
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>توضیحات</th>
@@ -97,7 +96,6 @@ export default class UserProgramList extends Component {
                         <tr>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.id}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.name}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.url}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.startTime}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.endTime}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.description}</td>
