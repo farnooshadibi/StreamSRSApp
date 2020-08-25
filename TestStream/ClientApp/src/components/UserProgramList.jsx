@@ -92,7 +92,7 @@ export default class UserProgramList extends Component {
                             <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>حذف</th>
                         </tr>
                     </thead>
-                    {this.state.users.map((program, index) => 
+                    {this.state.programs.map((program, index) => 
                     <tbody >
                         <tr>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.id}</td>
