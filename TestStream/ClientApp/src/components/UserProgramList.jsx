@@ -70,6 +70,7 @@ export default class UserProgramList extends Component {
         this.setState({ open: false })
     }
     render() {
+   
         return (
             <div className="box-body user-listp">
                 <br />
@@ -96,8 +97,8 @@ export default class UserProgramList extends Component {
                         <tr>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.id}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.name}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.startTime}</td>
-                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.endTime}</td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.startTime === null ? ' ثبت نشده ' : new Date(program.startTime).toLocaleString('fa-IR')}</td>
+                                <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.endTime === null ? ' ثبت نشده ' : new Date(program.endTime).toLocaleString('fa-IR')}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.description}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.lamenter}</td>
                                 <td style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>{program.performerName}</td>
