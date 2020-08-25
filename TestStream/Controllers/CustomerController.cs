@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Web;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
@@ -182,24 +183,23 @@ namespace TestStream.Controllers
                 customer.StreamUrl = string.Format("http://185.194.76.58/live/{0}?token={1}",customer.LatinName, customer.Token);
                 customer.IsActive = true;
                 customer.Famous = true;
-                //
-
 
                 //
                 //1
 
-                //if (!string.IsNullOrEmpty(customer.Image))
-                //{
-                //    var dataparts = customer.Image.Split(',');
-                //    if (dataparts.Length > 1)
-                //    {
-                //        customer.Image = dataparts[1];
-                //    }
+                if (!string.IsNullOrEmpty(customer.Image))
+                {
+                    var dataparts = customer.Image.Split(',');
+                    if (dataparts.Length > 1)
+                    {
+                        customer.Image = dataparts[1];
+                    }
 
-                //    var convertImage = Convert.FromBase64String(customer.Image);
-                //    string imageName = customer.Id + "-" + Guid.NewGuid().ToString();
-                //    string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Files/" + Path.GetFileName(imageName));
-                //    System.IO.File.WriteAllBytes(filePath, convertImage);
+                    var convertImage = Convert.FromBase64String(customer.Image);
+                    string imageName = customer.Id + "-" + Guid.NewGuid().ToString();
+                    // string filePath = Server.MapPath("~/Files/" + Path.GetFileName(imageName));
+                    var filePath = Path.Combine("Images/Customers",imageName+".jpg");
+                    System.IO.File.WriteAllBytes(filePath, convertImage);
 
 
                     //string imageName = customer.Id + "-" + Guid.NewGuid().ToString();
@@ -231,7 +231,7 @@ namespace TestStream.Controllers
                     response.Status = true;
                     response.Message = " Create successfully";
 
-                //}
+                }
                 return Ok(response);
             }
 
