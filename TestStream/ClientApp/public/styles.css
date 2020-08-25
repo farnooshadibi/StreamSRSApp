@@ -72,6 +72,7 @@ body{
 }
 .upstar > img {
     width: 100%;
+    margin-top:65px
 }
 
 .downStar {
@@ -81,6 +82,7 @@ body{
 
 .downStar > img {
     width: 100%;
+    margin-bottom:65px;
     transform: rotate(180deg);
 }
 
@@ -133,10 +135,11 @@ body{
 }
 .searcho {
     height: 23%;
-    margin-top: 5px;
+    margin: 5px auto 0 0;
     background-color: #343a40;
     border-radius: 8px;
     border: 0;
+    color:azure;
     font-size: 17px;
 }
 
@@ -192,5 +195,42 @@ body{
 }
 
 .myimg {
-    transform: translateX(25%);
+    transform: translateX(15%);
+}
+
+.searchoButton {
+    margin-right:0
+}
+
+.paraph {
+    margin: 0 auto;
+    text-align:center;
+
+}
+
+.detailevent {
+    background-color: azure;
+    padding: 15px 3px 15px 3px;
+    width:40%;
+    border:0;
+    margin: 35px auto;
+    border-radius:10px;
+}
+
+.detailevent > h3 {
+    font-size: 80%;
+    padding: 10px 0;
+    color: #171717;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+    .detailevent {
+        background-color: azure;
+        padding: 15px 3px 15px 3px;
+        width: 97%;
+        border: 0;
+        margin: 35px auto;
+        border-radius: 10px;
+    }
 }

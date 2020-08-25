@@ -57,12 +57,11 @@ export default class VideoDetail extends Component{
                 nativeTextTracks: true,
             }
         }
-        //debugger;
         if (this.state && this.state.video.url) {
-            console.log('reinit:::::::::::::', this.state.reInit, this.state.video.url)
+            console.log('reinit:::::::::::::', this.state.reInit, this.state.video)
            return (
-                <div className="rtl text-center">
-                    <h3>{webView ? '' : this.state.video.name}</h3>
+               <div className="rtl text-center">
+                   <h3 style={{ marginTop: '20px' }}>{webView ? '' : this.state.video.name}</h3>
                     <br />
                     <center>
                        <div class="player" >
@@ -82,17 +81,26 @@ export default class VideoDetail extends Component{
                                 lastTextTime={{
                                 }}
                                 isDayDoubleZero={true}
-                            />
+                           />
+                               
+                               
                             </div>}
 
 
                         </div>
-                    </center>
+                   </center>
+                   {!this.state.video.playList.eventPlace && !this.state.video.playList.performerName && !this.state.video.playList.lamenter ? null : <div className='detailevent'>
+                       {this.state.video.playList.eventPlace ? <h3>مکان: {this.state.video.playList.eventPlace}</h3> : null}
+                       {this.state.video.playList.performerName ? <h3>سخنران: {this.state.video.playList.performerName}</h3> : null}
+                       {this.state.video.playList.lamenter ? <h3>مداح: {this.state.video.playList.lamenter}</h3> : null}
+                   </div>}
+                   
+                   
 
                 </div>
             )
         } else {
-            return (<div>در حال بارگزاری</div>);
+            return (<div className="paraph">در حال بارگزاری</div>);
         }
     }
 }

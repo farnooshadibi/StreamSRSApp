@@ -27,12 +27,10 @@ export default class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path="/app">
-                        <Route exact path="/video-detail2/:id" component={VideoDetail} />
-                        <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
-                        <Route path="/requester2" component={Requester} />
-                        <Route exact path="/home2" component={() => <Home webView={true} />} />
-                    </Route>
+                    <Route exact path="/video-detail2/:id" component={VideoDetail} />
+                    <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
+                    <Route path="/requester2" component={Requester} />
+                    
                 <Route path="/">
                 <Layout>
                     <Route exact path='/' component={Home} />
@@ -49,7 +47,7 @@ export default class App extends Component {
                     <Route path="/stream-list" component={StreamManagement} />
                     <Route path="/requester" component={Requester} />
                     <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-
+                    <Route exact path="/home2" component={() => <Home webView={true} />} />
 
                     </Layout>
                     </Route>

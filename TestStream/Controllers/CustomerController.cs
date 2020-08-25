@@ -132,6 +132,7 @@ namespace TestStream.Controllers
                     .Where(c => c.IsActive == true && c.Famous == false)
                     .Select(customer => new
                     {
+                        customer.Id,
                         customer.Name,
                         customer.Description,
                         customer.Url,

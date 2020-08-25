@@ -108,6 +108,7 @@ export class NavMenu extends Component {
                                     </NavItem>
 
                                     <NavItem>
+                                        
                                             <div className="text-center" style={{display:'flex'}}>
                                                 <input className='searcho'
                                                     type='text'
@@ -116,11 +117,12 @@ export class NavMenu extends Component {
                                                     onChange={(event) => { this.setState({ name: event.target.value }); }}
                                                 />
 
-                                                <Link className="btn btn-dark mybtn-search" to={{ pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} ><i className="fa fa-search" style={{ fontSize: '15px', color: 'white', padding: "2px 0 0 2px" }}></i> </Link>
+                                            <Link className="btn btn-dark mybtn-search searchoButton" to={{ pathname: '/search-list', state: { filteredCustomer: [1, 2, 3], name: this.state.name } }} ><i className="fa fa-search" style={{ fontSize: '15px', color: 'white', padding: "2px 0 0 2px" }}></i> </Link>
 
 
                                                 {/*<SearchBox placeholder='جست و جو' handleSearch={this.handleSearch.bind(this)} />*/}
-                                                </div>                                      
+                                            </div>                                      
+                                        
                                     </NavItem>
 
                                 </ul>

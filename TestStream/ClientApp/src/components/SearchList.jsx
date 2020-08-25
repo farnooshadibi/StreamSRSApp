@@ -48,7 +48,7 @@ export default class SearchList extends Component {
         return (
             <div>
                 <div className="row">
-                    <p>
+                    <p className="paraph">
                         نمایش نتایج جستجو
                     </p>
                 </div>

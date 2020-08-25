@@ -9,6 +9,7 @@ export default class VideoList extends Component{
         
         
         let router=webView===true ? '2' : ''
+        let defaultImg ='https://lh3.googleusercontent.com/proxy/v_3kVPoOFzjJTfhlTam9DayCrA3lh6FmXLiSMW2FSEuxedN1vJTt3Zc1RF7FCRp1CMg6swIvy5Mkx8Z57oJQ_T2R3elOIcuhUOHcDzfyCUW_o_rXAM2JfURu1g'
         let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
@@ -20,7 +21,7 @@ export default class VideoList extends Component{
                 <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                     <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
                         <div className="card cardBg">
-                                    <img src={customer.c.image} style={{ height: "270px", width: "auto", borderRadius:"26px 26px 0 0"}} className="card-img-top" alt={customer.c.name}/>
+                                    <img src={customer.c.image ? customer.c.image : defaultImg} style={{ height: "270px", width: "auto", borderRadius:"26px 26px 0 0"}} className="card-img-top" alt={customer.c.name}/>
                                     <h3 className="card-title">{customer.c.name}</h3>
                                     <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>
                                         <div className="col-md-12" style={{display:"inline-flex"}}>

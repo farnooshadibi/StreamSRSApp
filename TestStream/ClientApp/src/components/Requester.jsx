@@ -254,8 +254,8 @@ export default class Requester extends Component {
                         <br />
                         <div className="form-group" style={{ marginBottom: 220 }}>
                             <br />
-                            <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10 }}>ثبت </button>
-                            <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} > بازگشت </button>
+                            <button type="submit" className="btn btn-success add-button text-center" style={{ marginLeft: 10, width:'115px',padding:'10px' }}>ثبت </button>
+                            <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} style={{ marginLeft: 10, width: '115px', padding: '10px'}} > بازگشت </button>
                         </div>
                     </form>
 
