@@ -27,8 +27,7 @@ export default class UserProgram extends Component {
             performerName: '',
             lamenter: '',
             eventPlace: '',
-            customerId: 0,
-            isActive: false
+            customerId:0
         }
     }
     componentDidMount() {
@@ -36,35 +35,31 @@ export default class UserProgram extends Component {
         const { mode } = this.props.location.state
         if (mode === 'edit') {
             this.state.mode = 'edit'
-            const { programId } = this.props.location.state;
-            console.log("programId", programId)
-            this.state.Id = programId;
-            this.handleEdit(programId);
+            const { userId } = this.props.location.state;
+            this.state.Id = userId;
+            this.handleEdit(userId);
         }
         else if (mode === 'add') {
             this.state.mode = 'add';
-            const { programId } = this.props.location.state
-            this.state.customerId = programId;
+            const { userId } = this.props.location.state
+            this.state.customerId = userId;
         }
-
+        //with url
+        //const {id} = this.props.match.params
+        //console.log("id:", id) // "foo"
+        //with cookie
+        //const cookies = new Cookies();
+        //console.log("cookie",cookies.get('userId'))
     }
-    handleEdit(programId) {
-        axios.get(`/api/playList/${programId}`)
+    handleEdit(userId) {
+        axios.get(`/api/customer/${userId}`)
             .then(
                 response => {
                     this.setState(prevState => ({
                         ...prevState.fields,
                         name: response.data.name,
                         url: response.data.url,
-                        image: response.data.image,
-                        startTime: response.data.startTime,
-                        endTime: response.data.endTime,
-                        description: response.data.description,
-                        performerName: response.data.performerName,
-                        lamenter: response.data.lamenter,
-                        eventPlace: response.data.eventPlace,
-                        customerId: response.data.customerId,
-                        isActive: response.data.isActive
+                        image: response.data.image
                     })
                     )
                 }
@@ -119,9 +114,11 @@ export default class UserProgram extends Component {
             )
     }
     handleSubmitEdit() {
-        const { Id, name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive} = this.state;
-        axios.put(`/api/playList/`, { Id, name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId, isActive })
+        const { Id, name, url, image } = this.state;
+        axios.put(`/api/customer/`, { Id, name, url, image })
             .then(response => {
+                //alert(response.data.message);
+
                 this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });
             })
             // .then(this.props.history.push('/user'))
@@ -132,7 +129,7 @@ export default class UserProgram extends Component {
             })
     }
     backToList() {
-        return this.props.history.push('/user-program-list')
+        return this.props.history.push('/user-list')
         // return <Redirect to="/user" />
     }
     handleCloseCustomizadSnack() {
@@ -161,7 +158,7 @@ export default class UserProgram extends Component {
                         <DatePicker
                             isGregorian={false}
                             value={this.state.value}
-                            onChange={value => this.setState({ startTime:value })}
+                            onChange={value => this.setState({ startTime: value.toLocaleString('en-IR') })}
                         />
                     </div>
                     <div className="form-group rtl">
@@ -169,7 +166,7 @@ export default class UserProgram extends Component {
                         <DatePicker
                             isGregorian={false}
                             value={this.state.value}
-                            onChange={value => this.setState({ endTime:value })}
+                            onChange={value => this.setState({ endTime: value.toLocaleString('en-IR') })}
                         />
                     </div>
                     <div className="form-group rtl">
