@@ -68,7 +68,7 @@ export default class VideoDetail extends Component{
                            {play ? <VideoPlayer error={this.state.reInit = !this.state.reInit} {...videoJsOptions} /> : null}
 
                             {play ? false : <div className="mytimer"><Countdown
-                                date={video.startTime}
+                                date={video.IntervalSec}
                                 onEndCountdown={(count) => this.setState({ play: true })}
                                 lang="en"
                                 displayText={{

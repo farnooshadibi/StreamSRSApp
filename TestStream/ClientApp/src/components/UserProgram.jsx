@@ -158,7 +158,12 @@ export default class UserProgram extends Component {
                         <DatePicker
                             isGregorian={false}
                             value={this.state.value}
-                            onChange={value => this.setState({ startTime: value.toLocaleString('en-IR') })}
+                            onChange={value => {
+                                var strDateTime = value.format("YYYY-MM-DD HH:mm:ss");
+                                
+                                this.setState({ startTime: strDateTime });
+                            }
+                            }
                         />
                     </div>
                     <div className="form-group rtl">
@@ -166,7 +171,7 @@ export default class UserProgram extends Component {
                         <DatePicker
                             isGregorian={false}
                             value={this.state.value}
-                            onChange={value => this.setState({ endTime: value.toLocaleString('en-IR') })}
+                            onChange={value => this.setState({ endTime: value.format("YYYY-MM-DD HH:mm:ss") })}
                         />
                     </div>
                     <div className="form-group rtl">

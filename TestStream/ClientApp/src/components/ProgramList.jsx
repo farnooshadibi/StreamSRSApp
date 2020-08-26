@@ -10,7 +10,7 @@ export default class ProgramList extends Component{
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         let router = webView === true ? '2' : ''
         let defaultImg = 'https://lh3.googleusercontent.com/proxy/v_3kVPoOFzjJTfhlTam9DayCrA3lh6FmXLiSMW2FSEuxedN1vJTt3Zc1RF7FCRp1CMg6swIvy5Mkx8Z57oJQ_T2R3elOIcuhUOHcDzfyCUW_o_rXAM2JfURu1g'
-
+        if (customer) {
             return (
 
                 <div className="col-md-4" style={{ margin: "20px 0" }}>
@@ -31,6 +31,10 @@ export default class ProgramList extends Component{
 
 
             )
+        }
+        else {
+            return(null)
+        }
         
         }
 }

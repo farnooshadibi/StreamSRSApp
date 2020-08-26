@@ -46,28 +46,35 @@ namespace TestStream.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] PlayList playList)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Response response = new Response();
-                //playList.StartTime = DateTime.Now;
-                //playList.EndTime = DateTime.Now;
-                playList.Duration = DateTime.Now;
-                playList.IsActive = true;
+                try
+                {
+                    Response response = new Response();
+                    //playList.StartTime = DateTime.Now;
+                    //playList.EndTime = DateTime.Now;
+                    playList.Duration = DateTime.Now;
+                    playList.IsActive = true;
 
-                db.playLists.Add(playList);
-                db.SaveChanges();
-                response.Data = playList;
-                response.Status = true;
-                response.Message = " Create successfully";
+                    db.playLists.Add(playList);
+                    db.SaveChanges();
+                    response.Data = playList;
+                    response.Status = true;
+                    response.Message = " Create successfully";
 
 
-                return Ok(response);
+                    return Ok(response);
+                }
+
+                catch (Exception e)
+                {
+                    writeException.Write(e.Message, DateTime.Now, "PlayList", "Post", "Admin");
+                    return this.NotFound("Dosnt Create successfully");
+                }
             }
-
-            catch (Exception e)
+            else
             {
-                writeException.Write(e.Message, DateTime.Now, "PlayList", "Post", "Admin");
-                return this.NotFound("Dosnt Create successfully");
+                return this.NotFound("error");
             }
         }
 
