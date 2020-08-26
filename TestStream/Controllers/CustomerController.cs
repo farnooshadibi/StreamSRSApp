@@ -198,7 +198,7 @@ namespace TestStream.Controllers
                     var convertImage = Convert.FromBase64String(customer.Image);
                     string imageName = customer.LatinName + "-" + Guid.NewGuid().ToString();
                     // string filePath = Server.MapPath("~/Files/" + Path.GetFileName(imageName));
-                    var filePath = Path.Combine("Images/Customers",imageName+".jpg");
+                    var filePath = Path.Combine("Images/Customers",imageName+".png");
                     System.IO.File.WriteAllBytes(filePath, convertImage);
 
                     //3
@@ -293,8 +293,11 @@ namespace TestStream.Controllers
                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault()
-                                .StartTime
-
+                                .StartTime,
+                    IntervalSec = ((customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                .OrderBy(p => p.StartTime)
+                                .FirstOrDefault()
+                                .StartTime - DateTime.Now).TotalSeconds)
                 })
                  .FirstOrDefault();
 

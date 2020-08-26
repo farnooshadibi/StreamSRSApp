@@ -19,5 +19,7 @@ namespace TestStream.Models.ApiModels.PlayList
         public string EventPlace { get; set; }
         public bool IsActive { get; set; }
         public int CustomerId { get; set; }
+
+        public double IntervalSec { get; set; }
     }
 }

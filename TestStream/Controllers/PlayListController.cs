@@ -45,12 +45,12 @@ namespace TestStream.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] PlayList playList)
+        public ActionResult Post([FromBody] PlayListDto playList)
         {
             try
             {
                 Response response = new Response();
-                playList.Duration = DateTime.Now;
+                playList.IntervalSec = (playList.StartTime - DateTime.Now).TotalSeconds ;
                 playList.IsActive = true;
 
                 if (!string.IsNullOrEmpty(playList.Image))
@@ -66,9 +66,25 @@ namespace TestStream.Controllers
                     var filePath = Path.Combine("Images/PlayLists", imageName + ".jpg");
                     System.IO.File.WriteAllBytes(filePath, convertImage);
 
-                    db.playLists.Add(playList);
+                    PlayList ply = new PlayList();
+                    //
+                    ply.Id              = playList.Id;
+                    ply.Name            = playList.Name ;
+                    ply.StartTime       = playList.StartTime ;
+                    ply.EndTime         = playList.EndTime ;
+                    ply.Duration        = DateTime.Now ;
+                    ply.Description     = playList.Description ;
+                    ply.Image           = playList.Image ;
+                    ply.PerformerName   = playList.PerformerName ;
+                    ply.Lamenter        = playList.Lamenter ;
+                    ply.EventPlace      = playList.EventPlace ;
+                    ply.IsActive        = playList.IsActive ;
+                    ply.CustomerId      = playList.CustomerId ;
+
+                    //
+                    db.playLists.Add(ply);
                     db.SaveChanges();
-                    response.Data = playList;
+                    response.Data = ply;
                     response.Status = true;
                     response.Message = " Create successfully";
 

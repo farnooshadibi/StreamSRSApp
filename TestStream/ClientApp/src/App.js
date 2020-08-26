@@ -20,6 +20,8 @@ import SearchList from './components/SearchList';
 import StreamManagement from './components/StreamManagement';
 import RequesterList from './components/RequesterList';
 import UserProgramList from './components/UserProgramList';
+import Shrine from './components/Shrine';
+import ShrineListAdmin from './components/ShrineListAdmin';
 
 
 export default class App extends Component {
@@ -43,6 +45,9 @@ export default class App extends Component {
                             <AuthorizeRoute path="/user-program" component={UserProgram} />
                             <AuthorizeRoute path="/user-program/:id" component={UserProgram} />
                             <AuthorizeRoute path="/user-program-list" component={UserProgramList} />
+                            <AuthorizeRoute path="/shrine" component={Shrine} />
+                            <AuthorizeRoute path="/shrine/:id" component={Shrine} />
+                            <AuthorizeRoute path="/shrine-list-admin" component={ShrineListAdmin} />
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
                             <AuthorizeRoute path="/requestReview" component={Requester} />
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />
