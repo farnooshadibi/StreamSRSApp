@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Images\Customers\" />
+    <Folder Include="Images\PlayLists\" />
     <Folder Include="Images\Shrines\" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -49,18 +50,29 @@ namespace TestStream.Controllers
             try
             {
                 Response response = new Response();
-                //playList.StartTime = DateTime.Now;
-                //playList.EndTime = DateTime.Now;
                 playList.Duration = DateTime.Now;
                 playList.IsActive = true;
 
-                db.playLists.Add(playList);
-                db.SaveChanges();
-                response.Data = playList;
-                response.Status = true;
-                response.Message = " Create successfully";
+                if (!string.IsNullOrEmpty(playList.Image))
+                {
+                    var dataparts = playList.Image.Split(',');
+                    if (dataparts.Length > 1)
+                    {
+                        playList.Image = dataparts[1];
+                    }
 
+                    var convertImage = Convert.FromBase64String(playList.Image);
+                    string imageName = playList.CustomerId + "-" + Guid.NewGuid().ToString();
+                    var filePath = Path.Combine("Images/PlayLists", imageName + ".jpg");
+                    System.IO.File.WriteAllBytes(filePath, convertImage);
 
+                    db.playLists.Add(playList);
+                    db.SaveChanges();
+                    response.Data = playList;
+                    response.Status = true;
+                    response.Message = " Create successfully";
+
+                }
                 return Ok(response);
             }
 
