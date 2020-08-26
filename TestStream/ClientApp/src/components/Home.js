@@ -168,7 +168,7 @@ export default class Home extends Component {
                     </Slider>
                 </div>
                 <div className="upstar">
-                    <img src='./starTop.png' />
+                    <img src='/starTop.png' />
                 </div>
                 <div className="bgMoharam">
                     <h3 style={{ textAlign: "center", color: "#fff" }}>حرم های مطهر</h3>
@@ -178,7 +178,7 @@ export default class Home extends Component {
                     </Slider>
                 </div>
                 <div className="downStar">
-                    <img src='./starTop.png' />
+                    <img src='/starTop.png' />
                 </div>
 
                 <div className="bgBarname">

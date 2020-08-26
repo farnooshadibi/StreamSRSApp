@@ -9,7 +9,7 @@ export default class VideoList extends Component{
         
         
         let router=webView===true ? '2' : ''
-        let defaultImg ='https://lh3.googleusercontent.com/proxy/v_3kVPoOFzjJTfhlTam9DayCrA3lh6FmXLiSMW2FSEuxedN1vJTt3Zc1RF7FCRp1CMg6swIvy5Mkx8Z57oJQ_T2R3elOIcuhUOHcDzfyCUW_o_rXAM2JfURu1g'
+        let defaultImg ='/io.png'
         let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
         if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
