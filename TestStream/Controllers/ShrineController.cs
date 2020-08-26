@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -98,14 +99,26 @@ namespace TestStream.Controllers
                 Response response = new Response();
 
                 shrine.IsActive = true;
+                if (!string.IsNullOrEmpty(shrine.Image))
+                {
+                    var dataparts = shrine.Image.Split(',');
+                    if (dataparts.Length > 1)
+                    {
+                        shrine.Image = dataparts[1];
+                    }
 
-                db.shrines.Add(shrine);
-                db.SaveChanges();
-                response.Data = shrine;
-                response.Status = true;
-                response.Message = " Create successfully";
+                    var convertImage = Convert.FromBase64String(shrine.Image);
+                    string imageName = shrine.Id + "-" + Guid.NewGuid().ToString();
+                    var filePath = Path.Combine("Images/Shrines", imageName + ".jpg");
+                    System.IO.File.WriteAllBytes(filePath, convertImage);
 
+                    db.shrines.Add(shrine);
+                    db.SaveChanges();
+                    response.Data = shrine;
+                    response.Status = true;
+                    response.Message = " Create successfully";
 
+                }
                 return Ok(response);
             }
 

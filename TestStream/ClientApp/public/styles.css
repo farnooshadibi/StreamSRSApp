@@ -209,18 +209,20 @@ body{
 }
 
 .detailevent {
-    background-color: azure;
     padding: 15px 3px 15px 3px;
     width:63%;
     border:0;
     margin: 35px auto;
-    border-radius:10px;
+    border-radius: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(355deg, rgb(84 3 3) 13%, rgb(121 9 9) 46%, rgb(212 5 33) 94%);
+    color: white;
 }
 
 .detailevent > h3 {
-    font-size: 80%;
+    font-size: 85%;
     padding: 10px 0;
-    color: #171717;
+    color: antiquewhite;
     font-weight: 600;
 }
 
