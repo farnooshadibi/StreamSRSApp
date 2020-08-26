@@ -69,16 +69,14 @@ namespace TestStream.Controllers
                         var filePath = Path.Combine("Images/PlayLists", imageName + ".jpg");
                         System.IO.File.WriteAllBytes(filePath, convertImage);
 
-                        db.playLists.Add(playList);
-                        db.SaveChanges();
-                        response.Data = playList;
-                        response.Status = true;
-                        response.Message = " Create successfully";
-
-
-
-                        return Ok(response);
+                        
                     }
+                    db.playLists.Add(playList);
+                    db.SaveChanges();
+                    response.Data = playList;
+                    response.Status = true;
+                    response.Message = " Create successfully";
+                    return Ok(response);
                 }
                 catch (Exception e)
                 {
