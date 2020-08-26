@@ -66,11 +66,13 @@ namespace TestStream.Controllers
 
                         var convertImage = Convert.FromBase64String(playList.Image);
                         string imageName = playList.CustomerId + "-" + Guid.NewGuid().ToString();
-                        var filePath = Path.Combine("Images/PlayLists", imageName + ".jpg");
+                        var filePath = Path.Combine("ClientApp/public/Images/PlayLists", imageName + ".png");
                         System.IO.File.WriteAllBytes(filePath, convertImage);
+                        playList.Image = filePath.Replace("ClientApp/public", "");
 
-                        
+
                     }
+                   
                     db.playLists.Add(playList);
                     db.SaveChanges();
                     response.Data = playList;
@@ -89,7 +91,7 @@ namespace TestStream.Controllers
             {
                 return this.NotFound("error");
             }
-            return Ok();
+            //return Ok();
         }
 
 
@@ -134,7 +136,22 @@ namespace TestStream.Controllers
             }
             else
             {
-                customerObj.Name = playListDto.Name;
+                    if (!string.IsNullOrEmpty(playListDto.Image))
+                    {
+                        var dataparts = playListDto.Image.Split(',');
+                        if (dataparts.Length > 1)
+                        {
+                            playListDto.Image = dataparts[1];
+                        }
+
+                        var convertImage = Convert.FromBase64String(playListDto.Image);
+                        string imageName = playListDto.CustomerId + "-" + Guid.NewGuid().ToString();
+                        // string filePath = Server.MapPath("~/Files/" + Path.GetFileName(imageName));
+                        var filePath = Path.Combine("ClientApp/public/Images/Customers", imageName + ".png");
+                        System.IO.File.WriteAllBytes(filePath, convertImage);
+                        playListDto.Image = filePath.Replace("ClientApp/public", "");
+                    }
+                    customerObj.Name = playListDto.Name;
                 customerObj.StartTime = playListDto.StartTime;
                 customerObj.EndTime = playListDto.EndTime;
                 customerObj.Description = playListDto.Description;

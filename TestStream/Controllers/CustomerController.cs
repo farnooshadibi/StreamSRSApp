@@ -198,26 +198,27 @@ namespace TestStream.Controllers
                     var convertImage = Convert.FromBase64String(customer.Image);
                     string imageName = customer.LatinName + "-" + Guid.NewGuid().ToString();
                     // string filePath = Server.MapPath("~/Files/" + Path.GetFileName(imageName));
-                    var filePath = Path.Combine("Images/Customers",imageName+".png");
+                    var filePath = Path.Combine("ClientApp/public/Images/Customers",imageName+".png");
                     System.IO.File.WriteAllBytes(filePath, convertImage);
+                    customer.Image = filePath.Replace("ClientApp/public" , "");
+                }
+                //3
+                //string DefaultImagePath = HttpContext.Current.Server.MapPath("~/Images/Customers");
+                //byte[] bytes = Convert.FromBase64String(customer.Image);
+                //using (MemoryStream ms = new MemoryStream(bytes))
+                //{
+                //    Image pic = Image.FromStream(ms);
+                //    pic.Save(DefaultImagePath + imageName + ".jpg");
+                //}
+                //
 
-                    //3
-                    //string DefaultImagePath = HttpContext.Current.Server.MapPath("~/Images/Customers");
-                    //byte[] bytes = Convert.FromBase64String(customer.Image);
-                    //using (MemoryStream ms = new MemoryStream(bytes))
-                    //{
-                    //    Image pic = Image.FromStream(ms);
-                    //    pic.Save(DefaultImagePath + imageName + ".jpg");
-                    //}
-                    //
-
-                    db.customers.Add(customer);
+                db.customers.Add(customer);
                     db.SaveChanges();
                     response.Data = customer;
                     response.Status = true;
                     response.Message = " Create successfully";
 
-                }
+                
                 return Ok(response);
             }
 
@@ -335,6 +336,23 @@ namespace TestStream.Controllers
                 }
                 else
                 {
+
+                    if (!string.IsNullOrEmpty(customerDto.Image))
+                    {
+                        var dataparts = customerDto.Image.Split(',');
+                        if (dataparts.Length > 1)
+                        {
+                            customerDto.Image = dataparts[1];
+                        }
+
+                        var convertImage = Convert.FromBase64String(customerDto.Image);
+                        string imageName = customerDto.LatinName + "-" + Guid.NewGuid().ToString();
+                        // string filePath = Server.MapPath("~/Files/" + Path.GetFileName(imageName));
+                        var filePath = Path.Combine("ClientApp/public/Images/Customers", imageName + ".png");
+                        System.IO.File.WriteAllBytes(filePath, convertImage);
+                        customerDto.Image = filePath.Replace("ClientApp/public", "");
+                    }
+
                     customerObj.Name = customerDto.Name;
                     customerObj.Url = customerDto.Url;
                     customerObj.Image = customerDto.Image;

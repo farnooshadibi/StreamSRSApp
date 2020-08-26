@@ -109,16 +109,17 @@ namespace TestStream.Controllers
 
                     var convertImage = Convert.FromBase64String(shrine.Image);
                     string imageName = shrine.Id + "-" + Guid.NewGuid().ToString();
-                    var filePath = Path.Combine("Images/Shrines", imageName + ".jpg");
+                    var filePath = Path.Combine("ClientApp/public/Images/Shrines", imageName + ".png");
                     System.IO.File.WriteAllBytes(filePath, convertImage);
 
-                    db.shrines.Add(shrine);
-                    db.SaveChanges();
-                    response.Data = shrine;
-                    response.Status = true;
-                    response.Message = " Create successfully";
+                    shrine.Image = filePath.Replace("ClientApp/public", "");
 
                 }
+                db.shrines.Add(shrine);
+                db.SaveChanges();
+                response.Data = shrine;
+                response.Status = true;
+                response.Message = " Create successfully";
                 return Ok(response);
             }
 
@@ -143,6 +144,22 @@ namespace TestStream.Controllers
                 }
                 else
                 {
+                    if (!string.IsNullOrEmpty(shrineDto.Image))
+                    {
+                        var dataparts = shrineDto.Image.Split(',');
+                        if (dataparts.Length > 1)
+                        {
+                            shrineDto.Image = dataparts[1];
+                        }
+
+                        var convertImage = Convert.FromBase64String(shrineDto.Image);
+                        string imageName = shrineDto.Id + "-" + Guid.NewGuid().ToString();
+                        var filePath = Path.Combine("ClientApp/public/Images/Shrines", imageName + ".png");
+                        System.IO.File.WriteAllBytes(filePath, convertImage);
+
+                        shrineDto.Image = filePath.Replace("ClientApp/public", "");
+
+                    }
                     customerObj.Name = shrineDto.Name;
                     customerObj.Url = shrineDto.Url;
                     customerObj.Image = shrineDto.Image;
