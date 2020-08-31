@@ -58,7 +58,7 @@ export default class ShrineListAdmin extends Component {
         const { shrineId } = this.state;
         this.setState({ mode: 'submit' })
         // if (window.confirm("Do you want delete this User?")) {
-        axios.delete(`/api/customer/${shrineId}`)
+        axios.delete(`/api/shrine/${shrineId}`)
             .then(response => {
                 this.setState({ open: true, message: "کاربر مورد نظر باموفقیت حذف شد" });
                 this.getUserList();

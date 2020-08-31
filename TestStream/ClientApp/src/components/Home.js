@@ -89,7 +89,7 @@ export default class Home extends Component {
                     {
                         breakpoint: 600,
                         settings: {
-                            slidesToShow: 2,
+                            slidesToShow: min>=2 ? 2 : 1,
                             slidesToScroll: 1,
                             initialSlide: 2
                         }
