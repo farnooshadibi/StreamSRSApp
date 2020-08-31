@@ -49,7 +49,7 @@ export default class User extends Component {
         //console.log("cookie",cookies.get('userId'))
     }
     handleEdit(userId) {
-        axios.get(`/api/customer/${userId}`)
+        axios.get(`/api/getCustomer/${userId}`)
             .then(
                 response => {
                     console.log("response", response);

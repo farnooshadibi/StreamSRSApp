@@ -99,10 +99,17 @@ namespace TestStream.Controllers
 
                 var customerPlayList = db.customers
                     .Where(c => c.IsActive == true && c.Famous == true)
-                    .Select(c => new
+                    .Select(customer => new
                     {
-                        c,
-                        PlayList = c.playLists.Where(p => p.EndTime > DateTime.Now.AddHours(2))
+                        customer.Id,
+                        customer.Name,
+                        customer.Description,
+                        customer.Url,
+                        customer.LatinName,
+                        customer.IsActive,
+                        customer.Image,
+                        customer.StreamUrl,
+                        PlayList = customer.playLists.Where(p => p.EndTime > DateTime.Now.AddHours(2))
                        .OrderBy(p => p.StartTime)
                        .FirstOrDefault()
                     })
@@ -214,9 +221,11 @@ namespace TestStream.Controllers
 
                 db.customers.Add(customer);
                     db.SaveChanges();
-                    response.Data = customer;
+                    response.Data = "Create successfully";
                     response.Status = true;
-                    response.Message = " Create successfully";
+
+
+                    response.Message = "Create successfully";
 
                 
                 return Ok(response);
@@ -264,6 +273,64 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Create successfully");
             }
         }
+
+        // GET api/values/5
+        [HttpGet("GetCustomer/{id}")]
+        public ActionResult GetCustomer(int id)
+        {
+            try
+            {
+                var customer = db.customers.Find(id);
+                CustomerPlayListDto customerPlayListDto = new CustomerPlayListDto();
+                customerPlayListDto.Name = customer.Name;
+                customerPlayListDto.Url = customer.Url;
+
+                var customerObj = db.customers
+                 .Where(customer => customer.Id == id)
+                 .Select(customer => new
+                 {
+                     customer.Name,
+                     customer.Description,
+                     customer.Url,
+                     customer.LatinName,
+                     customer.IsActive,
+                     customer.Famous,
+                     customer.Image,
+                     customer.StreamUrl,
+                     customer.Token,
+                     PlayList = customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                 .OrderBy(p => p.StartTime)
+                                 .FirstOrDefault(),
+                     startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                 .OrderBy(p => p.StartTime)
+                                 .FirstOrDefault()
+                                 .StartTime,
+                     IntervalSec = ((customer.playLists.Where(p => p.EndTime > DateTime.Now)
+                                 .OrderBy(p => p.StartTime)
+                                 .FirstOrDefault()
+                                 .StartTime - DateTime.Now).TotalSeconds)
+                 })
+                  .FirstOrDefault();
+
+                if (customerObj == null)
+                {
+                    return this.NotFound(" doesnt exist");
+                }
+                else
+                {
+
+                    return Ok(customerObj);
+                }
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Get", "Admin");
+                return this.NotFound("Dosnt Get Customer successfully");
+            }
+
+
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
@@ -287,7 +354,6 @@ namespace TestStream.Controllers
                     customer.Famous,
                     customer.Image,
                     customer.StreamUrl,
-                    customer.Token,
                     PlayList= customer.playLists.Where(p => p.EndTime > DateTime.Now)
                                 .OrderBy(p => p.StartTime)
                                 .FirstOrDefault(),
