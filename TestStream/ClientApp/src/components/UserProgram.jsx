@@ -36,7 +36,7 @@ export default class UserProgram extends Component {
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { programId } = this.props.location.state;
-            //this.state.Id = userId;
+            this.setState({ Id: programId });
             this.handleEdit(programId);
         }
         else if (mode === 'add') {
@@ -52,7 +52,7 @@ export default class UserProgram extends Component {
         //console.log("cookie",cookies.get('userId'))
     }
     handleEdit(programId) {
-        axios.get(`/api/customer/${programId}`)
+        axios.get(`/api/playList/${programId}`)
             .then(
                 response => {
                     this.setState(prevState => ({
@@ -116,7 +116,7 @@ export default class UserProgram extends Component {
     }
     handleSubmitEdit() {
         const { Id, name, url, image } = this.state;
-        axios.put(`/api/customer/`, { Id, name, url, image })
+        axios.put(`/api/playList/`, { Id, name, url, image })
             .then(response => {
                 //alert(response.data.message);
 
