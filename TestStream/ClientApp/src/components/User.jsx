@@ -35,7 +35,7 @@ export default class User extends Component {
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { userId } = this.props.location.state
-            this.state.Id = userId
+            //this.state.Id = userId
             this.handleEdit(userId);
         }
         else if (mode === 'add') {
@@ -49,10 +49,11 @@ export default class User extends Component {
         //console.log("cookie",cookies.get('userId'))
     }
     handleEdit(userId) {
-        axios.get(`/api/getCustomer/${userId}`)
+        axios.get(`/api/customer/getCustomer/${userId}`)
             .then(
                 response => {
                     console.log("response", response);
+                    console.log("userId", userId);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         name: response.data.name,

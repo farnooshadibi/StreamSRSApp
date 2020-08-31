@@ -35,14 +35,14 @@ export default class UserProgram extends Component {
         const { mode } = this.props.location.state
         if (mode === 'edit') {
             this.state.mode = 'edit'
-            const { userId } = this.props.location.state;
-            this.state.Id = userId;
-            this.handleEdit(userId);
+            const { programId } = this.props.location.state;
+            //this.state.Id = userId;
+            this.handleEdit(programId);
         }
         else if (mode === 'add') {
             this.state.mode = 'add';
-            const { userId } = this.props.location.state
-            this.state.customerId = userId;
+            const { programId } = this.props.location.state
+            this.state.customerId = programId;
         }
         //with url
         //const {id} = this.props.match.params
@@ -51,8 +51,8 @@ export default class UserProgram extends Component {
         //const cookies = new Cookies();
         //console.log("cookie",cookies.get('userId'))
     }
-    handleEdit(userId) {
-        axios.get(`/api/customer/${userId}`)
+    handleEdit(programId) {
+        axios.get(`/api/customer/${programId}`)
             .then(
                 response => {
                     this.setState(prevState => ({
@@ -234,7 +234,7 @@ export default class UserProgram extends Component {
                     <div className="form-group" style={{ marginBottom: 220 }}>
                         <br />
                         <button type="submit" className="btn btn-success" style={{ marginLeft: 10 }}>ثبت </button>
-                        <button className="btn btn-info" onClick={this.backToList.bind(this)} > بازگشت به لیست مشتریان</button>
+                        <button className="btn btn-info" onClick={this.backToList.bind(this)} > بازگشت به لیست برنامه های پخش</button>
                     </div>
                 </form>
 
