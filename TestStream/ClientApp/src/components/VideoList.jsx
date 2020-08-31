@@ -11,17 +11,17 @@ export default class VideoList extends Component{
         let defaultImg ='/io.png'
         let date = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleDateString('fa-IR');
         let time = (customer.playList === null || typeof customer.playList === 'undefined' || customer.playList.startTime === null) ? ' ' : new Date(customer.playList.startTime).toLocaleTimeString('fa-IR');
-        if (typeof customer === 'undefined' || typeof customer.c === 'undefined' || customer.c == null )
+        if (typeof customer === 'undefined' || typeof customer === 'undefined' || customer == null )
             return ('')
         else
             return (
                 <div >
-                    <Link style={{textDecoration:'none'}} to={`${mode}${router}/${customer.c.id}`}>
+                    <Link style={{textDecoration:'none'}} to={`${mode}${router}/${customer.id}`}>
                 <div className="d-flex justify-content-around" style={{ marginBottom: 10, padding: "5px" }}>
                     <div className="card text-center" style={{ width: '20rem', height: "50", backgroundColor:"transparent" }}>
                         <div className="card cardBg">
-                                    <img src={customer.c.image ? customer.c.image : defaultImg} style={{ height: "270px", width: "auto", borderRadius:"26px 26px 0 0"}} className="card-img-top" alt={customer.c.name}/>
-                                    <h3 className="card-title">{customer.c.name}</h3>
+                                    <img src={customer.image ? customer.image : defaultImg} style={{ height: "270px", width: "auto", borderRadius:"26px 26px 0 0"}} className="card-img-top" alt={customer.name}/>
+                                    <h3 className="card-title">{customer.name}</h3>
                                     <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>
                                         <div className="col-md-12" style={{display:"inline-flex"}}>
                                             <i className="fa fa-map-marker" style={{ fontSize: '15px', color: 'white', padding:"11px 0px 3px 10px" }}></i>
