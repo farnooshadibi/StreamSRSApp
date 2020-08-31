@@ -183,8 +183,9 @@ export default class Home extends Component {
 
                 <div className="bgBarname">
                     <h3 style={{ textAlign: "center", color: "#fff", marginTop:"-5%" }}>سایر برنامه ها</h3>
-                    <div className="underline"></div>
-                    <div className="row">
+                        <div className="underline"></div>
+                        <div className="row">
+                            
                             {firstSix.map((customer, index) => customer ? <ProgramList key={index} customer={customer} webView={this.props.webView} /> : null)}
                     </div>
                 </div>
