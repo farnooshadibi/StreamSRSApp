@@ -149,7 +149,7 @@ namespace TestStream.Controllers
             }
             else
             {
-                    if (!string.IsNullOrEmpty(playListDto.Image))
+                    if (!string.IsNullOrEmpty(playListDto.Image) && playListDto.Image.Contains("data:image"))
                     {
                         var dataparts = playListDto.Image.Split(',');
                         if (dataparts.Length > 1)

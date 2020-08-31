@@ -129,7 +129,7 @@ export default class UserProgram extends Component {
             })
     }
     backToList() {
-        return this.props.history.push('/user-list')
+        return this.props.history.push('/user-program-list')
         // return <Redirect to="/user" />
     }
     handleCloseCustomizadSnack() {
