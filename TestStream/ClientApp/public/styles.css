@@ -226,6 +226,9 @@ body{
     font-weight: 600;
 }
 
+.nav-link{
+    margin-top:4px;
+}
 @media only screen and (max-width: 600px) {
     .detailevent {
         background-color: azure;

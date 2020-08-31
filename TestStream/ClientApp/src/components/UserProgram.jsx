@@ -102,6 +102,7 @@ export default class UserProgram extends Component {
        //const { userId } = this.props.location.state;
         //this.setState({ customerId: userId });
         console.log("customerId:", this.state.customerId);
+        console.log("start time:", this.state.startTime);
         const { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId } = this.state;
         axios.post(apiPost, { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId })
             .then(response => {
