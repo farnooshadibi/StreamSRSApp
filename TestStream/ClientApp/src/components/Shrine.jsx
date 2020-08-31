@@ -98,6 +98,8 @@ export default class Shrine extends Component {
     }
     handleSubmitEdit() {
         const { Id, name, url, image, isActive, description } = this.state;
+        console.log("typeOfImage:", typeof( image));
+
         axios.put(`/api/shrine/`, { Id, name, url, image, isActive, description })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ویرایش اطلاعات با موفقیت انجام شد" });

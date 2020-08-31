@@ -144,7 +144,7 @@ namespace TestStream.Controllers
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(shrineDto.Image))
+                    if (!string.IsNullOrEmpty(shrineDto.Image) && shrineDto.Image.Contains("data:image"))
                     {
                         var dataparts = shrineDto.Image.Split(',');
                         if (dataparts.Length > 1)
