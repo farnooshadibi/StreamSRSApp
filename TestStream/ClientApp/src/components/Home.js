@@ -20,7 +20,7 @@ export default class Home extends Component {
     componentWillMount() {
         axios.get('/api/customer/getfamouscustomer')
             .then(response => {            
-               // console.log("response", response);
+                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: data
