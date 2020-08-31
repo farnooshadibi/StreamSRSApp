@@ -11,7 +11,7 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customers: {},
+            customers: [],
             shrines: [],
             unfamous:[]
         }
@@ -23,7 +23,7 @@ export default class Home extends Component {
                // console.log("response", response);
                 const { data } = response.data;
                 this.setState({
-                    customers: response.data
+                    customers: data
                 })
                
 
@@ -55,7 +55,6 @@ export default class Home extends Component {
 
 
     render() {
-        console.log('2+2+2+2+', this.state.unfamous)
         const { customers, shrines } = this.state;
         var firstSix = []
         let min = 3
@@ -64,10 +63,10 @@ export default class Home extends Component {
         now.getMinutes();
         now.getSeconds();
         let i =0
-        if (typeof this.state.customers === 'undefined' || typeof this.state.customers.data === 'undefined')
+        if (typeof this.state.customers === 'undefined')
             return ('')
         else {
-            (this.state.customers.data.length > 3) ? min = 4 : min = this.state.customers.data.length
+            (this.state.customers.length > 3) ? min = 4 : min = this.state.customers.length
             let min2 = 3
             shrines.length > 3 ? min2 = 4 : min2 = shrines.length
             var settings = {
@@ -140,7 +139,7 @@ export default class Home extends Component {
                 ]
             };
         }
-        if (typeof this.state.customers.data === 'undefined' || this.state.customers.data === null)
+        if (typeof this.state.customers === 'undefined' || this.state.customers === null)
             return ('')
         else
             while (i < 6) {
@@ -161,7 +160,7 @@ export default class Home extends Component {
                     <div className="underline"></div>
                     <Slider {...settings}>
                             {
-                                customers.data.map((customer, index) =>
+                                customers.map((customer, index) =>
                                     8<11 ?
                                         <VideoList webView={this.props.webView} key={index} customer={customer} mode="video-detail" />: null
                                 )}
