@@ -45,7 +45,7 @@ namespace TestStream.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] PlayListDto playList)
+        public ActionResult Post([FromBody] PlayList playList)
         {
             if (ModelState.IsValid)
             {
@@ -73,20 +73,20 @@ namespace TestStream.Controllers
 
                     }
 
-                    PlayList ply = new PlayList();
-                    ply.Name = playList.Name;
-                    ply.StartTime = ConvertDate.ToGeorgianDateTime(playList.StartTime);
-                    ply.EndTime = ConvertDate.ToGeorgianDateTime(playList.EndTime);
-                    ply.Duration = DateTime.Now;
-                    ply.Description = playList.Description;
-                    ply.Image = playList.Image;
-                    ply.PerformerName = playList.PerformerName;
-                    ply.Lamenter = playList.Lamenter;
-                    ply.EventPlace = playList.EventPlace;
-                    ply.IsActive = true;
-                    ply.CustomerId = playList.CustomerId;
+                    //PlayList ply = new PlayList();
+                    //ply.Name = playList.Name;
+                    //ply.StartTime = ConvertDate.ToGeorgianDateTime(playList.StartTime);
+                    //ply.EndTime = ConvertDate.ToGeorgianDateTime(playList.EndTime);
+                    //ply.Duration = DateTime.Now;
+                    //ply.Description = playList.Description;
+                    //ply.Image = playList.Image;
+                    //ply.PerformerName = playList.PerformerName;
+                    //ply.Lamenter = playList.Lamenter;
+                    //ply.EventPlace = playList.EventPlace;
+                    //ply.IsActive = true;
+                    //ply.CustomerId = playList.CustomerId;
                    
-                    db.playLists.Add(ply);
+                    db.playLists.Add(playList);
                     db.SaveChanges();
                     response.Data = playList;
                     response.Status = true;
@@ -165,8 +165,8 @@ namespace TestStream.Controllers
                         playListDto.Image = filePath.Replace("ClientApp/public", "");
                     }
                     customerObj.Name = playListDto.Name;
-                customerObj.StartTime = ConvertDate.ToGeorgianDateTime(playListDto.StartTime);
-                    customerObj.EndTime = ConvertDate.ToGeorgianDateTime(playListDto.EndTime);
+                customerObj.StartTime = playListDto.StartTime;
+                    customerObj.EndTime = playListDto.EndTime;
                     customerObj.Description = playListDto.Description;
                 customerObj.Image = playListDto.Image;
                 customerObj.PerformerName = playListDto.PerformerName;
