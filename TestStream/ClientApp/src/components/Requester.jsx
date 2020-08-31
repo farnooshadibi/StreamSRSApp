@@ -157,7 +157,7 @@ export default class Requester extends Component {
             )
     }
     backToList() {
-        return this.props.history.push('/')
+        return this.props.history.push('/requester-list')
         // return <Redirect to="/user" />
     }
 

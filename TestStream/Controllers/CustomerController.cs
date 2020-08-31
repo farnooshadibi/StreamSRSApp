@@ -338,9 +338,7 @@ namespace TestStream.Controllers
             try
             {
                 var customer = db.customers.Find(id);
-                CustomerPlayListDto customerPlayListDto = new CustomerPlayListDto();
-                customerPlayListDto.Name = customer.Name;
-                customerPlayListDto.Url = customer.Url;
+
 
                var customerObj = db.customers
                 .Where(customer => customer.Id == id)
@@ -403,7 +401,7 @@ namespace TestStream.Controllers
                 else
                 {
 
-                    if (!string.IsNullOrEmpty(customerDto.Image))
+                    if (!string.IsNullOrEmpty(customerDto.Image) && customerDto.Image.Contains("data:image"))
                     {
                         var dataparts = customerDto.Image.Split(',');
                         if (dataparts.Length > 1)
