@@ -117,12 +117,14 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} to="/">خانه</NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-                                    <NavItem>
-                                        
+                                    <NavItem>       
                                         <NavLink tag={Link} to={{ pathname: '/requester', state: { mode: 'add' } }} >ثبت اطلاعات </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-
+                                    <NavItem>
+                                        <NavLink tag={Link} to={{ pathname: '/festival', state: { mode: 'add' } }} >ثبت نام در جشنواره </NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
                                     <NavItem>
                                         
                                             <div className="text-center" style={{display:'flex'}}>

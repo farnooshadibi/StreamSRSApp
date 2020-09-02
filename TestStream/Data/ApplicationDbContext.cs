@@ -24,5 +24,7 @@ namespace TestStream.Data
         public DbSet<BlockedIP> blockedIPs { get; set; }
         public DbSet<Requester> requesters { get; set; }
         public DbSet<Service> services { get; set; }
+        public DbSet<Festival> festivals { get; set; }
+        public DbSet<FestivalFile> festivalFiles { get; set; }
     }
 }

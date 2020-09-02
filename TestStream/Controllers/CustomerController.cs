@@ -574,6 +574,8 @@ namespace TestStream.Controllers
         }
 
         [Authorize]
+
+
         [HttpGet("GetCustomersToken")]
         public ActionResult GetCustomersToken()
         {

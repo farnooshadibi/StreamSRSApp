@@ -23,6 +23,7 @@ import UserProgramList from './components/UserProgramList';
 import Shrine from './components/Shrine';
 import ShrineListAdmin from './components/ShrineListAdmin';
 import Service from './components/Service';
+import Festival from './components/Festival';
 
 
 export default class App extends Component {
@@ -61,6 +62,7 @@ export default class App extends Component {
                             <Route path="/stream-list" component={StreamManagement} />
                             <Route path="/requester" component={Requester} />
                             <Route path="/service" component={Service} />
+                            <Route path="/festival" component={Festival} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
                         </Layout>
