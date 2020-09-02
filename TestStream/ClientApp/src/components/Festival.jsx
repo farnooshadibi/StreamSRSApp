@@ -29,7 +29,8 @@ export default class Festival extends Component {
             files: {}, 
             file: [], 
             formFile: '',
-            fileName:''
+            fileName: '',
+            fileType:''
 
         }
     }
@@ -131,7 +132,7 @@ export default class Festival extends Component {
         })
     }
     handleRequest() {
-        const { firstName, lastName, mobile, phone, festivalFiles, description } = this.state;
+        const { firstName, lastName, mobile, phone, festivalFiles, description, fileType } = this.state;
         
         var formData = new FormData();
 
@@ -146,6 +147,7 @@ export default class Festival extends Component {
         formData.append('mobile', mobile);
         formData.append('phone', phone);
         formData.append('description', description);
+        formData.append('fileType', fileType);
 
         console.log("formData:", formData);
         console.log(" this.state.file:", this.state.file);
@@ -252,16 +254,8 @@ export default class Festival extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="form-group rtl">
-                                <label>توضیحات </label>
-                                <textarea type="text"
-                                    className="form-control rtl"
-                                    name="description"
-                                    value={description}
-                                    onChange={(event) => { this.setState({ description: event.target.value }); }}
-                                />
-                            </div>
-                            <div className="form-group rtl">
+                            <div className="row">
+                                <div className="col-lg-6 form-group rtl">
                                 <label>فایل </label>
                                 <input type="file"
                                     multiple 
@@ -269,6 +263,27 @@ export default class Festival extends Component {
                                     name="file"
                                     //value={description}
                                     onChange={(event) => { this.onChange(event) }}
+                                />
+                            </div>
+                            <div className="col-lg-6 form-group rtl">
+                                <label>نوع اثر   </label>
+                                <select className="form-control rtl"
+                                    value={this.state.fileType}
+                                        onChange={(event) => { this.setState({ fileType: event.target.value }); }}
+                                >
+                                    <option value="1">موسیقی</option>
+                                    <option value="2">فیلم </option>
+                                    <option value="3">عکس</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div className="form-group rtl">
+                                <label>توضیحات </label>
+                                <textarea type="text"
+                                    className="form-control rtl"
+                                    name="description"
+                                    value={description}
+                                    onChange={(event) => { this.setState({ description: event.target.value }); }}
                                 />
                             </div>
                             {this.state.mode === 'edit' ?

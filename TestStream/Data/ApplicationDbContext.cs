@@ -26,5 +26,6 @@ namespace TestStream.Data
         public DbSet<Service> services { get; set; }
         public DbSet<Festival> festivals { get; set; }
         public DbSet<FestivalFile> festivalFiles { get; set; }
+        public DbSet<FestivalFileType> festivalFileType { get; set; }
     }
 }

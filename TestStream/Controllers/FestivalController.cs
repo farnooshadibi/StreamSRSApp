@@ -42,7 +42,8 @@ namespace TestStream.Controllers
                 festivalObj.Mobile = festival.Mobile;
                 festivalObj.Phone = festival.Phone;
                 festivalObj.Description = festival.Description;
-               
+                festivalObj.FileType = festival.FileType;
+
                 db.festivals.Add(festivalObj);
                 db.SaveChanges();
                 festivalObj.TrackingCode = festivalObj.Id + code;

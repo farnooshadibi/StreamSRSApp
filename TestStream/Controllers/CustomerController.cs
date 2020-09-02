@@ -28,7 +28,7 @@ namespace TestStream.Controllers
             db = context;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public ActionResult Get()
         {
@@ -175,7 +175,7 @@ namespace TestStream.Controllers
         }
 
         // POST api/values
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public ActionResult Post([FromBody] Customer customer)
         {
@@ -240,7 +240,7 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Create successfully");
             }
         }
-        [Authorize]
+        //[Authorize]
         //renew Token
         [HttpPost("RenewToken")]
         public ActionResult RenewToken([FromBody] Customer customer)
@@ -278,7 +278,7 @@ namespace TestStream.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         // GET api/values/5
         [HttpGet("GetCustomer/{id}")]
         public ActionResult GetCustomer(int id)
@@ -572,9 +572,6 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Create successfully");
             }
         }
-
-        [Authorize]
-
 
         [HttpGet("GetCustomersToken")]
         public ActionResult GetCustomersToken()

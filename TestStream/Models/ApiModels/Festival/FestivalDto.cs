@@ -18,6 +18,8 @@ namespace TestStream.Models.ApiModels.Festival
         public bool Processed { get; set; }
         public string Result { get; set; }
         public string TrackingCode { get; set; }
+        public string FileType { get; set; }
+        public int FestivalFileTypeId { get; set; }
         public List<IFormFile> FormFile { get; set; }
 
     }
