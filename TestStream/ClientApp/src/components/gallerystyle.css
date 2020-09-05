@@ -1,0 +1,29 @@
+.menu {
+    display: inline-flex;
+    list-style-type: none;
+}
+*{
+    margin:0; 
+    padding:0;
+}
+
+.gallerymenu {
+    text-align: center;
+}
+
+.gallerymenu > Link {
+    margin:20px;
+}
+
+.menu li {
+
+    border-radius: 15px;
+    transition: 500ms;
+    background-color: azure;
+    color: black;
+    width:30%;
+}
+
+.menu li:hover {
+    background-color:aquamarine;
+}

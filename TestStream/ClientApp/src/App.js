@@ -22,6 +22,7 @@ import RequesterList from './components/RequesterList';
 import UserProgramList from './components/UserProgramList';
 import Shrine from './components/Shrine';
 import ShrineListAdmin from './components/ShrineListAdmin';
+import Gallery from './components/Gallery';
 
 
 export default class App extends Component {
@@ -60,7 +61,10 @@ export default class App extends Component {
                             <Route path="/stream-list" component={StreamManagement} />
                             <Route path="/requester" component={Requester} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-
+                            <Route exact path="/gallery" component={() => <Gallery />} />
+                            <Route exact path="/gallery/images" component={() => <Gallery mode='images' />}/>
+                            <Route exact path="/gallery/videos" component={() => <Gallery mode='videos' />} />
+                            <Route exact path="/gallery/audios" component={() => <Gallery mode='audios' />} />
                         </Layout>
                     </Route>
                 </Switch>
