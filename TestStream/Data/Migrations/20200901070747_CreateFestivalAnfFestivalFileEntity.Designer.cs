@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestStream.Data;
 
 namespace TestStream.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200901070747_CreateFestivalAnfFestivalFileEntity")]
+    partial class CreateFestivalAnfFestivalFileEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -398,16 +400,7 @@ namespace TestStream.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Approve")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FestivalFileTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -415,9 +408,6 @@ namespace TestStream.Data.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Like")
-                        .HasColumnType("int");
 
                     b.Property<string>("Mobile")
                         .HasColumnType("nvarchar(max)");
@@ -460,21 +450,6 @@ namespace TestStream.Data.Migrations
                     b.HasIndex("FestivalId");
 
                     b.ToTable("festivalFiles");
-                });
-
-            modelBuilder.Entity("TestStream.Models.FestivalFileType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("festivalFileType");
                 });
 
             modelBuilder.Entity("TestStream.Models.PlayList", b =>

@@ -14,6 +14,7 @@ using TestStream.Extra_Classes;
 using TestStream.Models;
 using TestStream.Models.ApiModels.Customer;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TestStream.Controllers
 {
@@ -27,6 +28,7 @@ namespace TestStream.Controllers
             db = context;
         }
 
+        //[Authorize]
         [HttpGet]
         public ActionResult Get()
         {
@@ -173,6 +175,7 @@ namespace TestStream.Controllers
         }
 
         // POST api/values
+        //[Authorize]
         [HttpPost]
         public ActionResult Post([FromBody] Customer customer)
         {
@@ -237,6 +240,7 @@ namespace TestStream.Controllers
                 return this.NotFound("Dosnt Create successfully");
             }
         }
+        //[Authorize]
         //renew Token
         [HttpPost("RenewToken")]
         public ActionResult RenewToken([FromBody] Customer customer)
@@ -274,6 +278,7 @@ namespace TestStream.Controllers
             }
         }
 
+        //[Authorize]
         // GET api/values/5
         [HttpGet("GetCustomer/{id}")]
         public ActionResult GetCustomer(int id)

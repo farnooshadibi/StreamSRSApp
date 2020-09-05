@@ -31,7 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\public\Images\Services\" />
     <Folder Include="ClientApp\public\Images\PlayLists\" />
+    <Folder Include="UploadFiles\Festivals\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

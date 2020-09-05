@@ -35,6 +35,7 @@ export default class User extends Component {
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { userId } = this.props.location.state
+            this.setState({ Id: userId });
             //this.state.Id = userId
             this.handleEdit(userId);
         }

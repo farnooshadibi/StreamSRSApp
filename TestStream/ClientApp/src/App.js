@@ -22,7 +22,13 @@ import RequesterList from './components/RequesterList';
 import UserProgramList from './components/UserProgramList';
 import Shrine from './components/Shrine';
 import ShrineListAdmin from './components/ShrineListAdmin';
+<<<<<<< HEAD
 import Gallery from './components/Gallery';
+||||||| merged common ancestors
+=======
+import Service from './components/Service';
+import Festival from './components/Festival';
+>>>>>>> 716974e6afe257b270fc650809356b3cdc9868fd
 
 
 export default class App extends Component {
@@ -60,6 +66,8 @@ export default class App extends Component {
                             <Route path="/search-list" component={SearchList} />
                             <Route path="/stream-list" component={StreamManagement} />
                             <Route path="/requester" component={Requester} />
+                            <Route path="/service" component={Service} />
+                            <Route path="/festival" component={Festival} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                             <Route exact path="/gallery" component={() => <Gallery />} />
                             <Route exact path="/gallery/images" component={() => <Gallery mode='images' />}/>

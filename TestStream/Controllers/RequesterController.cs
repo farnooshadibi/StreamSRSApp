@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using shortid;
 using TestStream.Data;
 using TestStream.Extra_Classes;
 using TestStream.Models;
@@ -168,6 +170,50 @@ namespace TestStream.Controllers
             {
                 writeException.Write(e.Message, DateTime.Now, "Requesters", "Delete", "Admin");
                 return this.NotFound("Dosnt Delete successfully");
+            }
+        }
+
+        // POST api/values
+        [HttpPost("UploadFile")]
+        public ActionResult UploadFile([FromBody] Service service)
+        {
+            try
+            {
+                Response response = new Response();
+
+
+                if (!string.IsNullOrEmpty(service.File))
+                {
+                    var dataparts = service.File.Split(',');
+                    if (dataparts.Length > 1)
+                    {
+                        service.File = dataparts[1];
+                    }
+
+                    var convertImage = Convert.FromBase64String(service.File);
+                    string imageName = service.Id + "-" + Guid.NewGuid().ToString();
+                    var filePath = Path.Combine("ClientApp/public/Images/Services", imageName + ".png");
+                    System.IO.File.WriteAllBytes(filePath, convertImage);
+                    service.File = filePath.Replace("ClientApp/public", "");
+
+
+                }
+                string id = ShortId.Generate(true, false);
+                service.code = id;               
+                db.services.Add(service);
+                db.SaveChanges();
+                response.Data = service;
+                response.Status = true;
+                response.Message = " Create successfully";
+
+
+                return Ok(response);
+            }
+
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Post", "Admin");
+                return this.NotFound("Dosnt Create successfully");
             }
         }
 
