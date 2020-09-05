@@ -19,7 +19,6 @@ namespace TestStream.Models
         public string TrackingCode { get; set; }
         public int Like { get; set; }
         public bool Approve { get; set; }
-        public string FileType { get; set; }
         public int FestivalFileTypeId { get; set; }
         public ICollection<FestivalFile> festivalFiles { get; set; }
     }

@@ -30,7 +30,9 @@ export default class Festival extends Component {
             file: [], 
             formFile: '',
             fileName: '',
-            fileType:''
+            fileTypeId: 0, 
+            fileTypeName: '', 
+            fileType: []
 
         }
     }
@@ -45,9 +47,28 @@ export default class Festival extends Component {
             this.handleEdit(festivalId);
         }
         else if (mode === 'add') {
-            this.state.mode = 'add'
+            this.state.mode = 'add';
+            this.handleFestivalType();
         }
     }
+
+    handleFestivalType() {
+        axios.get(`/api/festival/getFestivalType`)
+            .then(
+                response => {
+                    console.log("r", response);
+                    this.setState({
+                        fileType: response.data.data
+
+                    })
+                    console.log("fileType", this.state.fileType, this.state.fileTypeId);
+                }
+            )
+            .catch((error) => {
+                console.log(error)
+                this.setState({ isSuccess: true, mode: 'error', message: 'ثبت با خطا مواجه شد' })
+            })
+}
     handleEdit(festivalId) {
         axios.get(`/api/festival/${festivalId}`)
             .then(
@@ -132,8 +153,8 @@ export default class Festival extends Component {
         })
     }
     handleRequest() {
-        const { firstName, lastName, mobile, phone, festivalFiles, description, fileType } = this.state;
-        
+        const { firstName, lastName, mobile, phone, festivalFiles, description, fileTypeId } = this.state;
+        console.log("iddd", this.state.fileTypeId);
         var formData = new FormData();
 
         for (let i = 0; i < this.state.file.length; i++) {
@@ -147,7 +168,7 @@ export default class Festival extends Component {
         formData.append('mobile', mobile);
         formData.append('phone', phone);
         formData.append('description', description);
-        formData.append('fileType', fileType);
+        formData.append('fileTypeId', fileTypeId);
 
         console.log("formData:", formData);
         console.log(" this.state.file:", this.state.file);
@@ -171,25 +192,10 @@ export default class Festival extends Component {
         this.setState({ file });
         //let files = event.target.files;
         this.setState({ formFile: event.target.files[0], fileName: event.target.files[0].name })
-
-        //this.setState({ festivalFiles: files });
-        //var formData = new FormData();
-        //for (let i = 0; i < files.length; i++) {
-            
-        //    formData.append(`file[${i}]`, files[i])
-        //    this.setState({ files: formData });
-
-        //    //let reader = new FileReader();
-        //    //reader.readAsDataURL(files[i]);
-        //    //reader.onload = (e) => {
-        //    //    this.setState({ files: formData });
-               
-        //    //}
-        //}
-        
     }
 
     render() {
+        console.log("fff", this.state.fileTypeId)
         const { firstName, lastName, mobile, phone, festivalFiles, description, processed, result } = this.state;
         const { errors } = this.state;
         if (this.state.isSuccess && this.state.mode === 'add') {
@@ -210,7 +216,7 @@ export default class Festival extends Component {
                 <Container>
                     <div className="form-group rtl requester">
                         <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >ثبت اطلاعات شرکت کنندگان در جشنواره </h5>
-                        <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }} enctype="multipart/form-data">
+                        <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }} encType="multipart/form-data">
                             <div className="row">
                                 <div className=" col-lg-6 form-group rtl">
                                     <label> نام </label>
@@ -256,6 +262,15 @@ export default class Festival extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-lg-6 form-group rtl">
+                                    <label>نوع اثر   </label>
+                                    <select className="form-control rtl"
+                                        //value={this.state.fileType.id}
+                                        onChange={(event) => { this.setState({ fileTypeId: event.target.value }) }}
+                                    >
+                                        {this.state.fileType.map((value, index) => <option  value={value.id}>{value.name} </option>)}
+                                    </select>
+                                </div>
+                                <div className="col-lg-6 form-group rtl">
                                 <label>فایل </label>
                                 <input type="file"
                                     multiple 
@@ -265,17 +280,6 @@ export default class Festival extends Component {
                                     onChange={(event) => { this.onChange(event) }}
                                 />
                             </div>
-                            <div className="col-lg-6 form-group rtl">
-                                <label>نوع اثر   </label>
-                                <select className="form-control rtl"
-                                    value={this.state.fileType}
-                                        onChange={(event) => { this.setState({ fileType: event.target.value }); }}
-                                >
-                                    <option value="1">موسیقی</option>
-                                    <option value="2">فیلم </option>
-                                    <option value="3">عکس</option>
-                                </select>
-                                </div>
                             </div>
                             <div className="form-group rtl">
                                 <label>توضیحات </label>

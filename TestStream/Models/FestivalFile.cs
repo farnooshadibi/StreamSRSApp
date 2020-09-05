@@ -10,5 +10,6 @@ namespace TestStream.Models
         public int Id { get; set; }
         public string FileURL { get; set; }
         public int FestivalId { get; set; }
+        public bool Approve { get; set; }
     }
 }

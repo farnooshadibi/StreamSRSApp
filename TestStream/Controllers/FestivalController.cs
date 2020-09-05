@@ -42,7 +42,7 @@ namespace TestStream.Controllers
                 festivalObj.Mobile = festival.Mobile;
                 festivalObj.Phone = festival.Phone;
                 festivalObj.Description = festival.Description;
-                festivalObj.FileType = festival.FileType;
+                festivalObj.FestivalFileTypeId = festival.fileTypeId;
 
                 db.festivals.Add(festivalObj);
                 db.SaveChanges();
@@ -53,6 +53,7 @@ namespace TestStream.Controllers
 
 
                 List<string> filesName = new List<string>(); 
+                if(festival.FormFile != null) { 
                 foreach (IFormFile f in festival.FormFile)
                 {
                     FestivalFile festivalFile = new FestivalFile();
@@ -67,8 +68,8 @@ namespace TestStream.Controllers
                     festivalFile.FestivalId = festivalObj.Id;
                     db.festivalFiles.Add(festivalFile);
                     db.SaveChanges();
-                }         
-
+                }
+                }
 
 
                 response.Data = festivalObj;
@@ -91,25 +92,26 @@ namespace TestStream.Controllers
         {
             try
             {
-                var result = db.festivals
-    .Select(festival => new
-    {
-        festival.Id,
-        festival.FirstName,
-        festival.LastName,
-        festival.Mobile,
-        festival.Phone,
-        festival.Description,
-        festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
-       .ToList()
-    })
-    .ToList();
+                var result = db.festivals.ToList();
+    //            var result = db.festivals
+    //.Select(festival => new
+    //{
+    //    festival.Id,
+    //    festival.FirstName,
+    //    festival.LastName,
+    //    festival.Mobile,
+    //    festival.Phone,
+    //    festival.Description,
+    //    festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
+    //   .ToList()
+    //})
+    //.ToList();
 
-                var festivalList = result.Where(c => c.festivalFile != null).ToList();
+               // var festivalList = result.Where(c => c.festivalFile != null).ToList();
 
 
                 Response response = new Response();
-                response.Data = festivalList;
+                response.Data = result;
                 response.Status = true;
                 response.Message = "Received successfully";
                 return Ok(response);
@@ -128,17 +130,17 @@ namespace TestStream.Controllers
         {
             try
             {
-                var result = db.festivals.Find(id);
+                //var result = db.festivals.Find(id);
+                var files = db.festivalFiles.Where(current => current.FestivalId == id).ToList();
 
-
-                if (result == null)
+                if (files == null)
                 {
                     return this.NotFound(" doesnt exist");
                 }
                 else
                 {
 
-                    return Ok(result);
+                    return Ok(files);
                 }
             }
             catch (Exception e)
@@ -149,6 +151,30 @@ namespace TestStream.Controllers
 
 
         }
+
+        [HttpGet("GetFestivalType")]
+        public ActionResult GetFestivalType()
+        {
+            try
+            {
+                Response response = new Response();
+
+                var typeList = db.festivalFileType.ToList();
+
+                response.Data = typeList;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Festival", "GetFestivalType", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+
         // POST api/values/5
         [HttpPut]
         public ActionResult Put([FromBody] FestivalDto festivalDto)
