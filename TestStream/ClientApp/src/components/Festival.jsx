@@ -23,6 +23,7 @@ export default class Festival extends Component {
             phone: '',
             description: '',
             trackingCode: '',
+            workName:'',
             result: '',
             processed: false, 
             festivalFiles: {}, 
@@ -30,7 +31,7 @@ export default class Festival extends Component {
             file: [], 
             formFile: '',
             fileName: '',
-            fileTypeId: 0, 
+            fileTypeId: 1, 
             fileTypeName: '', 
             fileType: []
 
@@ -51,17 +52,13 @@ export default class Festival extends Component {
             this.handleFestivalType();
         }
     }
-
     handleFestivalType() {
         axios.get(`/api/festival/getFestivalType`)
             .then(
                 response => {
-                    console.log("r", response);
                     this.setState({
                         fileType: response.data.data
-
                     })
-                    console.log("fileType", this.state.fileType, this.state.fileTypeId);
                 }
             )
             .catch((error) => {
@@ -84,6 +81,7 @@ export default class Festival extends Component {
                         description: response.data.description,
                         trackingCode: response.data.trackingCode,
                         festivalFiles: response.data.festivalFiles,
+                        workName: response.data.workName,
                     })
                     )
                 }
@@ -153,15 +151,12 @@ export default class Festival extends Component {
         })
     }
     handleRequest() {
-        const { firstName, lastName, mobile, phone, festivalFiles, description, fileTypeId } = this.state;
-        console.log("iddd", this.state.fileTypeId);
+        const { firstName, lastName, mobile, phone, festivalFiles, description, fileTypeId, workName } = this.state;
         var formData = new FormData();
 
         for (let i = 0; i < this.state.file.length; i++) {
             formData.append(`formFile`, this.state.file[i])
         }
-        //formData.append('fileName', this.state.fileName);
-        //formData.append('formFile', this.state.formFile);
 
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
@@ -169,9 +164,8 @@ export default class Festival extends Component {
         formData.append('phone', phone);
         formData.append('description', description);
         formData.append('fileTypeId', fileTypeId);
-
-        console.log("formData:", formData);
-        console.log(" this.state.file:", this.state.file);
+        formData.append('workName', workName);
+        console.log("type", fileTypeId)
 
         axios.post(apiPost, formData)
             .then(response => {
@@ -195,15 +189,14 @@ export default class Festival extends Component {
     }
 
     render() {
-        console.log("fff", this.state.fileTypeId)
-        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, result } = this.state;
+        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, result, workName } = this.state;
         const { errors } = this.state;
         if (this.state.isSuccess && this.state.mode === 'add') {
             return (
                 <Container>
                     <div className="alert alert-success" role="alert">
                         <h4 className="alert-heading"></h4>
-                        <p> ثبت اطلاعات با موفقیت انجام شد، کارشناسان ما در اسرع وقت با شما تماس می گیرند</p>
+                        <p> ثبت اطلاعات با موفقیت انجام شد</p>
                         <p>کد رهگیری شما : {this.state.trackingCode}</p>
                         <hr />
                         <button className="btn btn-info add-button" onClick={this.backToList.bind(this)} > بازگشت </button>
@@ -218,7 +211,7 @@ export default class Festival extends Component {
                         <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >ثبت اطلاعات شرکت کنندگان در جشنواره </h5>
                         <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }} encType="multipart/form-data">
                             <div className="row">
-                                <div className=" col-lg-6 form-group rtl">
+                                <div className=" col-lg-3 form-group rtl">
                                     <label> نام </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
@@ -228,7 +221,7 @@ export default class Festival extends Component {
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["name"] ? 'block' : 'none' }}>{errors["name"]} </span>
                                 </div>
-                                <div className="col-lg-6 form-group rtl">
+                                <div className="col-lg-3 form-group rtl">
                                     <label>نام خانوادگی </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["lastName"] ? 'is-invalid' : ''].join(' ')}
@@ -238,9 +231,7 @@ export default class Festival extends Component {
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["lastName"] ? 'block' : 'none' }}>{errors["lastName"]} </span>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-6 form-group rtl">
+                                <div className="col-lg-3 form-group rtl">
                                     <label>شماره موبایل </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["mobile"] ? 'is-invalid' : ''].join(' ')}
@@ -250,7 +241,7 @@ export default class Festival extends Component {
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["mobile"] ? 'block' : 'none' }}>{errors["mobile"]} </span>
                                 </div>
-                                <div className="col-lg-6 form-group rtl">
+                                <div className="col-lg-3 form-group rtl">
                                     <label>شماره ثابت </label>
                                     <input type="text"
                                         className="form-control rtl"
@@ -261,28 +252,40 @@ export default class Festival extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-6 form-group rtl">
+
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-4 form-group rtl">
                                     <label>نوع اثر   </label>
                                     <select className="form-control rtl"
-                                        //value={this.state.fileType.id}
+                                        value={this.state.fileTypeId}
                                         onChange={(event) => { this.setState({ fileTypeId: event.target.value }) }}
                                     >
-                                        {this.state.fileType.map((value, index) => <option  value={value.id}>{value.name} </option>)}
+                                        {this.state.fileType.map((value, index) => <option className="form-control"  value={value.id}>{value.name} </option>)}
                                     </select>
                                 </div>
-                                <div className="col-lg-6 form-group rtl">
-                                <label>فایل </label>
+                                <div className="col-lg-4 form-group rtl">
+                                    <label>نام اثر </label>
+                                    <input type="text"
+                                        className="form-control rtl"
+                                        name="workName"
+                                        value={workName}
+                                        onChange={(event) => { this.setState({ workName: event.target.value }); }}
+                                    />
+                                </div>
+                                <div className="col-lg-4 form-group rtl">
+                                <label>انتخاب فایل </label>
                                 <input type="file"
                                     multiple 
                                     className="form-control rtl"
                                     name="file"
-                                    //value={description}
+                                        //value={description}
                                     onChange={(event) => { this.onChange(event) }}
                                 />
                             </div>
                             </div>
                             <div className="form-group rtl">
-                                <label>توضیحات </label>
+                                <label> توضیحات در مورد اثر </label>
                                 <textarea type="text"
                                     className="form-control rtl"
                                     name="description"

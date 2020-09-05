@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestStream.Data;
 
 namespace TestStream.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200905065748_addApproveField")]
+    partial class addApproveField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -346,35 +348,6 @@ namespace TestStream.Data.Migrations
                     b.ToTable("blockedIPs");
                 });
 
-            modelBuilder.Entity("TestStream.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Approve")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("FestivalId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("SubmitDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FestivalId");
-
-                    b.ToTable("comments");
-                });
-
             modelBuilder.Entity("TestStream.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -461,9 +434,6 @@ namespace TestStream.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TrackingCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -702,15 +672,6 @@ namespace TestStream.Data.Migrations
                     b.HasOne("TestStream.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TestStream.Models.Comment", b =>
-                {
-                    b.HasOne("TestStream.Models.Festival", null)
-                        .WithMany("comments")
-                        .HasForeignKey("FestivalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
