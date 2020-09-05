@@ -22,13 +22,9 @@ import RequesterList from './components/RequesterList';
 import UserProgramList from './components/UserProgramList';
 import Shrine from './components/Shrine';
 import ShrineListAdmin from './components/ShrineListAdmin';
-<<<<<<< HEAD
 import Gallery from './components/Gallery';
-||||||| merged common ancestors
-=======
 import Service from './components/Service';
 import Festival from './components/Festival';
->>>>>>> 716974e6afe257b270fc650809356b3cdc9868fd
 
 
 export default class App extends Component {
