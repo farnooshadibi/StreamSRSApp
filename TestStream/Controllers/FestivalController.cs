@@ -181,7 +181,7 @@ namespace TestStream.Controllers
                 int skip = (page - 1) * pageSize;
                 int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
                 var result = db.festivals
-                    .Where(c => c.Approve == true && c.Processed == true)
+                    .Where(c => c.Approve == true && c.Processed == true && c.FestivalFileTypeId == 1)
                 .Select(festival => new
                 {
                     festival.Id,
@@ -223,7 +223,7 @@ namespace TestStream.Controllers
                 int skip = (page - 1) * pageSize;
                 int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
                 var result = db.festivals
-                    .Where(c => c.Approve == true && c.Processed == true)
+                    .Where(c => c.Approve == true && c.Processed == true && c.FestivalFileTypeId == 2)
                 .Select(festival => new
                 {
                     festival.Id,
@@ -265,7 +265,7 @@ namespace TestStream.Controllers
                 int skip = (page - 1) * pageSize;
                 int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
                 var result = db.festivals
-                    .Where(c => c.Approve == true && c.Processed == true)
+                    .Where(c => c.Approve == true && c.Processed == true && c.FestivalFileTypeId == 3)
                 .Select(festival => new
                 {
                     festival.Id,
@@ -302,7 +302,7 @@ namespace TestStream.Controllers
             try
             {
                 var result = db.festivals
-                    .Where(c => c.Approve == true && c.Processed == true)
+                    .Where(c => c.Approve == true && c.Processed == true && c.Id == id)
                 .Select(festival => new
                 {
                     festival.Id,
@@ -404,30 +404,37 @@ namespace TestStream.Controllers
         }
 
         [HttpPost("PostLike")]
-        public ActionResult PostLike([FromForm] FestivalDto festival)
+        public ActionResult PostLike([FromBody] FestivalDto festival)
         {
 
             try
             {
                 var festivalObj = db.festivals.Where(c => c.Id == festival.Id).SingleOrDefault();
-
-                if(festival.Like == true)
-                {
-                    festivalObj.Like += 1;
-                }
-
-                if (festival.Like == false)
-                {
-                    festivalObj.Like -= 1;
-                }
-
                 Response response = new Response();
-                db.festivals.Update(festivalObj);
-                db.SaveChanges();
- 
-                response.Data = festivalObj;
-                response.Status = true;
-                response.Message = "Create successfully";
+
+                if (festivalObj != null)
+                {
+                    if (festival.Like == true)
+                    {
+                        festivalObj.Like += 1;
+                    }
+
+                    if (festival.Like == false)
+                    {
+                        festivalObj.Like -= 1;
+                    }
+
+                    
+                    db.festivals.Update(festivalObj);
+                    db.SaveChanges();
+
+                    response.Data = festivalObj;
+                    response.Status = true;
+                    response.Message = "Create successfully";
+
+                }
+
+
 
 
                 return Ok(response);
