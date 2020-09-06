@@ -9,6 +9,12 @@ import { Container } from 'reactstrap';
 export default class FestivalDetail extends Component {
     constructor(props) {
         super(props);
+        var ff = {
+            fileURL: '',
+            festivalId: 0,
+            approve: false
+        };
+
         this.state = {
             errors: {},
             Id: 0,
@@ -28,11 +34,11 @@ export default class FestivalDetail extends Component {
             result: '',
             processed: false,
             approve: false,
-            festivalFile: {
-                fileURL: '',
-                festivalId: 0,
-                approve: false
-            },
+            approvefile: false,
+
+
+            festivalFile:[],
+            festivalFile: [],
             festivalFiles: {},
             files: {},
             file: [],
@@ -83,8 +89,8 @@ export default class FestivalDetail extends Component {
     handleSubmit(event) {
         event.preventDefault();
         //this.state.mode = 'edit';
-        const { Id, processed, approve } = this.state;
-        axios.put(`/api/festival/`, { Id, processed, approve })
+        const { Id, processed, approve, festivalFile } = this.state;
+        axios.put(`/api/festival/`, { Id, processed, approve, festivalFile })
             .then(response => {
                 this.setState({ isSuccess: true, message: "بررسی اطلاعات با موفقیت انجام شد" });
             })
@@ -95,9 +101,19 @@ export default class FestivalDetail extends Component {
 
             })
     }
+
+    handleChange(event) {
+//        console.log('handleCHeckbox', event.target.id, this.state)
+        var index = this.state.festivalFile.findIndex(p => p.id == event.target.id)
+        console.log('handleCHeckbox', index)
+        //this.setState({
+        this.state.festivalFile[index].approve = event.target.checked
+        this.forceUpdate()
+        //});
+    }
     render() {
         console.log("festivalFile", this.state.festivalFile)
-        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName } = this.state;
+        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName, approvefile } = this.state;
         return (<Container>
             <div className="form-group requester">
                 <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >بررسی اطلاعات شرکت کنندگان در جشنواره </h5>
@@ -142,7 +158,7 @@ export default class FestivalDetail extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-4 form-group rtl">
+                        <div className="col-lg-6 form-group rtl">
                             <label>نوع اثر </label>
                             {this.state.festivalFileTypeId == 1 ? <input type="text"
                                 className="form-control rtl"
@@ -164,7 +180,7 @@ export default class FestivalDetail extends Component {
                             /> : null}
                            
                         </div>
-                        <div className="col-lg-4 form-group rtl">
+                        <div className="col-lg-6 form-group rtl">
                             <label>نام اثر </label>
                             <input type="text"
                                 className="form-control rtl"
@@ -174,6 +190,21 @@ export default class FestivalDetail extends Component {
                             />
                         </div>
                     </div>
+                  
+                    {this.state.festivalFile.map((value, index) => <div className="form-control" key={value.id} >
+                        <div className="form-group rtl row">
+                        {value.fileURL} 
+                        
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id={value.id} checked={value.approve}
+                                    onChange={ this.handleChange.bind(this) }
+                            />
+                            <label className="form-check-label" htmlFor="defaultCheck1">
+                                تایید
+                            </label>
+                        </div>
+                        </div>
+                    </div>)}
                     <div className="form-group rtl">
                         <label> توضیحات در مورد اثر </label>
                         <textarea type="text"
