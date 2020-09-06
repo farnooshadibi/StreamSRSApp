@@ -146,6 +146,7 @@ namespace TestStream.Controllers
                     festival.FirstName,
                     festival.LastName,
                     festival.Description,
+                    festival.FestivalFileTypeId,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -352,7 +353,7 @@ namespace TestStream.Controllers
                      festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
                     .ToList()
                  })
-                 .ToList();
+                 .FirstOrDefault();
                 //var files = db.festivalFiles.Where(current => current.FestivalId == id).ToList();
 
                 if (result == null)

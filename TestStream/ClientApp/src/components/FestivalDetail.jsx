@@ -59,6 +59,7 @@ export default class FestivalDetail extends Component {
         axios.get(`/api/festival/${festivalId}`)
             .then(
                 response => {
+                    console.log("res", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         processed: response.data.processed,
@@ -72,7 +73,9 @@ export default class FestivalDetail extends Component {
                         festivalFile: response.data.festivalFile,
                         workName: response.data.workName,
                     })
+                       
                     )
+                    console.log("first", this.state.firstName);
                 }
             )
             .catch((error) => {
@@ -147,7 +150,7 @@ export default class FestivalDetail extends Component {
                                 className="form-control rtl"
                                 name="fileTypeId"
                                 value={this.state.fileTypeId}
-                            onChange={(event) => { this.setState({ workName: event.target.value }); }}
+                                onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
                             />
                         </div>
                         <div className="col-lg-4 form-group rtl">
