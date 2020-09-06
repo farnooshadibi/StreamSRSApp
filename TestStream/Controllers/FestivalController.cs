@@ -135,17 +135,18 @@ namespace TestStream.Controllers
             {
                 var count = db.festivals.Where(c => c.Approve == true && c.Processed == true).Count();
                 int pageSize = 12;
-                if(page == 0) page = 1 ;
+                if (page == 0) page = 1;
                 int skip = (page - 1) * pageSize;
                 int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
                 var result = db.festivals
-                    .Where( c => c.Approve == true && c.Processed == true)
+                    .Where(c => c.Approve == true && c.Processed == true)
                 .Select(festival => new
                 {
                     festival.Id,
                     festival.FirstName,
                     festival.LastName,
                     festival.Description,
+                    festival.FestivalFileTypeId,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -335,17 +336,34 @@ namespace TestStream.Controllers
         {
             try
             {
-                //var result = db.festivals.Find(id);
-                var files = db.festivalFiles.Where(current => current.FestivalId == id).ToList();
+                var result = db.festivals
+                 .Where(c => c.Id == id)
+                 .Select(festival => new
+                 {
+                     festival.Id,
+                     festival.FirstName,
+                     festival.LastName,
+                     festival.Description,
+                     festival.Mobile,
+                     festival.Phone,
+                     festival.Approve,
+                     festival.Processed,
+                     festival.TrackingCode,
+                     festival.WorkName,
+                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
+                    .ToList()
+                 })
+                 .FirstOrDefault();
+                //var files = db.festivalFiles.Where(current => current.FestivalId == id).ToList();
 
-                if (files == null)
+                if (result == null)
                 {
                     return this.NotFound(" doesnt exist");
                 }
                 else
                 {
 
-                    return Ok(files);
+                    return Ok(result);
                 }
             }
             catch (Exception e)
@@ -424,7 +442,7 @@ namespace TestStream.Controllers
                         festivalObj.Like -= 1;
                     }
 
-                    
+
                     db.festivals.Update(festivalObj);
                     db.SaveChanges();
 

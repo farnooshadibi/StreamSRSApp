@@ -15,27 +15,16 @@ export default class Gallery extends Component {
         super(props);
         this.state = {
             data: [{ num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'audio' }, { num: 1, type: 'video' }],
-            currentPage:0
+            currentPage:1
 
         }
     }
 
     componentDidMount() {
-        if (this.props.mode === '') {
-            console.log('motada')
-            axios.get(`/api/festival/getAllFestivalFiles/1`)
-                .then(response => {
-                    console.log("r", response);
-                    this.setState({
-                        data: response.data
-                    })
-                })
 
-                .catch((error) => console.log(error))
-        }
 
         if (this.props.mode === 'images') {
-            axios.get(`/api/festival/getPhotos/1`)
+            axios.get(`/api/festival/getPhotos/${this.state.currentPage}`)
                 .then(response => {
                     console.log("r", response);
                     this.setState({
@@ -47,7 +36,7 @@ export default class Gallery extends Component {
         }
 
         if (this.props.mode === 'videos') {
-            axios.get(`/api/festival/getVideos/1`)
+            axios.get(`/api/festival/getVideos/${this.state.currentPage}`)
                 .then(response => {
                     console.log("r", response);
                     this.setState({
@@ -59,7 +48,7 @@ export default class Gallery extends Component {
         }
 
         if (this.props.mode === 'audios') {
-            axios.get(`/api/festival/getAudios/1`)
+            axios.get(`/api/festival/getAudios/${this.state.currentPage}`)
                 .then(response => {
                     console.log("r", response);
                     this.setState({
