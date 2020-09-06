@@ -38,7 +38,7 @@ export default class FestivalDetail extends Component {
             file: [],
             formFile: '',
             fileName: '',
-            fileTypeId: 1,
+            festivalFileTypeId: 1,
             fileTypeName: '',
             fileType: []
         }
@@ -52,14 +52,12 @@ export default class FestivalDetail extends Component {
     componentDidMount() {
         const { festivalId } = this.props.location.state
         this.setState({ Id: festivalId });
-        console.log("id", festivalId)
         this.handleEdit(festivalId);
     }
     handleEdit(festivalId) {
         axios.get(`/api/festival/${festivalId}`)
             .then(
                 response => {
-                    console.log("res", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         processed: response.data.processed,
@@ -72,10 +70,9 @@ export default class FestivalDetail extends Component {
                         trackingCode: response.data.trackingCode,
                         festivalFile: response.data.festivalFile,
                         workName: response.data.workName,
-                    })
-                       
+                        festivalFileTypeId: response.data.festivalFileTypeId
+                    })                 
                     )
-                    console.log("first", this.state.firstName);
                 }
             )
             .catch((error) => {
@@ -99,6 +96,7 @@ export default class FestivalDetail extends Component {
             })
     }
     render() {
+        console.log("festivalFile", this.state.festivalFile)
         const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName } = this.state;
         return (<Container>
             <div className="form-group requester">
@@ -146,12 +144,25 @@ export default class FestivalDetail extends Component {
                     <div className="row">
                         <div className="col-lg-4 form-group rtl">
                             <label>نوع اثر </label>
-                            <input type="text"
+                            {this.state.festivalFileTypeId == 1 ? <input type="text"
                                 className="form-control rtl"
                                 name="fileTypeId"
-                                value={this.state.fileTypeId}
+                                value="عکس"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
-                            />
+                            /> : null}
+                            {this.state.festivalFileTypeId == 2 ? <input type="text"
+                                className="form-control rtl"
+                                name="fileTypeId"
+                                value="فیلم"
+                                onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
+                            /> : null}
+                            {this.state.festivalFileTypeId == 3 ? <input type="text"
+                                className="form-control rtl"
+                                name="fileTypeId"
+                                value="صدا"
+                                onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
+                            /> : null}
+                           
                         </div>
                         <div className="col-lg-4 form-group rtl">
                             <label>نام اثر </label>
@@ -162,18 +173,17 @@ export default class FestivalDetail extends Component {
                             onChange={(event) => { this.setState({ workName: event.target.value }); }}
                             />
                         </div>
-                        <div className="col-lg-4 form-group rtl">
-                            <label> توضیحات در مورد اثر </label>
-                            <textarea type="text"
-                                className="form-control rtl"
-                                name="description"
-                                value={description}
-                            onChange={(event) => { this.setState({ description: event.target.value }); }}
-                            />
-                        </div>
                     </div>
-
-                    <div>
+                    <div className="form-group rtl">
+                        <label> توضیحات در مورد اثر </label>
+                        <textarea type="text"
+                            className="form-control rtl"
+                            name="description"
+                            value={description}
+                            onChange={(event) => { this.setState({ description: event.target.value }); }}
+                        />
+                    </div>
+                    <div className="row">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="processed" checked={processed}
                                 onChange={(event) => { this.setState({ processed: event.target.checked }); }}
