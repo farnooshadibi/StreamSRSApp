@@ -14,21 +14,34 @@ export default class Gallery extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{ num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'audio' }, { num: 1, type: 'video' }],
-            currentPage:1
+            data: [],
+            currentPage: 1,
+            allPages:0
 
         }
     }
 
     componentDidMount() {
 
+        if (this.props.mode === '') {
+            axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
+                .then(response => {
+                    console.log("r", response.data);
+                    this.setState({
+                        data: response.data.data,
+                        allPages:response
+                    })
+                })
+
+                .catch((error) => console.log(error))
+        }
 
         if (this.props.mode === 'images') {
             axios.get(`/api/festival/getPhotos/${this.state.currentPage}`)
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data
+                        data: response.data.data
                     })
                 })
 
@@ -40,7 +53,7 @@ export default class Gallery extends Component {
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data
+                        data: response.data.data
                     })
                 })
 
@@ -52,7 +65,7 @@ export default class Gallery extends Component {
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data
+                        data: response.data.data
                     })
                 })
 
@@ -79,12 +92,12 @@ export default class Gallery extends Component {
                     this.props.mode === '' ?
                         
                                 this.state.data.map(x => {
-                                    switch (x.type) {
-                                        case 'video':
-                                            return <GalleryVideo customer={x}  />
-                                        case 'image':
+                                    switch (x.festivalFileTypeId) {
+                                        case 1:
                                             return <GalleryImage customer={x} />
-                                        case 'audio':
+                                        case 2:
+                                            return <GalleryVideo customer={x} />
+                                        case 3:
                                             return <GalleryAudio customer={x} />
                                     }
                                 }
@@ -107,14 +120,6 @@ export default class Gallery extends Component {
                     <div className="row">
                         {this.state.data.map((data, index) => data ? <GalleryAudio key={index} customer={data} /> : null)}
                     </div> : null}
-
-                <ul class="pagination">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
 
             </div>
             )
