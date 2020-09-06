@@ -239,3 +239,23 @@ body{
         border-radius: 10px;
     }
 }
+
+.azure{
+    color:azure!important;
+}
+
+
+.center {
+    margin: 0 auto!important;
+}
+
+.audio-player {
+    background-color: #b7b7b7;
+    padding: 0.5rem;
+    border-radius: 10px;
+    filter: invert(100%);
+    width: 100%!important;
+    max-width: 606px!important;
+    direction: ltr!important;
+    margin:60px auto;
+}

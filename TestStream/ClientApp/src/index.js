@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import 'react-awesome-slider/dist/styles.css';
 
 import App from './App';
 //import registerServiceWorker from './registerServiceWorker';
