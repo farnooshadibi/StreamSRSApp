@@ -62,12 +62,12 @@ namespace TestStream.Controllers
                         FestivalFile festivalFile = new FestivalFile();
                         string temp = DateTime.Now.Ticks.ToString() + f.FileName;
                         filesName.Add(temp);
-                        string filePath = Path.Combine("UploadFiles/Festivals", temp);
+                        string filePath = Path.Combine("ClientApp/public/UploadFiles/Festivals", temp);
                         using (Stream stream = new FileStream(filePath, FileMode.Create))
                         {
                             f.CopyTo(stream);
                         }
-                        festivalFile.FileURL = filePath;
+                        festivalFile.FileURL = filePath.Replace("ClientApp/public", ""); ;
                         festivalFile.FestivalId = festivalObj.Id;
                         db.festivalFiles.Add(festivalFile);
                         db.SaveChanges();
