@@ -147,6 +147,7 @@ namespace TestStream.Controllers
                     festival.LastName,
                     festival.Description,
                     festival.FestivalFileTypeId,
+                    festival.Like,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -189,6 +190,7 @@ namespace TestStream.Controllers
                     festival.FirstName,
                     festival.LastName,
                     festival.Description,
+                    festival.Like,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -231,6 +233,7 @@ namespace TestStream.Controllers
                     festival.FirstName,
                     festival.LastName,
                     festival.Description,
+                    festival.Like,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -273,6 +276,7 @@ namespace TestStream.Controllers
                     festival.FirstName,
                     festival.LastName,
                     festival.Description,
+                    festival.Like,
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -350,6 +354,7 @@ namespace TestStream.Controllers
                      festival.Processed,
                      festival.TrackingCode,
                      festival.WorkName,
+                     //festivalFileType= festival.fes
                      festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
                     .ToList()
                  })
