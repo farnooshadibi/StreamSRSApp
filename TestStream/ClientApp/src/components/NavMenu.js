@@ -91,6 +91,10 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} to="/shrine-list-admin">حرم های مطهر </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/festival-list">شرکت کنندگان در جشنواره </NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
                                     <LoginMenu>
                                     </LoginMenu>
                                 </ul>

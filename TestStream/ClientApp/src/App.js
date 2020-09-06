@@ -25,6 +25,8 @@ import ShrineListAdmin from './components/ShrineListAdmin';
 import Gallery from './components/Gallery';
 import Service from './components/Service';
 import Festival from './components/Festival';
+import FestivalList from './components/FestivalList';
+import FestivalDetail from './components/FestivalDetail';
 
 
 export default class App extends Component {
@@ -54,6 +56,8 @@ export default class App extends Component {
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
                             <AuthorizeRoute path="/requestReview" component={Requester} />
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />
+                            <AuthorizeRoute path="/festival-list" component={FestivalList} />
+                            <AuthorizeRoute path="/festival-detail" component={FestivalDetail} />
                             <Route path="/video-detail/:id" component={VideoDetail} />
                             <Route path='/counter' component={Counter} />
                             <AuthorizeRoute path='/fetch-data' component={FetchData} />

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 //import Cookies from 'universal-cookie'
-import CustomizedSnackbars, { } from './CustomizedSnackbars'
+import CustomizedSnackbars, { } from './CustomizedSnackbars';
 const getUrl = '/api/customer';
 
 
@@ -89,7 +89,6 @@ export default class UserList extends Component {
         this.setState({ open: false })
         // }
     }
-
     handleClick() {
         this.setState({ setOpenSnack: true })
         this.setState({ openSnack: true })
