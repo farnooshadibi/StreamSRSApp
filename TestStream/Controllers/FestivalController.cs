@@ -354,7 +354,7 @@ namespace TestStream.Controllers
                      festival.Processed,
                      festival.TrackingCode,
                      festival.WorkName,
-                     //festivalFileType= festival.fes
+                     festival.FestivalFileTypeId,
                      festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
                     .ToList()
                  })
@@ -545,16 +545,19 @@ namespace TestStream.Controllers
                     db.SaveChanges();
 
                     var result = festivalDto.festivalFile.ToList();
-
-                    foreach (var item in result)
+                    if( result != null)
                     {
-                        var fileObj = db.festivalFiles.FirstOrDefault(x => x.Id == item.Id);
-                        fileObj.Approve = item.Approve;
+                        foreach (var item in result)
+                        {
+                            var fileObj = db.festivalFiles.FirstOrDefault(x => x.Id == item.Id);
+                            fileObj.Approve = item.Approve;
 
-                        db.festivalFiles.Update(fileObj);
-                        db.SaveChanges();
+                            db.festivalFiles.Update(fileObj);
+                            db.SaveChanges();
 
+                        }
                     }
+
 
                 }
 
