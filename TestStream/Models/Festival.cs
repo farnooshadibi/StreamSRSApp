@@ -20,6 +20,8 @@ namespace TestStream.Models
         public int Like { get; set; }
         public bool Approve { get; set; }
         public int FestivalFileTypeId { get; set; }
+        public string WorkName { get; set; }
         public ICollection<FestivalFile> festivalFiles { get; set; }
+        public ICollection<Comment> comments { get; set; }
     }
 }

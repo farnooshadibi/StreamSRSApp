@@ -20,6 +20,11 @@ namespace TestStream.Models.ApiModels.Festival
         public string TrackingCode { get; set; }
         public int fileTypeId { get; set; }
         public int FestivalFileTypeId { get; set; }
+        public bool Approve { get; set; }
+        public bool Like { get; set; }
+        public int festivalFilesId { get; set; }
+        public string WorkName { get; set; }
+        public List<FestivalFile> festivalFile { get; set; }
         public List<IFormFile> FormFile { get; set; }
 
     }
