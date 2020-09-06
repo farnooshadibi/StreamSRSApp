@@ -10,7 +10,7 @@ export default class GalleryVideo extends Component{
                     
                 <div className="d-flex justify-content-around">
                         <div className="card text-center" style={{width:'100%', height: "50", backgroundColor: "transparent" }}>
-                            <Link style={{ textDecoration: 'none' }} to={`galleryaudio/id`}>
+                            <Link style={{ textDecoration: 'none' }} to={`gallerydetail/id`}>
                                 <div className="card cardBg">
                                     <i className="fa fa-volume-up" style={{ fontSize: '900%', color: 'white' }}></i>
 

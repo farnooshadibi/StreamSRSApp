@@ -23,6 +23,7 @@ import UserProgramList from './components/UserProgramList';
 import Shrine from './components/Shrine';
 import ShrineListAdmin from './components/ShrineListAdmin';
 import Gallery from './components/Gallery';
+import GalleryDetail from './components/GalleryDetail';
 import Service from './components/Service';
 import Festival from './components/Festival';
 import FestivalList from './components/FestivalList';
@@ -73,6 +74,7 @@ export default class App extends Component {
                             <Route exact path="/gallery/images" component={() => <Gallery mode='images' />}/>
                             <Route exact path="/gallery/videos" component={() => <Gallery mode='videos' />} />
                             <Route exact path="/gallery/audios" component={() => <Gallery mode='audios' />} />
+                            <Route exact path="/gallerydetail" component={() => <GalleryDetail />} />
                         </Layout>
                     </Route>
                 </Switch>
