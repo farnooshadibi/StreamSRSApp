@@ -33,7 +33,7 @@ export default class GalleryDetail extends Component{
         const style={ fontSize: '300%', color: !this.state.liked ? 'white' : 'red' , padding: "11px 0px 3px 10px", textAlign:'center' }
         return (
             <div>
-                <div className="center" style={{width:'60%', height: 'auto'}}>
+                <div className="center gallerywidth" style={{ height: 'auto'}}>
                 <AwesomeSlider animation="cubeAnimation">
                     <div data-src="https://fa.shafaqna.com/media/2020/03/%D8%AD%D8%B1%D9%85-%D8%A7%D9%85%D8%A7%D9%85-%D8%B1%D8%B6%D8%A7%D8%B9.jpg" />
                         <div data-src="https://www.w3schools.com/html/movie.mp4" />
@@ -45,18 +45,17 @@ export default class GalleryDetail extends Component{
                     <i className="fa fa-heart" style={style} onClick={() => this.setState({ liked: !this.state.liked })}></i>
                 </center>
                 <h3 className="azure" style={{ marginBottom:'25px', marginRight:'10%'}}>نظرات</h3>
-                <div className="row col-md-6 col-sm-8" style={{marginRight:'1px'}}>
+                <div className="row col-md-6 col-sm-10" style={{marginRight:'1px'}}>
                     <div class="ui comments center rtl" >
                         {this.state.comments.map(data => {
                             return (
-                                <div class="comment">
-                                    <a class="avatar">
+                                <div class="comment" style={{marginBottom:'15px'}}>
+                                    <a class="avatar" style={{float:'right', marginLeft:'5%'}}>
                                         <img src="https://semantic-ui.com/images/avatar/small/jenny.jpg" />
-                                           </a>
-                                        <div class="content">
-                                            <a class="author azure">سجاد نصرالله پور قره داغی        </a>
+                                    </a>
+                                    <div class="content">
+                                            <a class="author azure">سجاد نصرالله </a>
                                             <div class="metadata">
-                                            <span class="date azure">امروز 4:25</span>
                                         </div>
                                         <div class="text azure">
                                                 عالی

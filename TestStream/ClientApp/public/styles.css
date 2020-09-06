@@ -238,12 +238,18 @@ body{
         margin: 35px auto;
         border-radius: 10px;
     }
+    .gallerywidth{
+        width:99%!important;
+    }
 }
 
 .azure{
     color:azure!important;
 }
 
+.gallerywidth{
+    width:70%;
+}
 
 .center {
     margin: 0 auto!important;
