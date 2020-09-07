@@ -29,7 +29,6 @@ export default class Gallery extends Component {
                     console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", response.data);
                     this.setState({
                         data: response.data.data,
-                        allPages:response
                     })
                 })
 
