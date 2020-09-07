@@ -156,9 +156,9 @@ namespace TestStream.Controllers
                 .Take(pageSize)
                 .ToList();
 
-
+                var list = result.Where(c => c.festivalFile != null).ToList();
                 Response response = new Response();
-                response.Data = result;
+                response.Data = list;
                 response.Status = true;
                 response.Message = "Received successfully";
                 response.CountPage = TotalPages;
@@ -201,8 +201,9 @@ namespace TestStream.Controllers
                 .ToList();
 
 
+                var list = result.Where(c => c.festivalFile != null).ToList();
                 Response response = new Response();
-                response.Data = result;
+                response.Data = list;
                 response.Status = true;
                 response.Message = "Received successfully";
                 response.CountPage = TotalPages;
@@ -244,9 +245,9 @@ namespace TestStream.Controllers
                 .Take(pageSize)
                 .ToList();
 
-
+                var list = result.Where(c => c.festivalFile != null).ToList();
                 Response response = new Response();
-                response.Data = result;
+                response.Data = list;
                 response.Status = true;
                 response.Message = "Received successfully";
                 response.CountPage = TotalPages;
@@ -288,9 +289,9 @@ namespace TestStream.Controllers
                 .Take(pageSize)
                 .ToList();
 
-
+                var list = result.Where(c => c.festivalFile != null).ToList();
                 Response response = new Response();
-                response.Data = result;
+                response.Data = list;
                 response.Status = true;
                 response.Message = "Received successfully";
                 response.CountPage = TotalPages;
