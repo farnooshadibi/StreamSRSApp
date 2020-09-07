@@ -7,29 +7,73 @@ import GalleryImage from './GalleryImage'
 import GalleryVideo from './GalleryVideo'
 import GalleryAudio from './GalleryAudio'
 import './gallerystyle.css'
-import { Select } from '@material-ui/core';
+
 
 export default class Gallery extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: [{ num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'video' }, { num: 1, type: 'image' }, { num: 1, type: 'audio' }, { num: 1, type: 'video' }]
+            data: [],
+            currentPage: 1,
+            allPages:0
 
         }
     }
 
     componentDidMount() {
-        axios.get(`/api/gallery/${this.props.mode}`)
-            .then(response => {
-                console.log("r", response);
-                this.setState({
-                    data: response.data
-                })
-            })
 
-            .catch((error) => console.log(error))
-    }
+        if (this.props.mode === '') {
+            axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
+                .then(response => {
+                    console.log("r", response.data);
+                    this.setState({
+                        data: response.data.data,
+                        allPages:response
+                    })
+                })
+
+                .catch((error) => console.log(error))
+        }
+
+        if (this.props.mode === 'images') {
+            axios.get(`/api/festival/getPhotos/${this.state.currentPage}`)
+                .then(response => {
+                    console.log("r", response);
+                    this.setState({
+                        data: response.data.data
+                    })
+                })
+
+                .catch((error) => console.log(error))
+        }
+
+        if (this.props.mode === 'videos') {
+            axios.get(`/api/festival/getVideos/${this.state.currentPage}`)
+                .then(response => {
+                    console.log("r", response);
+                    this.setState({
+                        data: response.data.data
+                    })
+                })
+
+                .catch((error) => console.log(error))
+        }
+
+        if (this.props.mode === 'audios') {
+            axios.get(`/api/festival/getAudios/${this.state.currentPage}`)
+                .then(response => {
+                    console.log("r", response);
+                    this.setState({
+                        data: response.data.data
+                    })
+                })
+
+                .catch((error) => console.log(error))
+        }
+
+        }
+
 
 
     render() {
@@ -45,15 +89,15 @@ export default class Gallery extends Component {
 
                 <div className='row'>
                 {
-                    typeof (this.props.mode) === 'undefined' ?
+                    this.props.mode === '' ?
                         
                                 this.state.data.map(x => {
-                                    switch (x.type) {
-                                        case 'video':
-                                            return <GalleryVideo customer={x}  />
-                                        case 'image':
+                                    switch (x.festivalFileTypeId) {
+                                        case 1:
                                             return <GalleryImage customer={x} />
-                                        case 'audio':
+                                        case 2:
+                                            return <GalleryVideo customer={x} />
+                                        case 3:
                                             return <GalleryAudio customer={x} />
                                     }
                                 }
