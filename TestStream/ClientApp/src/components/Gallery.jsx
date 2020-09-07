@@ -26,7 +26,7 @@ export default class Gallery extends Component {
         if (this.props.mode === '') {
             axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
                 .then(response => {
-                    console.log("r", response.data);
+                    console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", response.data);
                     this.setState({
                         data: response.data.data,
                         allPages:response
