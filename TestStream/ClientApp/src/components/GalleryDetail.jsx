@@ -31,7 +31,6 @@ export default class GalleryDetail extends Component{
                 this.setState({
                     data: response.data
 
-
                 })
             })
 
