@@ -14,10 +14,31 @@ export default class GalleryDetail extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            data:[],
             comments: [1, { num: 0, type: 'audio' }, 3, 4, { num: 0, type: 'audio' }, 6],
             liked: false
         }
     }
+
+
+    componentDidMount() {
+        const { params } = this.props.match;
+        console.log(params)
+        console.log("SALAM")
+        axios.get(`api/festival/getFileDetails/${params.id}`)
+            .then(response => {
+                console.log("r", response);
+                this.setState({
+                    data: response.data
+
+
+                })
+            })
+
+            .catch((error) => console.log(error))
+    }
+
+
     render() {
         let audioFiles=[]
         this.state.comments.map(data => {
@@ -54,13 +75,13 @@ export default class GalleryDetail extends Component{
                                         <img src="https://semantic-ui.com/images/avatar/small/jenny.jpg" />
                                     </a>
                                     <div class="content">
-                                            <a class="author azure">سجاد نصرالله </a>
-                                            <div class="metadata">
-                                        </div>
-                                        <div class="text azure">
-                                                عالی
-                                        </div>
+                                        <a class="author azure">سجاد نصرالله </a>
+                                        <div class="metadata">
                                     </div>
+                                    <div class="text azure">
+                                            عالی
+                                    </div>
+                                </div>
 
                                 </div>
 

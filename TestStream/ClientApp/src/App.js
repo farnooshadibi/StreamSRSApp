@@ -57,8 +57,8 @@ export default class App extends Component {
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
                             <AuthorizeRoute path="/requestReview" component={Requester} />
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />
-                            <AuthorizeRoute path="/festival-list" component={FestivalList} />
-                            <AuthorizeRoute path="/festival-detail" component={FestivalDetail} />
+                            <Route path="/festival-list" component={FestivalList} />
+                            <Route path="/festival-detail" component={FestivalDetail} />
                             <Route path="/video-detail/:id" component={VideoDetail} />
                             <Route path='/counter' component={Counter} />
                             <AuthorizeRoute path='/fetch-data' component={FetchData} />
@@ -74,7 +74,7 @@ export default class App extends Component {
                             <Route exact path="/gallery/images" component={() => <Gallery mode='images' />}/>
                             <Route exact path="/gallery/videos" component={() => <Gallery mode='videos' />} />
                             <Route exact path="/gallery/audios" component={() => <Gallery mode='audios' />} />
-                            <Route exact path="/gallerydetail" component={() => <GalleryDetail />} />
+                            <Route path="/gallerydetail/:id" component={GalleryDetail} />
                         </Layout>
                     </Route>
                 </Switch>
