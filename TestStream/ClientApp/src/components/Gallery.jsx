@@ -77,7 +77,7 @@ export default class Gallery extends Component {
 
 
     render() {
-        var dataType = ''
+        console.log(this.state.data)
 
         return (
             <div className="container">
@@ -120,6 +120,38 @@ export default class Gallery extends Component {
                     <div className="row">
                         {this.state.data.map((data, index) => data ? <GalleryAudio key={index} customer={data} /> : null)}
                     </div> : null}
+
+                <div class="ui pagination menu">
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/1}`} >
+                        1
+                    </Link>
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/2}`} >
+                        2
+                    </Link>
+                    <div class="disabled item">
+                        ...
+                     </div>
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage}}`} >
+                        {this.state.currentPage}
+                    </Link>
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage+1}}`} >
+                        {this.state.currentPage+1}
+                    </Link>
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 2}}`} >
+                        {this.state.currentPage + 2}
+                    </Link>
+                    <div class="disabled item">
+                        ...
+                     </div>
+
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 1}}`} >
+                        {this.state.currentPage + 1}
+                    </Link>
+                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 2}}`} >
+                        {this.state.currentPage + 2}
+                    </Link>
+
+                </div>
 
             </div>
             )

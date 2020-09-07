@@ -132,6 +132,7 @@ export default class FestivalDetail extends Component {
                         <div className="col-lg-3 form-group rtl">
                             <label>نام خانوادگی </label>
                             <input type="text"
+                                disabled
                                 className="form-control rtl"
                                 name="lastName"
                                 value={lastName}
@@ -141,6 +142,7 @@ export default class FestivalDetail extends Component {
                         <div className="col-lg-3 form-group rtl">
                             <label>شماره موبایل </label>
                             <input type="text"
+                                disabled
                                 className="form-control rtl"
                                 name="mobile"
                                 value={mobile}
@@ -150,6 +152,7 @@ export default class FestivalDetail extends Component {
                         <div className="col-lg-3 form-group rtl">
                             <label>شماره ثابت </label>
                             <input type="text"
+                                disabled
                                 className="form-control rtl"
                                 name="phone"
                                 value={phone}
@@ -162,18 +165,21 @@ export default class FestivalDetail extends Component {
                             <label>نوع اثر </label>
                             {this.state.festivalFileTypeId == 1 ? <input type="text"
                                 className="form-control rtl"
+                                disabled
                                 name="fileTypeId"
                                 value="عکس"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
                             /> : null}
                             {this.state.festivalFileTypeId == 2 ? <input type="text"
                                 className="form-control rtl"
+                                disabled
                                 name="fileTypeId"
                                 value="فیلم"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
                             /> : null}
                             {this.state.festivalFileTypeId == 3 ? <input type="text"
                                 className="form-control rtl"
+                                disabled
                                 name="fileTypeId"
                                 value="صدا"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
@@ -183,6 +189,7 @@ export default class FestivalDetail extends Component {
                         <div className="col-lg-6 form-group rtl">
                             <label>نام اثر </label>
                             <input type="text"
+                                disabled
                                 className="form-control rtl"
                                 name="workName"
                                 value={workName}
@@ -190,7 +197,16 @@ export default class FestivalDetail extends Component {
                             />
                         </div>
                     </div>
-                  
+                    <div className="form-group rtl">
+                        <label> توضیحات در مورد اثر </label>
+                        <textarea type="text"
+                            disabled
+                            className="form-control rtl"
+                            name="description"
+                            value={description}
+                            onChange={(event) => { this.setState({ description: event.target.value }); }}
+                        />
+                    </div>
                     {this.state.festivalFile.map((value, index) => <div className="form-control" key={value.id} >
                         <div className="form-group rtl row">
                         {value.fileURL} 
@@ -205,15 +221,7 @@ export default class FestivalDetail extends Component {
                         </div>
                         </div>
                     </div>)}
-                    <div className="form-group rtl">
-                        <label> توضیحات در مورد اثر </label>
-                        <textarea type="text"
-                            className="form-control rtl"
-                            name="description"
-                            value={description}
-                            onChange={(event) => { this.setState({ description: event.target.value }); }}
-                        />
-                    </div>
+
                     <div className="row">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="processed" checked={processed}

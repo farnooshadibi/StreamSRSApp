@@ -4,6 +4,7 @@ import AudioPlayer from "react-modular-audio-player";
 import axios from 'axios';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import 'react-awesome-slider/dist/custom-animations/cube-animation.css';
+import { param } from 'jquery';
 
 
 
@@ -21,8 +22,9 @@ export default class GalleryDetail extends Component{
             mode: 'add',
             isSuccess: false,
             name:'',
-            message: '',
-            festivalId:null
+            text: '',
+            festivalId: null,
+            likes:null
         }
     }
 
@@ -34,8 +36,8 @@ export default class GalleryDetail extends Component{
             .then(response => {
                 console.log("r", response);
                 this.setState({
-                    data: response.data.data[0],
-                    festivalId: response.data.data[0].festivalFile[0].festivalId
+                    data: response.data.data,
+                    festivalId: parseInt(params.id)
 
                 })
             })
@@ -54,10 +56,33 @@ export default class GalleryDetail extends Component{
 
             .catch((error) => console.log(error))
 
+        axios.get(`/api/festival/getComments/${params.id}`)
+            .then(response => {
+                console.log("comment", response);
+                this.setState({
+                    comments: response.data.data
+
+                })
+            })
+
+            .catch((error) => console.log(error))
+
+        axios.get(`/api/festival/getLikeCount/${params.id}`)
+            .then(response => {
+                console.log("likesssss", response);
+                this.setState({
+                    likes: parseInt(response.data.data)
+
+                })
+            })
+
+            .catch((error) => console.log(error))
+
     }
 
+
     handleRequest = () => {
-        const {name,festivalId,text } = this.state;
+        const { name, festivalId, text } = this.state;
         axios.post('/api/festival/postComment', { name, festivalId, text })
             .then(response => {
                 this.setState({ isSuccess: true, message: "ثبت نظر با موفقیت انجام شد" });
@@ -68,26 +93,48 @@ export default class GalleryDetail extends Component{
             }
             )
     }
+
+    handleLike = () => {
+        let likednew=!this.state.liked
+        console.log(this.state.liked)
+        this.state.liked = likednew
+        this.forceUpdate()
+        console.log(this.state.liked)
+        const { festivalId, liked } = this.state;
+        let id = festivalId
+        let like = liked
+        axios.post('/api/festival/PostLike', {id, like })
+            .then(response => {
+                
+                this.setState({ isSuccess: true, message: "ثبت نظر با موفقیت انجام شد", likes: response.data.data.like });
+            })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ isSuccess: true, mode: 'error', message: 'هنگام ثبت خطا رخ داد' })
+            }
+            )
+    }
+
     handleCloseCustomizadSnack() {
         this.setState({ isSuccess: false })
     }
-    
+
+
     render() {
-        console.log(this.state)
+        let name = this.state.data.firstName + this.state.data.lastName
         let audioFiles = []
         if (this.state.data.festivalFileTypeId === 3) {
             this.state.data.festivalFile.map(data => {
                 console.log("aa",data)
                 audioFiles.push({
                     src: data.fileURL,
-
                     artist: this.state.data.lastName
                 })
-
             })
         }
-        
-        const style={ fontSize: '300%', color: !this.state.liked ? 'white' : 'red' , textAlign:'center', marginTop:'40px' }
+
+
+        const style = { fontSize: '300%', color: !this.state.liked ? 'white' : 'red', textAlign: 'center', marginTop: '70px' }
         return (
             <div className="container">
                 <div className="center gallerywidth" style={{ height: 'auto' }}>
@@ -107,7 +154,8 @@ export default class GalleryDetail extends Component{
                     : null
                     }
                 <center>
-                    <i className="fa fa-heart" style={style} onClick={() => this.setState({ liked: !this.state.liked })}></i>
+                    <i className="fa fa-heart" style={style} onClick={this.handleLike}></i>
+                    <h2> {this.state.likes} نفر این  را پسندیدند</h2>
                 </center>
                 <h3 className="azure" style={{ marginBottom:'25px', marginRight:'10%'}}>نظرات</h3>
                 <div className="row" style={{ marginRight: '1px' }}>
@@ -117,7 +165,7 @@ export default class GalleryDetail extends Component{
                             return (
                                 <div class="comment" style={{marginBottom:'15px'}}>
                                     <a class="avatar" style={{float:'right', marginLeft:'5%'}}>
-                                        <img src="https://semantic-ui.com/images/avatar/small/jenny.jpg" />
+                                        <img src="/comment.png" style={{width:'50px', height:'50px'}} />
                                     </a>
                                     <div class="content">
                                         <a class="author azure">{ data.name }</a>
@@ -135,13 +183,13 @@ export default class GalleryDetail extends Component{
                         )}
                             <form class="ui reply form" onSubmit={this.handleRequest}>
                                 <div class="field">
-                                    <input type="text" name="first-name" placeholder="نام" required onChange={e => this.setState({ name: e.target.value })} />
+                                    <input type="text" value={this.state.name} name="first-name" placeholder="نام" required onChange={e => this.setState({ name: e.target.value })} />
                                 </div>
 
                             <div class="field">
-                                    <textarea style={{ background: 'lightgray' }} onChange={e => this.setState({ message: e.target.value })}></textarea>
+                                    <textarea style={{ background: 'lightgray' }} value={ this.state.text } onChange={e => this.setState({ text: e.target.value })}></textarea>
                             </div>
-                            <div class="ui blue labeled submit icon button">
+                                <div class="ui blue labeled submit icon button" onClick={this.handleRequest}>
                                 <i class="fa fa-edit"></i>     نظر دهید
                             </div>
                         </form>

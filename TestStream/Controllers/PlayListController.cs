@@ -85,7 +85,7 @@ namespace TestStream.Controllers
                     //ply.EventPlace = playList.EventPlace;
                     //ply.IsActive = true;
                     //ply.CustomerId = playList.CustomerId;
-                   
+
                     db.playLists.Add(playList);
                     db.SaveChanges();
                     response.Data = playList;
@@ -108,47 +108,47 @@ namespace TestStream.Controllers
         }
 
 
-    [HttpGet("{id}")]
-    public ActionResult Get(int id)
-    {
-        try
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
         {
-            var playList = db.playLists.Find(id);
-
-
-            if (playList == null)
+            try
             {
-                return this.NotFound(" doesnt exist");
-            }
-            else
-            {
+                var playList = db.playLists.Find(id);
 
-                return Ok(playList);
+
+                if (playList == null)
+                {
+                    return this.NotFound(" doesnt exist");
+                }
+                else
+                {
+
+                    return Ok(playList);
+                }
             }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Get", "Admin");
+                return this.NotFound("Dosnt Get Customer successfully");
+            }
+
+
         }
-        catch (Exception e)
+        // POST api/values/5
+        [HttpPut]
+        public ActionResult Put([FromBody] PlayListDto playListDto)
         {
-            writeException.Write(e.Message, DateTime.Now, "PlayList", "Get", "Admin");
-            return this.NotFound("Dosnt Get Customer successfully");
-        }
-
-
-    }
-    // POST api/values/5
-    [HttpPut]
-    public ActionResult Put([FromBody] PlayListDto playListDto)
-    {
-        try
-        {
-            Response objResponse = new Response();
-
-            var customerObj = db.playLists.FirstOrDefault(x => x.Id == playListDto.Id);
-            if (customerObj == null)
+            try
             {
-                return this.NotFound("Request doesnt exist");
-            }
-            else
-            {
+                Response objResponse = new Response();
+
+                var customerObj = db.playLists.FirstOrDefault(x => x.Id == playListDto.Id);
+                if (customerObj == null)
+                {
+                    return this.NotFound("Request doesnt exist");
+                }
+                else
+                {
                     if (!string.IsNullOrEmpty(playListDto.Image) && playListDto.Image.Contains("data:image"))
                     {
                         var dataparts = playListDto.Image.Split(',');
@@ -165,62 +165,62 @@ namespace TestStream.Controllers
                         playListDto.Image = filePath.Replace("ClientApp/public", "");
                     }
                     customerObj.Name = playListDto.Name;
-                customerObj.StartTime = playListDto.StartTime;
+                    customerObj.StartTime = playListDto.StartTime;
                     customerObj.EndTime = playListDto.EndTime;
                     customerObj.Description = playListDto.Description;
-                customerObj.Image = playListDto.Image;
-                customerObj.PerformerName = playListDto.PerformerName;
-                customerObj.Lamenter = playListDto.Lamenter;
-                customerObj.EventPlace = playListDto.EventPlace;
-                customerObj.IsActive = playListDto.IsActive;
-                customerObj.Duration = DateTime.Now;
+                    customerObj.Image = playListDto.Image;
+                    customerObj.PerformerName = playListDto.PerformerName;
+                    customerObj.Lamenter = playListDto.Lamenter;
+                    customerObj.EventPlace = playListDto.EventPlace;
+                    customerObj.IsActive = playListDto.IsActive;
+                    customerObj.Duration = DateTime.Now;
 
-                db.playLists.Update(customerObj);
-                db.SaveChanges();
+                    db.playLists.Update(customerObj);
+                    db.SaveChanges();
+                }
+
+
+                objResponse.Data = customerObj;
+                objResponse.Status = true;
+                objResponse.Message = " Edit Successfully";
+
+
+                return Ok(objResponse);
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "PlayList", "Put", "Admin");
+                return this.NotFound("Dosnt Edit successfully");
             }
 
 
-            objResponse.Data = customerObj;
-            objResponse.Status = true;
-            objResponse.Message = " Edit Successfully";
-
-
-            return Ok(objResponse);
-        }
-        catch (Exception e)
-        {
-            writeException.Write(e.Message, DateTime.Now, "PlayList", "Put", "Admin");
-            return this.NotFound("Dosnt Edit successfully");
         }
 
-
-    }
-
-    // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
-    {
-        try
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
-            var playlist = db.playLists.SingleOrDefault(x => x.Id == id);
-
-            if (playlist != null)
+            try
             {
-                db.playLists.Remove(playlist);
-                db.SaveChanges();
+                var playlist = db.playLists.SingleOrDefault(x => x.Id == id);
 
-                return Ok("Delete successfully");
+                if (playlist != null)
+                {
+                    db.playLists.Remove(playlist);
+                    db.SaveChanges();
+
+                    return Ok("Delete successfully");
+                }
+                else
+                {
+                    return this.NotFound("Dosnt Delete successfully");
+                }
             }
-            else
+            catch (Exception e)
             {
+                writeException.Write(e.Message, DateTime.Now, "Playlist", "Delete", "Admin");
                 return this.NotFound("Dosnt Delete successfully");
             }
         }
-        catch (Exception e)
-        {
-            writeException.Write(e.Message, DateTime.Now, "Playlist", "Delete", "Admin");
-            return this.NotFound("Dosnt Delete successfully");
-        }
     }
-}
 }

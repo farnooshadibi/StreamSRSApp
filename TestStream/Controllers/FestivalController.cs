@@ -319,7 +319,7 @@ namespace TestStream.Controllers
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .ToList()
                 })
-                .ToList();
+                .FirstOrDefault();
 
 
                 Response response = new Response();
@@ -495,7 +495,31 @@ namespace TestStream.Controllers
 
         }
 
-        [HttpPost("PostComment/{id}")]
+
+        [HttpGet("GetCommentsList")]
+        public ActionResult GetCommentsList()
+        {
+            try
+            {
+                Response response = new Response();
+
+                var comments = db.comments.ToList();
+
+                response.Data = comments;
+                response.Status = true;
+                response.Message = "Received successfully";
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Festival", "GetCommentsList", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+
+        [HttpPost("PostComment")]
         public ActionResult PostComment([FromBody] Comment comment)
         {
             try
@@ -504,6 +528,35 @@ namespace TestStream.Controllers
                 Response response = new Response();
                 comment.SubmitDate = DateTime.Now;
                 db.comments.Add(comment);
+                db.SaveChanges();
+
+                response.Data = comment;
+                response.Status = true;
+                response.Message = "Create successfully";
+
+
+                return Ok(response);
+
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Festival", "PostComment", "Admin");
+                return this.NotFound("Dosnt Received successfully");
+            }
+
+        }
+        [HttpPost("ApproveComment")]
+        public ActionResult ApproveComment([FromBody] Comment comment)
+        {
+            try
+            {
+
+                Response response = new Response();
+                var cmmt = db.comments.Find(comment.Id);
+                //var cmmt = db.comments.FirstOrDefault(x => x.FestivalId == comment.FestivalId);
+                cmmt.Approve = comment.Approve;
+
+                db.comments.Update(cmmt);
                 db.SaveChanges();
 
                 response.Data = comment;

@@ -21,7 +21,7 @@ export default class GalleryVideo extends Component{
                                             <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>{`${this.props.customer.like}`}</p>
                                             <p>        </p>
                                             <i className="fa fa-comment" style={{ fontSize: '15px', color: 'white', padding: "11px 0px 3px 10px" }}></i>
-                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>{`${this.props.customer.like}`}</p>
+                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>{`${this.props.customer.comment}`}</p>
                                         </div>
                                         
                                     </div>

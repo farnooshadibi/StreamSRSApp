@@ -28,6 +28,7 @@ import Service from './components/Service';
 import Festival from './components/Festival';
 import FestivalList from './components/FestivalList';
 import FestivalDetail from './components/FestivalDetail';
+import CommentList from './components/CommentList';
 
 
 export default class App extends Component {
@@ -59,6 +60,8 @@ export default class App extends Component {
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />
                             <Route path="/festival-list" component={FestivalList} />
                             <Route path="/festival-detail" component={FestivalDetail} />
+                            <Route path="/comment-list" component={CommentList} />
+
                             <Route path="/video-detail/:id" component={VideoDetail} />
                             <Route path='/counter' component={Counter} />
                             <AuthorizeRoute path='/fetch-data' component={FetchData} />
