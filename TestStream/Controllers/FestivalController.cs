@@ -357,6 +357,8 @@ namespace TestStream.Controllers
                      festival.TrackingCode,
                      festival.WorkName,
                      festival.FestivalFileTypeId,
+                     festival.Like,
+                     comment = festival.comments.Where(c => c.FestivalId == festival.Id && c.Approve == true).Count(),
                      festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id)
                     .ToList()
                  })
@@ -526,15 +528,26 @@ namespace TestStream.Controllers
             {
 
                 Response response = new Response();
-                comment.SubmitDate = DateTime.Now;
-                db.comments.Add(comment);
-                db.SaveChanges();
+                if(string.IsNullOrEmpty(comment.Text)) {
+                    return this.NotFound("متن پیام نمی تواند خالی باشد");
 
-                response.Data = comment;
-                response.Status = true;
-                response.Message = "Create successfully";
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(comment.Name))
+                    {
+                        comment.Name = "بی نام";
 
+                    }
+                    comment.SubmitDate = DateTime.Now;
+                    db.comments.Add(comment);
+                    db.SaveChanges();
 
+                    response.Data = comment;
+                    response.Status = true;
+                    response.Message = "Create successfully";
+
+                }
                 return Ok(response);
 
             }

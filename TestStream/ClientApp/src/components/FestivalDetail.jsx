@@ -32,11 +32,12 @@ export default class FestivalDetail extends Component {
             trackingCode: '',
             workName: '',
             result: '',
+            like: 0,
+            comment:0,
             processed: false,
             approve: false,
             approvefile: false,
-
-
+            FestivalFileTypeId:0,
             festivalFile:[],
             festivalFile: [],
             festivalFiles: {},
@@ -76,7 +77,10 @@ export default class FestivalDetail extends Component {
                         trackingCode: response.data.trackingCode,
                         festivalFile: response.data.festivalFile,
                         workName: response.data.workName,
-                        festivalFileTypeId: response.data.festivalFileTypeId
+                        festivalFileTypeId: response.data.festivalFileTypeId,
+                        like: response.data.like,
+                        comment: response.data.comment,
+                        FestivalFileTypeId: response.data.festivalFileTypeId
                     })                 
                     )
                 }
@@ -113,7 +117,7 @@ export default class FestivalDetail extends Component {
     }
     render() {
         console.log("festivalFile", this.state.festivalFile)
-        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName, approvefile } = this.state;
+        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName, approvefile, comment, like, FestivalFileTypeId } = this.state;
         return (<Container>
             <div className="form-group requester">
                 <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >بررسی اطلاعات شرکت کنندگان در جشنواره </h5>
@@ -207,20 +211,37 @@ export default class FestivalDetail extends Component {
                             onChange={(event) => { this.setState({ description: event.target.value }); }}
                         />
                     </div>
-                    {this.state.festivalFile.map((value, index) => <div className="form-control" key={value.id} >
-                        <div className="form-group rtl row">
-                        {value.fileURL} 
-                        
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" id={value.id} checked={value.approve}
-                                    onChange={ this.handleChange.bind(this) }
-                            />
-                            <label className="form-check-label" htmlFor="defaultCheck1">
-                                تایید
+                    <div className="row">
+                    {this.state.festivalFile.map((value, index) => <div className="col-md-4 col-sm-12" style={{ marginBottom: '25px' }} key={value.id} >
+                            <div className="d-flex justify-content-around">
+                                <div className="card text-center" style={{ width: '100%', height: "50", backgroundColor: "transparent" }}>
+                                <div className="card cardBg">
+                                    {FestivalFileTypeId == 1 ? <img src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
+                                    {FestivalFileTypeId == 2 ? <video controls src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
+                                    {FestivalFileTypeId == 3 ? <audio controls src={value.fileURL} style={{ height: "70px", width: "auto", margin: '10px', borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه'  /> : null}
+                                    <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>
+                                                <div className="col-md-12" style={{ display: "inline-flex" }}>
+                                                    <i className="fa fa-heart" style={{ fontSize: '15px', color: 'white', padding: "11px 0px 3px 5px" }}></i>
+                                                    <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>{like}</p>
+                                                    <p>        </p>
+                                                    <i className="fa fa-comment" style={{ fontSize: '15px', color: 'white', padding: "11px 0px 3px 5px" }}></i>
+                                            <p className="card-name" style={{ fontSize: "80%", marginBottom: "10px" }}>{comment}</p>
+                                            <p className="card-name form-check" style={{ marginRight:'60px' }}>
+                                                <input className="form-check-input" type="checkbox" id={value.id} checked={value.approve}
+                                                    onChange={this.handleChange.bind(this)}
+                                                />
+                                                <label className="form-check-label" htmlFor="defaultCheck1">
+                                                    تایید
                             </label>
-                        </div>
-                        </div>
+                                            </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
                     </div>)}
+                        </div>
 
                     <div className="row">
                         <div className="form-check">
@@ -240,7 +261,6 @@ export default class FestivalDetail extends Component {
                             </label>
                         </div>
                     </div>
-
                     <br />
                     <div className="form-group" style={{ marginBottom: 220 }}>
                         <br />
