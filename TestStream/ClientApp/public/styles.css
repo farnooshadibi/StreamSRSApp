@@ -265,3 +265,13 @@ body{
     direction: ltr!important;
     margin:60px auto;
 }
+
+.dropdown-menu {
+    color: #fff !important;
+    background-color: #171717 !important;
+}
+
+.dropdown-item {
+    color: #ababab !important;
+    font-size: 15px!important;
+}

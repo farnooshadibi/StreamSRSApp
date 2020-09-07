@@ -192,6 +192,7 @@ namespace TestStream.Controllers
                     festival.LastName,
                     festival.Description,
                     festival.Like,
+                    comment = festival.comments.Where(c => c.FestivalId == festival.Id && c.Approve == true).Count(),
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -235,6 +236,7 @@ namespace TestStream.Controllers
                     festival.LastName,
                     festival.Description,
                     festival.Like,
+                    comment = festival.comments.Where(c => c.FestivalId == festival.Id && c.Approve == true).Count(),
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })
@@ -278,6 +280,7 @@ namespace TestStream.Controllers
                     festival.LastName,
                     festival.Description,
                     festival.Like,
+                    comment = festival.comments.Where(c => c.FestivalId == festival.Id && c.Approve == true).Count(),
                     festivalFile = festival.festivalFiles.Where(p => p.FestivalId == festival.Id && p.Approve == true)
                    .FirstOrDefault()
                 })

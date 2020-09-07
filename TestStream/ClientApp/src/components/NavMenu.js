@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
@@ -19,7 +19,10 @@ export class NavMenu extends Component {
             isAuthenticated: false,
             userName: null,
             name: '',
-            filteredCustomer: []
+            filteredCustomer: [],
+            dropdownOpen: false,
+            dropdownOpen1: false,
+            
         };
     }
 
@@ -28,6 +31,8 @@ export class NavMenu extends Component {
         this.populateState();
     }
 
+    toggle = () => this.setState({ dropdownOpen: !this.state.dropdownOpen });
+    toggle1 = () => this.setState({ dropdownOpen1: !this.state.dropdownOpen1 });
     componentWillUnmount() {
         authService.unsubscribe(this._subscription);
     }
@@ -66,12 +71,34 @@ export class NavMenu extends Component {
                             <NavbarBrand tag={Link} to="/">سوگواران</NavbarBrand>
                             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+
                                 <ul className="navbar-nav flex-grow">
                                     <NavItem>
                                         <NavLink tag={Link} to="/">خانه</NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-                                    <NavItem>
+                                    <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                        <DropdownToggle nav caret>
+                                            مشتریان
+                                        </DropdownToggle>
+                                        <div className="active"></div>
+                                        <DropdownMenu>
+                                            <DropdownItem tag={Link} to="/user-list"> لیست مشتریان</DropdownItem>
+                                            <DropdownItem tag={Link} to="/user-program-list">مدیریت برنامه های پخش</DropdownItem>
+                                            <DropdownItem tag={Link} to="/requester-list">مدیریت درخواست ها</DropdownItem>
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                    <Dropdown nav isOpen={this.state.dropdownOpen1} toggle={this.toggle1}>
+                                        <DropdownToggle nav caret>
+                                            جشنواره
+                                        </DropdownToggle>
+                                        <div className="active"></div>
+                                        <DropdownMenu>
+                                            <DropdownItem tag={Link} to="/festival-list"> لیست شرکت کنندگان</DropdownItem>
+                                            <DropdownItem tag={Link} to="/comment-list">لیست کامنت ها</DropdownItem>
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                    {/* <NavItem>
                                         <NavLink tag={Link} to="/user-list">مشتریان</NavLink>
                                         <div className="active"></div>
                                     </NavItem>
@@ -86,19 +113,23 @@ export class NavMenu extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} to="/requester-list">مدیریت درخواست ها</NavLink>
                                         <div className="active"></div>
+                                    </NavItem>*/}
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/stream-list">مدیریت استریم ها</NavLink>
+                                        <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/shrine-list-admin">حرم های مطهر </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-                                    <NavItem>
+                                    {/* <NavItem>
                                         <NavLink tag={Link} to="/festival-list">شرکت کنندگان در جشنواره </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} to="/comment-list">کامنت ها </NavLink>
                                         <div className="active"></div>
-                                    </NavItem>
+                                    </NavItem>*/}
                                     <LoginMenu>
                                     </LoginMenu>
                                 </ul>
