@@ -496,7 +496,7 @@ namespace TestStream.Controllers
         }
 
 
-        [HttpGet("GetCommentsList/{id}")]
+        [HttpGet("GetCommentsList")]
         public ActionResult GetCommentsList()
         {
             try
@@ -519,7 +519,7 @@ namespace TestStream.Controllers
 
         }
 
-        [HttpPost("PostComment/{id}")]
+        [HttpPost("PostComment")]
         public ActionResult PostComment([FromBody] Comment comment)
         {
             try
@@ -545,7 +545,7 @@ namespace TestStream.Controllers
             }
 
         }
-        [HttpPost("ApproveComment/{id}")]
+        [HttpPost("ApproveComment")]
         public ActionResult ApproveComment([FromBody] Comment comment)
         {
             try
@@ -553,7 +553,7 @@ namespace TestStream.Controllers
 
                 Response response = new Response();
                 var cmmt = db.comments.Find(comment.Id);
-                //var commentObj = db.comments.FirstOrDefault(x => x.Id == playListDto.Id);
+                //var cmmt = db.comments.FirstOrDefault(x => x.FestivalId == comment.FestivalId);
                 cmmt.Approve = comment.Approve;
 
                 db.comments.Update(cmmt);
