@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-
+import ReactPaginate from 'react-paginate';
 
 import GalleryImage from './GalleryImage'
 import GalleryVideo from './GalleryVideo'
@@ -16,20 +16,31 @@ export default class Gallery extends Component {
         this.state = {
             data: [],
             currentPage: 1,
-            allPages:0
+            allPages: 1,
 
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {}
+
+
+    handlePageClick = (data) => {
+        console.log("motada nemigiran", data)
+        let selected = data.selected;
+        selected++
+        this.setState({ currentPage: selected })
+    };
+
+    render() {
+
 
         if (this.props.mode === '') {
             axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
                 .then(response => {
-                    console.log("r", response.data);
+                    console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", response.data);
                     this.setState({
                         data: response.data.data,
-                        allPages:response
+                        allPages: response.data.countPage
                     })
                 })
 
@@ -41,7 +52,8 @@ export default class Gallery extends Component {
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data.data
+                        data: response.data.data,
+                        allPages: response.data.countPage
                     })
                 })
 
@@ -53,7 +65,8 @@ export default class Gallery extends Component {
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data.data
+                        data: response.data.data,
+                        allPages: response.data.countPage
                     })
                 })
 
@@ -65,19 +78,19 @@ export default class Gallery extends Component {
                 .then(response => {
                     console.log("r", response);
                     this.setState({
-                        data: response.data.data
+                        data: response.data.data,
+                        allPages: response.data.countPage
                     })
                 })
 
                 .catch((error) => console.log(error))
         }
 
-        }
 
 
 
-    render() {
-        var dataType = ''
+
+
 
         return (
             <div className="container">
@@ -120,6 +133,22 @@ export default class Gallery extends Component {
                     <div className="row">
                         {this.state.data.map((data, index) => data ? <GalleryAudio key={index} customer={data} /> : null)}
                     </div> : null}
+
+                <div className="d-flex justify-content-center">
+                    <ReactPaginate
+                        previousLabel={'قبل'}
+                        nextLabel={'بعد'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={this.state.allPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        activeClassName={'active'}
+                    />
+                </div>
 
             </div>
             )
