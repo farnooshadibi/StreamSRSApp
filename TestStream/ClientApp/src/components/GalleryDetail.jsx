@@ -1,10 +1,10 @@
 ﻿import React, {Component} from 'react';
 import AwesomeSlider from 'react-awesome-slider';
-import AudioPlayer from "react-modular-audio-player";
+import cookie from 'react-cookies'
 import axios from 'axios';
 import CustomizedSnackbars from './CustomizedSnackbars';
 import 'react-awesome-slider/dist/custom-animations/cube-animation.css';
-import { param } from 'jquery';
+
 
 
 
@@ -30,6 +30,7 @@ export default class GalleryDetail extends Component{
 
 
     componentDidMount() {
+        this.setState({ liked: cookie.load('userLiked') })
         const { params } = this.props.match;
         console.log(params)
         axios.get(`api/festival/getFileDetails/${params.id}`)
@@ -102,7 +103,8 @@ export default class GalleryDetail extends Component{
                 console.log(error)
                 this.setState({ isSuccess: true, mode: 'error', message: 'هنگام ثبت خطا رخ داد' })
             }
-            )
+        )
+        cookie.save('userLiked', liked)
     }
 
     handleCloseCustomizadSnack() {
@@ -111,6 +113,7 @@ export default class GalleryDetail extends Component{
 
 
     render() {
+        
         let name = this.state.data.firstName + this.state.data.lastName
         let audioFiles = []
         if (this.state.data.festivalFileTypeId === 3) {

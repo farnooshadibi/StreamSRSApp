@@ -165,6 +165,10 @@ export class NavMenu extends Component {
                                         <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
+                                        <NavLink tag={Link} to={{ pathname: '/gallery', state: { mode: 'add' } }} >گالری </NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
+                                    <NavItem>
                                         
                                             <div className="text-center" style={{display:'flex'}}>
                                                 <input className='searcho'
@@ -181,7 +185,7 @@ export class NavMenu extends Component {
                                             </div>                                      
                                         
                                     </NavItem>
-
+                                    
                                 </ul>
                             </Collapse>
                         </Container>
