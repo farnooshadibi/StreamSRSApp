@@ -46,12 +46,12 @@ export default class FestivalList extends Component {
             }}>
                 <thead>
                     <tr>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام</th>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام خانوادگی</th>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره همراه</th>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>وضعیت</th>
-                        <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>جزییات</th>
+                        <th scope="col" className="table-header-cell" >شماره</th>
+                        <th scope="col" className="table-header-cell" >نام</th>
+                        <th scope="col" className="table-header-cell" >نام خانوادگی</th>
+                        <th scope="col" className="table-header-cell" >شماره همراه</th>
+                        <th scope="col" className="table-header-cell" >وضعیت</th>
+                        <th scope="col" className="table-header-cell" >جزییات</th>
                     </tr>
                 </thead>
                 {this.state.festivals.map((festival, index) =>

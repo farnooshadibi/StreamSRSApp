@@ -80,16 +80,16 @@ export default class UserProgramList extends Component {
                 }}>
                     <thead>
                         <tr>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>زمان شروع</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>زمان پایان</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>توضیحات</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام مداح</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>سخنران</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>محل برگزاری</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>ویرایش</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>حذف</th>
+                            <th scope="col" className="table-header-cell">شماره</th>
+                            <th scope="col" className="table-header-cell">نام</th>
+                            <th scope="col" className="table-header-cell">زمان شروع</th>
+                            <th scope="col" className="table-header-cell">زمان پایان</th>
+                            <th scope="col" className="table-header-cell">توضیحات</th>
+                            <th scope="col" className="table-header-cell">نام مداح</th>
+                            <th scope="col" className="table-header-cell">سخنران</th>
+                            <th scope="col" className="table-header-cell">محل برگزاری</th>
+                            <th scope="col" className="table-header-cell">ویرایش</th>
+                            <th scope="col" className="table-header-cell">حذف</th>
                         </tr>
                     </thead>
                     {this.state.programs.map((program, index) => 

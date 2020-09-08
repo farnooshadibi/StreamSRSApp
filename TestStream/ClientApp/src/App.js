@@ -58,9 +58,9 @@ export default class App extends Component {
                             <AuthorizeRoute path="/requester-list" component={RequesterList} />
                             <AuthorizeRoute path="/requestReview" component={Requester} />
                             <AuthorizeRoute path="/requestReview/:id" component={Requester} />
-                            <Route path="/festival-list" component={FestivalList} />
-                            <Route path="/festival-detail" component={FestivalDetail} />
-                            <Route path="/comment-list" component={CommentList} />
+                            <AuthorizeRoute path="/festival-list" component={FestivalList} />
+                            <AuthorizeRoute path="/festival-detail" component={FestivalDetail} />
+                            <AuthorizeRoute path="/comment-list" component={CommentList} />
 
                             <Route path="/video-detail/:id" component={VideoDetail} />
                             <Route path='/counter' component={Counter} />

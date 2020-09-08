@@ -275,3 +275,9 @@ body{
     color: #ababab !important;
     font-size: 15px!important;
 }
+
+.table-header-cell {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}

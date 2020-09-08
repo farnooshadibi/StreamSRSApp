@@ -90,14 +90,14 @@ export default class RequesterList extends Component {
                 }}>
                     <thead>
                         <tr>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام هیئت</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام متولی</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره موبایل</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شهر برگزاری</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>برنامه زمانبندی</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>بررسی</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>حذف</th>
+                            <th scope="col" className="table-header-cell">شماره</th>
+                            <th scope="col" className="table-header-cell">نام هیئت</th>
+                            <th scope="col" className="table-header-cell">نام متولی</th>
+                            <th scope="col" className="table-header-cell">شماره موبایل</th>
+                            <th scope="col" className="table-header-cell">شهر برگزاری</th>
+                            <th scope="col" className="table-header-cell">برنامه زمانبندی</th>
+                            <th scope="col" className="table-header-cell">بررسی</th>
+                            <th scope="col" className="table-header-cell">حذف</th>
                         </tr>
                     </thead>
                     {this.state.requesters.map((req, index) =>
