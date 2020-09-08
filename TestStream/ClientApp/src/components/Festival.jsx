@@ -191,6 +191,19 @@ export default class Festival extends Component {
     render() {
         const { firstName, lastName, mobile, phone, festivalFiles, description, processed, result, workName } = this.state;
         const { errors } = this.state;
+        let fileType
+        console.log(this.state)
+        switch (parseInt(this.state.fileTypeId)) {
+            case 1:
+                fileType = 'image'
+                break;
+            case 2:
+                fileType = 'video'
+                break;
+            case 3:
+                fileType = 'audio'
+                break;
+        }
         if (this.state.isSuccess && this.state.mode === 'add') {
             return (
                 <Container>
@@ -278,7 +291,8 @@ export default class Festival extends Component {
                                 <input type="file"
                                     multiple 
                                     className="form-control rtl"
-                                    name="file"
+                                        name="file"
+                                        accept = {`${fileType}/*`}
                                         //value={description}
                                     onChange={(event) => { this.onChange(event) }}
                                 />

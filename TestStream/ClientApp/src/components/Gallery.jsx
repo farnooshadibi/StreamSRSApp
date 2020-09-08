@@ -94,7 +94,8 @@ export default class Gallery extends Component {
 
         return (
             <div className="container">
-                <div className="gallerymenu" style={{marginBottom:"25px"}}>
+                <div className="gallerymenu" style={{ marginBottom: "25px" }}>
+                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/gallery`}><button type="button" class="btn btn-light">همه</button></Link>
                         <Link style={{ textDecoration: 'none', color: 'black' }} to={`/images`}><button type="button" class="btn btn-light">عکس ها</button></Link>
                         <Link style={{ textDecoration: 'none', color: 'black' }} to={`/videos`}><button type="button" class="btn btn-light">ویدئو ها</button></Link>
                         <Link style={{ textDecoration: 'none', color: 'black' }} to={`/audios`}><button type="button" class="btn btn-light">صداها</button></Link>
