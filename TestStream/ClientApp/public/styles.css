@@ -276,6 +276,11 @@ body{
     font-size: 15px!important;
 }
 
+.table-header-cell {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
 .pagination li {
     background-color: black;
     margin: 5px;

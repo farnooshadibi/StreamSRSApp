@@ -114,13 +114,13 @@ export default class UserList extends Component {
                 }}>
                     <thead>
                         <tr>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>شماره</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>نام</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>URL</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>ویرایش</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>حذف</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>توکن جدید</th>
-                            <th scope="col" style={{ border: '1px solid #dddddd', textAlign: 'center', padding: 8 }}>برنامه پخش</th>
+                            <th scope="col" className="table-header-cell">شماره</th>
+                            <th scope="col" className="table-header-cell">نام</th>
+                            <th scope="col" className="table-header-cell">URL</th>
+                            <th scope="col" className="table-header-cell">ویرایش</th>
+                            <th scope="col" className="table-header-cell">حذف</th>
+                            <th scope="col" className="table-header-cell">توکن جدید</th>
+                            <th scope="col" className="table-header-cell">برنامه پخش</th>
                         </tr>
                     </thead>
                 {this.state.users.map((customer, index) => 
