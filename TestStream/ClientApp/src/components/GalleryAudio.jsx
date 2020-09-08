@@ -13,7 +13,7 @@ export default class GalleryVideo extends Component{
                                 <div className="card cardBg">
                                     <i className="fa fa-volume-up" style={{ fontSize: '900%', color: 'white' }}></i>
 
-                                    <audio controls src={`${this.props.customer.festivalFile.fileURL}` } style={{ height: "70px", width: "auto",margin:'10px', borderRadius:"26px 26px 0 0"}} className="card-img-top" alt='عکس مربوطه'/>
+                                    <audio controls src={`${this.props.customer.festivalFile.fileURL}` } style={{ height: "70px", width: "auto",margin:'10px', borderRadius:"26px 26px 0 0"}} className="card-img-top"/>
                                     <h3 className="card-title">{`${this.props.customer.firstName} ${this.props.customer.lastName}`}</h3>
                                     <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>
                                         <div className="col-md-12" style={{display:"inline-flex"}}>

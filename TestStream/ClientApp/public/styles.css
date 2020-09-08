@@ -275,3 +275,26 @@ body{
     color: #ababab !important;
     font-size: 15px!important;
 }
+
+.pagination li {
+    background-color: black;
+    margin: 5px;
+    padding: 5px;
+    width: 50px;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.pagination .active {
+    background-color: #790000;
+}
+
+.pagination a {
+    text-decoration:none;
+
+}
+
+.audiodetail{
+    width:100%;
+    max-width:500px;
+}

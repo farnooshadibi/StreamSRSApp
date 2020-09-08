@@ -56,16 +56,6 @@ export default class GalleryDetail extends Component{
 
             .catch((error) => console.log(error))
 
-        axios.get(`/api/festival/getComments/${params.id}`)
-            .then(response => {
-                console.log("comment", response);
-                this.setState({
-                    comments: response.data.data
-
-                })
-            })
-
-            .catch((error) => console.log(error))
 
         axios.get(`/api/festival/getLikeCount/${params.id}`)
             .then(response => {
@@ -132,7 +122,7 @@ export default class GalleryDetail extends Component{
                 })
             })
         }
-
+        console.log(audioFiles)
 
         const style = { fontSize: '300%', color: !this.state.liked ? 'white' : 'red', textAlign: 'center', marginTop: '70px' }
         return (
@@ -148,14 +138,17 @@ export default class GalleryDetail extends Component{
                 </div>
                 {this.state.data.festivalFileTypeId === 3 ?
                     audioFiles.map(data => {
-                    return(
-                    <AudioPlayer audioFiles={Array(data)} />)
+                        return (
+                            <div style={{textAlign:'center'}}>
+                                <audio className="audiodetail" controls src={data.src} />
+                        </div>
+                        )
                 })
                     : null
                     }
                 <center>
                     <i className="fa fa-heart" style={style} onClick={this.handleLike}></i>
-                    <h2> {this.state.likes} نفر این  را پسندیدند</h2>
+                    <h2 style={{margin:'32px 0'}}> {this.state.likes} نفر این  را پسندیدند</h2>
                 </center>
                 <h3 className="azure" style={{ marginBottom:'25px', marginRight:'10%'}}>نظرات</h3>
                 <div className="row" style={{ marginRight: '1px' }}>
@@ -187,10 +180,10 @@ export default class GalleryDetail extends Component{
                                 </div>
 
                             <div class="field">
-                                    <textarea style={{ background: 'lightgray' }} value={ this.state.text } onChange={e => this.setState({ text: e.target.value })}></textarea>
-                            </div>
-                                <div class="ui blue labeled submit icon button" onClick={this.handleRequest}>
-                                <i class="fa fa-edit"></i>     نظر دهید
+                                    <textarea style={{ background: 'lightgray' }} value={this.state.text} required onChange={e => this.setState({ text: e.target.value })}></textarea>
+                                </div>
+                                <div>
+                                    <input value="نظر دهید" type="submit" class="ui blue labeled submit icon button" />
                             </div>
                         </form>
                     </div>
