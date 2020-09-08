@@ -74,9 +74,10 @@ export default class App extends Component {
                             <Route path="/festival" component={Festival} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                             <Route exact path="/gallery" component={() => <Gallery mode=''/>} />
-                            <Route exact path="/gallery/images" component={() => <Gallery mode='images' />}/>
-                            <Route exact path="/gallery/videos" component={() => <Gallery mode='videos' />} />
-                            <Route exact path="/gallery/audios" component={() => <Gallery mode='audios' />} />
+                            <Route exact path="/images" component={() => <Gallery mode='images' />}/>
+                            <Route exact path="/videos" component={() => <Gallery mode='videos' />} />
+                            <Route exact path="/audios" component={() => <Gallery mode='audios' />} />
+                            
                             <Route path="/gallerydetail/:id" component={GalleryDetail} />
                         </Layout>
                     </Route>
