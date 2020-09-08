@@ -23,16 +23,16 @@ export default class Festival extends Component {
             phone: '',
             description: '',
             trackingCode: '',
-            workName:'',
+            workName: '',
             result: '',
-            processed: false, 
-            festivalFiles: {}, 
-            files: {}, 
-            file: [], 
+            processed: false,
+            festivalFiles: {},
+            files: {},
+            file: [],
             formFile: '',
             fileName: '',
-            fileTypeId: 1, 
-            fileTypeName: '', 
+            fileTypeId: 1,
+            fileTypeName: '',
             fileType: []
 
         }
@@ -65,7 +65,7 @@ export default class Festival extends Component {
                 console.log(error)
                 this.setState({ isSuccess: true, mode: 'error', message: 'ثبت با خطا مواجه شد' })
             })
-}
+    }
     handleEdit(festivalId) {
         axios.get(`/api/festival/${festivalId}`)
             .then(
@@ -93,7 +93,7 @@ export default class Festival extends Component {
     }
     handleSubmitEdit() {
         //this.state.mode = 'edit';
-        const { Id, processed, result} = this.state;
+        const { Id, processed, result } = this.state;
         axios.put(`/api/festival/`, { Id, processed, result })
             .then(response => {
                 this.setState({ isSuccess: true, message: "بررسی اطلاعات با موفقیت انجام شد" });
@@ -261,7 +261,7 @@ export default class Festival extends Component {
                                         value={this.state.fileTypeId}
                                         onChange={(event) => { this.setState({ fileTypeId: event.target.value }) }}
                                     >
-                                        {this.state.fileType.map((value, index) => <option className="form-control"  value={value.id}>{value.name} </option>)}
+                                        {this.state.fileType.map((value, index) => <option className="form-control" value={value.id}>{value.name} </option>)}
                                     </select>
                                 </div>
                                 <div className="col-lg-4 form-group rtl">
@@ -274,15 +274,15 @@ export default class Festival extends Component {
                                     />
                                 </div>
                                 <div className="col-lg-4 form-group rtl">
-                                <label>انتخاب فایل </label>
-                                <input type="file"
-                                    multiple 
-                                    className="form-control rtl"
-                                    name="file"
+                                    <label>انتخاب فایل </label>
+                                    <input type="file"
+                                        multiple
+                                        className="form-control rtl"
+                                        name="file"
                                         //value={description}
-                                    onChange={(event) => { this.onChange(event) }}
-                                />
-                            </div>
+                                        onChange={(event) => { this.onChange(event) }}
+                                    />
+                                </div>
                             </div>
                             <div className="form-group rtl">
                                 <label> توضیحات در مورد اثر </label>
@@ -292,6 +292,20 @@ export default class Festival extends Component {
                                     value={description}
                                     onChange={(event) => { this.setState({ description: event.target.value }); }}
                                 />
+                            </div>
+                            <div className="form-group my-alert">
+                                لطفا در وارد کردن اطلاعات شخصی ، شماره همراه و انتخاب نوع اثر دقت فرمائید
+                            </div>
+                            <br />
+                            <div className="form-group">
+                                <h4> قوانین شرکت در جشنواره </h4>
+                                <p className="my-rules">
+                                   1-تنها آثاری مورد بررسی قرار خواهند گرفت که ارسال کننده صاحب اثر باشد و در صورت تشخیص داوران مبنی بر کپی بودن اثر، در جشنواره شرکت داده نخواهد شد
+                                    <br />
+                                    2-فایل ها را به صورت جداگانه ، بدون فشرده سازی و با کیفیت مناسب ارسال نمائید
+                                    <br />
+                                   3-حداکثر حجم فایل ارسالی 100MB باشد
+                            </p>
                             </div>
                             {this.state.mode === 'edit' ?
                                 <div>
