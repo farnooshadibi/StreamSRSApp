@@ -18,21 +18,26 @@ export default class GalleryDetail extends Component{
         this.state = {
             data:[],
             comments: [],
-            liked: false,
+            liked: 0,
             mode: 'add',
             isSuccess: false,
             name:'',
             text: '',
             festivalId: null,
-            likes:null
+            likes: null,
+            userLikes:[]
         }
     }
 
 
-    componentDidMount() {
-        this.setState({ liked: cookie.load('userLiked') })
+    componentWillMount() {
+        let liked1 = cookie.load('userLiked')
+        console.log("+///+///+///+", liked1)
+        if (typeof liked1 !== 'undefined')
+            this.setState({ userLikes: liked1  })
         const { params } = this.props.match;
         console.log(params)
+        
         axios.get(`api/festival/getFileDetails/${params.id}`)
             .then(response => {
                 console.log("r", response);
@@ -41,6 +46,10 @@ export default class GalleryDetail extends Component{
                     festivalId: parseInt(params.id)
 
                 })
+                let results = this.state.userLikes.find(element => element == this.state.festivalId);
+                this.setState({ liked: results })
+                console.log("qwrwerwerqerqwrqwrqwrqwr1", this.state.userl)
+                console.log("qwrwerwerqerqwrqwrqwrqwr2", this.state.liked)
             })
 
             .catch((error) => console.log(error))
@@ -69,6 +78,8 @@ export default class GalleryDetail extends Component{
 
             .catch((error) => console.log(error))
 
+        
+
     }
 
 
@@ -86,6 +97,10 @@ export default class GalleryDetail extends Component{
     }
 
     handleLike = () => {
+        let liked1 = cookie.load('userLiked')
+        if (typeof liked1 !== 'undefined')
+            this.setState({ userLikes: liked1 })
+
         let likednew=!this.state.liked
         console.log(this.state.liked)
         this.state.liked = likednew
@@ -104,7 +119,16 @@ export default class GalleryDetail extends Component{
                 this.setState({ isSuccess: true, mode: 'error', message: 'هنگام ثبت خطا رخ داد' })
             }
         )
-        cookie.save('userLiked', liked)
+        if (like == true)
+            this.state.userLikes.push(id)
+        else
+            this.state.userLikes.pop(id)
+
+        this.forceUpdate()
+        console.log("SAEED-handleLike", id, like, this.state.festivalId, this.state.userLikes)
+        this.setState({ userLikes: this.state.userLikes })
+        this.forceUpdate()
+        cookie.save('userLiked', this.state.userLikes)
     }
 
     handleCloseCustomizadSnack() {
@@ -113,7 +137,7 @@ export default class GalleryDetail extends Component{
 
 
     render() {
-        
+        console.log("qwqeqwqe",this.state)
         let name = this.state.data.firstName + this.state.data.lastName
         let audioFiles = []
         if (this.state.data.festivalFileTypeId === 3) {
@@ -125,9 +149,9 @@ export default class GalleryDetail extends Component{
                 })
             })
         }
-        console.log(audioFiles)
+        
 
-        const style = { fontSize: '300%', color: !this.state.liked ? 'white' : 'red', textAlign: 'center', marginTop: '70px' }
+        const style = { fontSize: '300%', color: this.state.liked ? 'red' : 'white', textAlign: 'center', marginTop: '70px' }
         return (
             <div className="container">
                 <div className="center gallerywidth" style={{ height: 'auto' }}>

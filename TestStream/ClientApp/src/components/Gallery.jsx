@@ -17,23 +17,24 @@ export default class Gallery extends Component {
             data: [],
             currentPage: 1,
             allPages: 1,
+            toConnect:1
 
         }
     }
 
-    componentDidMount() {}
-
+    componentDidMount() {
+        this.connection()
+    }
 
     handlePageClick = (data) => {
-        console.log("motada nemigiran", data)
         let selected = data.selected;
         selected++
         this.setState({ currentPage: selected })
+        this.connection()
     };
 
-    render() {
-
-
+    
+    connection = () => {
         if (this.props.mode === '') {
             axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
                 .then(response => {
@@ -85,12 +86,11 @@ export default class Gallery extends Component {
 
                 .catch((error) => console.log(error))
         }
+    }
+    render() {
+        const {allPages} = this.state
 
-
-
-
-
-
+        
 
         return (
             <div className="container">
