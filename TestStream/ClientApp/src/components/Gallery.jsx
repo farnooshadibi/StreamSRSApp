@@ -16,7 +16,7 @@ export default class Gallery extends Component {
         this.state = {
             data: [],
             currentPage: 1,
-            allPages:0
+            allPages: 0,
 
         }
     }
@@ -121,34 +121,26 @@ export default class Gallery extends Component {
                     </div> : null}
 
                 <div class="ui pagination menu">
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/1}`} >
-                        1
-                    </Link>
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/2}`} >
-                        2
-                    </Link>
-                    <div class="disabled item">
-                        ...
-                     </div>
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage}}`} >
+                    {this.state.currentPage === 1 ? null : (
+                        <Link className="item" style={{ textDecoration: 'none' }} component={() => this.setState({ currentPage: 1 })} >
+                            1
+                        </Link>
+                    
+                        )}
+                    <Link className="item" style={{ textDecoration: 'none' }}  >
                         {this.state.currentPage}
                     </Link>
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage+1}}`} >
+
+                    <Link className="item" style={{ textDecoration: 'none' }} component={() => this.setState({ currentPage: this.state.currentPage+1 })} >
                         {this.state.currentPage+1}
                     </Link>
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 2}}`} >
-                        {this.state.currentPage + 2}
+                    <Link className="item" style={{ textDecoration: 'none' }} component={() => this.setState({ currentPage: this.state.currentPage + 2 })} >
+                        {this.state.currentPage+2}
                     </Link>
-                    <div class="disabled item">
-                        ...
-                     </div>
+                    <Link className="item" style={{ textDecoration: 'none' }} component={() => this.setState({ currentPage: this.state.currentPage + 3 })} >
+                        {this.state.currentPage + 3}
+                    </Link>
 
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 1}}`} >
-                        {this.state.currentPage + 1}
-                    </Link>
-                    <Link className="item" style={{ textDecoration: 'none' }} to={`/api/festival/getAllFestivalFiles/${this.state.currentPage + 2}}`} >
-                        {this.state.currentPage + 2}
-                    </Link>
 
                 </div>
 
