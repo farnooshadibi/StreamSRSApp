@@ -29,6 +29,7 @@ import Festival from './components/Festival';
 import FestivalList from './components/FestivalList';
 import FestivalDetail from './components/FestivalDetail';
 import CommentList from './components/CommentList';
+import Login from './components/Login';
 
 
 export default class App extends Component {
@@ -67,11 +68,13 @@ export default class App extends Component {
                             <AuthorizeRoute path='/fetch-data' component={FetchData} />
                             <Route path="/shrine-list" component={ShrineList} />
                             <Route path="/shrine-detail/:id" component={ShrineDetail} />
+                            <Route path="/login" component={Login} />
                             <Route path="/search-list" component={SearchList} />
                             <Route path="/stream-list" component={StreamManagement} />
                             <Route path="/requester" component={Requester} />
                             <Route path="/service" component={Service} />
                             <Route path="/festival" component={Festival} />
+                            <Route path="/login" component={Login} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                             <Route exact path="/gallery" component={() => <Gallery mode=''/>} />
                             <Route exact path="/images" component={() => <Gallery mode='images' />}/>
