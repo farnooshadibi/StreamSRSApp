@@ -77,7 +77,7 @@ export default class Festival extends Component {
                         firstName: response.data.firstName,
                         lastName: response.data.lastName,
                         mobile: response.data.mobile,
-                        phone: response.data.phone,
+                        //phone: response.data.phone,
                         description: response.data.description,
                         trackingCode: response.data.trackingCode,
                         festivalFiles: response.data.festivalFiles,
@@ -151,7 +151,7 @@ export default class Festival extends Component {
         })
     }
     handleRequest() {
-        const { firstName, lastName, mobile, phone, festivalFiles, description, fileTypeId, workName } = this.state;
+        const { firstName, lastName, mobile, festivalFiles, description, fileTypeId, workName } = this.state;
         var formData = new FormData();
 
         for (let i = 0; i < this.state.file.length; i++) {
@@ -161,7 +161,7 @@ export default class Festival extends Component {
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
         formData.append('mobile', mobile);
-        formData.append('phone', phone);
+        //formData.append('phone', phone);
         formData.append('description', description);
         formData.append('fileTypeId', fileTypeId);
         formData.append('workName', workName);
@@ -189,7 +189,7 @@ export default class Festival extends Component {
     }
 
     render() {
-        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, result, workName } = this.state;
+        const { firstName, lastName, mobile, festivalFiles, description, processed, result, workName } = this.state;
         const { errors } = this.state;
         let fileType
         console.log(this.state)
@@ -224,7 +224,7 @@ export default class Festival extends Component {
                         <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >ثبت اطلاعات شرکت کنندگان در جشنواره </h5>
                         <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }} encType="multipart/form-data">
                             <div className="row">
-                                <div className=" col-lg-3 form-group rtl">
+                                <div className=" col-lg-4 form-group rtl">
                                     <label> نام </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
@@ -234,7 +234,7 @@ export default class Festival extends Component {
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["name"] ? 'block' : 'none' }}>{errors["name"]} </span>
                                 </div>
-                                <div className="col-lg-3 form-group rtl">
+                                <div className="col-lg-4 form-group rtl">
                                     <label>نام خانوادگی </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["lastName"] ? 'is-invalid' : ''].join(' ')}
@@ -244,7 +244,7 @@ export default class Festival extends Component {
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["lastName"] ? 'block' : 'none' }}>{errors["lastName"]} </span>
                                 </div>
-                                <div className="col-lg-3 form-group rtl">
+                                <div className="col-lg-4 form-group rtl">
                                     <label>شماره موبایل </label>
                                     <input type="text"
                                         className={["form-control rtl", errors["mobile"] ? 'is-invalid' : ''].join(' ')}
@@ -253,15 +253,6 @@ export default class Festival extends Component {
                                         onChange={(event) => { this.setState({ mobile: event.target.value }); }}
                                     />
                                     <span className="invalid-feedback rtl" style={{ display: errors["mobile"] ? 'block' : 'none' }}>{errors["mobile"]} </span>
-                                </div>
-                                <div className="col-lg-3 form-group rtl">
-                                    <label>شماره ثابت </label>
-                                    <input type="text"
-                                        className="form-control rtl"
-                                        name="phone"
-                                        value={phone}
-                                        onChange={(event) => { this.setState({ phone: event.target.value }); }}
-                                    />
                                 </div>
                             </div>
                             <div className="row">

@@ -12,7 +12,7 @@ namespace TestStream.Models.ApiModels.Festival
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Mobile { get; set; }
-        public string Phone { get; set; }
+        //public string Phone { get; set; }
         public string Description { get; set; }
         public DateTime SubmitDate { get; set; }
         public bool Processed { get; set; }

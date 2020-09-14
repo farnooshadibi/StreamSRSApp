@@ -41,7 +41,7 @@ namespace TestStream.Controllers
                 festivalObj.FirstName = festival.FirstName;
                 festivalObj.LastName = festival.LastName;
                 festivalObj.Mobile = festival.Mobile;
-                festivalObj.Phone = festival.Phone;
+                //festivalObj.Phone = festival.Phone;
                 festivalObj.Description = festival.Description;
                 festivalObj.WorkName = festival.WorkName;
                 festivalObj.FestivalFileTypeId = festival.fileTypeId;
@@ -264,6 +264,7 @@ namespace TestStream.Controllers
 
         [HttpGet("GetAudios/{page}")]
         public ActionResult GetAudios(int page)
+        
         {
             try
             {
@@ -355,7 +356,7 @@ namespace TestStream.Controllers
                      festival.LastName,
                      festival.Description,
                      festival.Mobile,
-                     festival.Phone,
+                    // festival.Phone,
                      festival.Approve,
                      festival.Processed,
                      festival.TrackingCode,

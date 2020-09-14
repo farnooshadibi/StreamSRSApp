@@ -72,7 +72,7 @@ export default class FestivalDetail extends Component {
                         firstName: response.data.firstName,
                         lastName: response.data.lastName,
                         mobile: response.data.mobile,
-                        phone: response.data.phone,
+                        //phone: response.data.phone,
                         description: response.data.description,
                         trackingCode: response.data.trackingCode,
                         festivalFile: response.data.festivalFile,
@@ -117,13 +117,13 @@ export default class FestivalDetail extends Component {
     }
     render() {
         console.log("festivalFile", this.state.festivalFile)
-        const { firstName, lastName, mobile, phone, festivalFiles, description, processed, approve, workName, approvefile, comment, like, FestivalFileTypeId } = this.state;
+        const { firstName, lastName, mobile, festivalFiles, description, processed, approve, workName, approvefile, comment, like, FestivalFileTypeId } = this.state;
         return (<Container>
             <div className="form-group requester">
                 <h5 style={{ color: 'green' }} className="font-weight-bolder pt-3 text-center" >بررسی اطلاعات شرکت کنندگان در جشنواره </h5>
                 <form className="" onSubmit={this.handleSubmit.bind(this)} style={{ marginTop: 30 }} encType="multipart/form-data">
                     <div className="row">
-                        <div className=" col-lg-3 form-group rtl">
+                        <div className=" col-lg-4 form-group rtl">
                             <label> نام </label>
                             <input type="text"
                                 disabled
@@ -133,7 +133,7 @@ export default class FestivalDetail extends Component {
                             onChange={(event) => { this.setState({ firstName: event.target.value }); }}
                             />
                         </div>
-                        <div className="col-lg-3 form-group rtl">
+                        <div className="col-lg-4 form-group rtl">
                             <label>نام خانوادگی </label>
                             <input type="text"
                                 disabled
@@ -143,7 +143,7 @@ export default class FestivalDetail extends Component {
                             onChange={(event) => { this.setState({ lastName: event.target.value }); }}
                             />
                         </div>
-                        <div className="col-lg-3 form-group rtl">
+                        <div className="col-lg-4 form-group rtl">
                             <label>شماره موبایل </label>
                             <input type="text"
                                 disabled
@@ -151,16 +151,6 @@ export default class FestivalDetail extends Component {
                                 name="mobile"
                                 value={mobile}
                             onChange={(event) => { this.setState({ mobile: event.target.value }); }}
-                            />
-                        </div>
-                        <div className="col-lg-3 form-group rtl">
-                            <label>شماره ثابت </label>
-                            <input type="text"
-                                disabled
-                                className="form-control rtl"
-                                name="phone"
-                                value={phone}
-                            onChange={(event) => { this.setState({ phone: event.target.value }); }}
                             />
                         </div>
                     </div>
