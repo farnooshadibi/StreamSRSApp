@@ -28,5 +28,6 @@ namespace TestStream.Data
         public DbSet<FestivalFile> festivalFiles { get; set; }
         public DbSet<FestivalFileType> festivalFileType { get; set; }
         public DbSet<Comment> comments { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }

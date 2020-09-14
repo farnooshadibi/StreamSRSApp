@@ -125,7 +125,6 @@ export default class GalleryDetail extends Component{
             this.state.userLikes.pop(id)
 
         this.forceUpdate()
-        console.log("SAEED-handleLike", id, like, this.state.festivalId, this.state.userLikes)
         this.setState({ userLikes: this.state.userLikes })
         this.forceUpdate()
         cookie.save('userLiked', this.state.userLikes)
@@ -137,7 +136,7 @@ export default class GalleryDetail extends Component{
 
 
     render() {
-        console.log("qwqeqwqe",this.state)
+        console.log("auth",this.props.auth)
         let name = this.state.data.firstName + this.state.data.lastName
         let audioFiles = []
         if (this.state.data.festivalFileTypeId === 3) {
@@ -172,50 +171,52 @@ export default class GalleryDetail extends Component{
                         )
                 })
                     : null
-                    }
-                <center>
-                    <i className="fa fa-heart" style={style} onClick={this.handleLike}></i>
-                    <h2 style={{margin:'32px 0'}}> {this.state.likes} نفر این  را پسندیدند</h2>
-                </center>
-                <h3 className="azure" style={{ marginBottom:'25px', marginRight:'10%'}}>نظرات</h3>
-                <div className="row" style={{ marginRight: '1px' }}>
-                    <div className="col-md-6 col-sm-10 center">
-                    <div class="ui comments rtl" >
-                        {this.state.comments.map(data => {
-                            return (
-                                <div class="comment" style={{marginBottom:'15px'}}>
-                                    <a class="avatar" style={{float:'right', marginLeft:'5%'}}>
-                                        <img src="/comment.png" style={{width:'50px', height:'50px'}} />
-                                    </a>
-                                    <div class="content">
-                                        <a class="author azure">{ data.name }</a>
-                                        <div class="metadata">
-                                    </div>
-                                        <div class="text azure" style={{fontSize:'90%', marginTop:'10px'}}>
-                                            {data.text}
-                                    </div>
-                                </div>
+                }
+               
+                        <center>
+                            <i className="fa fa-heart" style={style} onClick={this.handleLike}></i>
+                            <h2 style={{ margin: '32px 0' }}> {this.state.likes} نفر این  را پسندیدند</h2>
+                        </center>
+                        <h3 className="azure" style={{ marginBottom: '25px', marginRight: '10%' }}>نظرات</h3>
+                        <div className="row" style={{ marginRight: '1px' }}>
+                            <div className="col-md-6 col-sm-10 center">
+                                <div class="ui comments rtl" >
+                                    {this.state.comments.map(data => {
+                                        return (
+                                            <div class="comment" style={{ marginBottom: '15px' }}>
+                                                <a class="avatar" style={{ float: 'right', marginLeft: '5%' }}>
+                                                    <img src="/comment.png" style={{ width: '50px', height: '50px' }} />
+                                                </a>
+                                                <div class="content">
+                                                    <a class="author azure">{data.name}</a>
+                                                    <div class="metadata">
+                                                    </div>
+                                                    <div class="text azure" style={{ fontSize: '90%', marginTop: '10px' }}>
+                                                        {data.text}
+                                                    </div>
+                                                </div>
 
-                                </div>
+                                            </div>
 
-                            )
-                        }
-                        )}
-                            <form class="ui reply form" onSubmit={this.handleRequest}>
-                                <div class="field">
-                                    <input type="text" value={this.state.name} name="first-name" placeholder="نام" required onChange={e => this.setState({ name: e.target.value })} />
-                                </div>
+                                        )
+                                    }
+                                    )}
+                                    <form class="ui reply form" onSubmit={this.handleRequest}>
+                                        <div class="field">
+                                            <input type="text" value={this.state.name} name="first-name" placeholder="نام" required onChange={e => this.setState({ name: e.target.value })} />
+                                        </div>
 
-                            <div class="field">
-                                    <textarea style={{ background: 'lightgray' }} value={this.state.text} required onChange={e => this.setState({ text: e.target.value })}></textarea>
+                                        <div class="field">
+                                            <textarea style={{ background: 'lightgray' }} value={this.state.text} required onChange={e => this.setState({ text: e.target.value })}></textarea>
+                                        </div>
+                                        <div>
+                                            <input value="نظر دهید" type="submit" class="ui blue labeled submit icon button" />
+                                        </div>
+                                    </form>
                                 </div>
-                                <div>
-                                    <input value="نظر دهید" type="submit" class="ui blue labeled submit icon button" />
                             </div>
-                        </form>
-                    </div>
-                    </div>
-                </div>
+                        </div>
+                   
 
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
                        </div>

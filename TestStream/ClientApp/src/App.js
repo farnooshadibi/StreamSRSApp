@@ -31,12 +31,50 @@ import FestivalDetail from './components/FestivalDetail';
 import CommentList from './components/CommentList';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import axios from 'axios';
+import PrivateRoute from './components/PrivateRoute';
 
 
 export default class App extends Component {
     static displayName = App.name;
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAuthenticate: false
+        }
+    }
+
+    handleLogout() {
+        localStorage.removeItem('api-token');
+        this.setState({ isAuthenticate: false });
+    }
+
+    handleLogin() {
+        this.setState({ isAuthenticate: true })
+    }
+
+    componentDidMount() {
+        let apiToken = localStorage.getItem('api-token');
+         console.log("api token" , apiToken)
+
+        if (apiToken === null) {
+            this.setState({
+                isAuthenticate: false
+            })
+        } else {
+            this.setState({
+                isAuthenticate: true
+            })
+            console.log("api tokennnnnnnn", apiToken, this.state.isAuthenticate)
+            //axios //ToDo
+            //axios.get(`/api/user?api_token=${apiToken}`)
+            //    .then(response => this.setState({ isAuthenticate: true }))
 
 
+            //    .catch((error) => this.setState({ isAuthenticate: false }))
+
+        }
+    }
     render() {
         return (
             <div>
@@ -75,15 +113,14 @@ export default class App extends Component {
                             <Route path="/requester" component={Requester} />
                             <Route path="/service" component={Service} />
                             <Route path="/festival" component={Festival} />
-                            <Route path="/login" component={Login} />
+                            <Route path="/login" render={(props) => <Login {...props} auth={this.state.isAuthenticate} login={this.handleLogin.bind(this)} />} />
                             <Route path="/SignUp" component={SignUp} />
                             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                             <Route exact path="/gallery" component={() => <Gallery mode=''/>} />
                             <Route exact path="/images" component={() => <Gallery mode='images' />}/>
                             <Route exact path="/videos" component={() => <Gallery mode='videos' />} />
-                            <Route exact path="/audios" component={() => <Gallery mode='audios' />} />
-                            
-                            <Route path="/gallerydetail/:id" component={GalleryDetail} />
+                            <Route exact path="/audios" component={() => <Gallery mode='audios' />} />                          
+                            <PrivateRoute path="/gallerydetail/:id" component={GalleryDetail} auth={this.state.isAuthenticate}/>
                         </Layout>
                     </Route>
                 </Switch>

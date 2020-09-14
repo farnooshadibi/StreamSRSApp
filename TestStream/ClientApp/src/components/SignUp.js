@@ -1,52 +1,132 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-const apiPost = '/api/festival';
+import validator from 'validator';
+import CustomizedSnackbars from './CustomizedSnackbars';
+const apiPost = '/api/user';
 
 
 export default class Login extends Component {
 
     state = {
-        email: '',
+        userName: '',
         password: '',
-        reenter:''
+        reenter: '',
+        isSuccess: false,
+        message: '',
+        mode: '',
+        errors: {}
+    }
+    handleValidation(callback) {
+        let userName = this.state.userName;
+        let password = this.state.password;
+        let reenter = this.state.reenter;
+        let errors = {};
+        let formIsValid = true;
+
+        //email
+        if (validator.isEmpty(userName)) {
+            formIsValid = false;
+            errors["name"] = "نام کاربری نمیتواند خالی باشد";
+        }
+        else if (!validator.isEmail(userName)) { 
+            formIsValid = false;
+                errors["name"] = "فرمت ایمیل نادرست است";
+            }
+        
+        //password
+        else if (validator.isEmpty(password)) {
+            formIsValid = false;
+            errors["password"] = "رمز عبور نمیتواند خالی باشد";
+        }
+        //reenter
+        else if (validator.isEmpty(reenter)) {
+            formIsValid = false;
+            errors["reenter"] = "تکرار رمز عبور نمیتواند خالی باشد";
+        }
+        else if (password !== reenter) {
+            console.log("hdtfgthtgf")
+                formIsValid = false;
+                errors["reenter"] = "تکرار رمز عبور با رمز عبور وارد شده، مطابقت ندارد";
+            }
+
+        this.setState({ errors }, () => {
+            return callback(formIsValid);
+        });
     }
     handleEmail = (e) => {
-        this.setState({ email: e.target.value })
+        this.setState({ userName: e.target.value })
     }
     handlePassword = (e) => {
         this.setState({ password: e.target.value })
     }
     handleReenter = (e) => {
-        this.setState({ reentr: e.target.value })
+        this.setState({ reenter: e.target.value })
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        this.handleValidation((valid) => {
+            if (valid) {
+                    this.handleRequest();
+                    //this.props.history.push('/')
+            }
+        })
+    }
+    handleRequest() {
+        const { userName, password, reenter } = this.state;
+        axios.post(apiPost, { userName, password, reenter })
+            .then(response => {
+                this.setState({ isSuccess: true,mode:'add', message: "ثبت کاربر با موفقیت انجام شد" });
+            })
+            .catch((error) => {
+                console.log(error)
+                this.setState({ isSuccess: true, mode: 'error', message: " نام کاربری قبلا در سامانه ثبت شده است" })
+            }
+            )
+    }
+    handleCloseCustomizadSnack() {
+        this.setState({ isSuccess: false })
     }
     render() {
         
-        console.log("dattaaaaa", this.state)
+        const { errors } = this.state;
         return (
             
         <div className="container ">
-                <form className="col col-md-6 ">
+                <form className="col col-md-6 " onSubmit={this.handleSubmit.bind(this)}>
                     <div class="form-group">
                         <label for="exampleInputEmail1">آدرس ایمیل</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={ this.handleEmail } />
+                        <input type="email"
+                            className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="Enter email"
+                            name="userName"
+                            value={this.state.userName}
+                            onChange={this.handleEmail} />
+                        <span className="invalid-feedback rtl" style={{ display: errors["name"] ? 'block' : 'none' }}>{errors["name"]} </span>
                     </div>
                     <div class="form-group">
                             <label for="exampleInputPassword1">کلمه عبور</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handlePassword} />
+                        <input type="password" className={["form-control rtl", errors["password"] ? 'is-invalid' : ''].join(' ')} name="password"
+                            value={this.state.password} id="exampleInputPassword1" placeholder="Password" onChange={this.handlePassword} />
+                        <span className="invalid-feedback rtl" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]} </span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"> تکرار کلمه عبور</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleReenter} />
+                        <input type="password" className={["form-control rtl", errors["reenter"] ? 'is-invalid' : ''].join(' ')} id="exampleInputPassword1" name="reenter"
+                            value={this.state.reenter} placeholder="Password" onChange={this.handleReenter} />
+                        <span className="invalid-feedback rtl" style={{ display: errors["reenter"] ? 'block' : 'none' }}>{errors["reenter"]} </span>
                     </div>
                     <div style={{marginTop:'25px'}}>
                         <Link className="btn btn-light" style={{ textDecoration: 'none'}} to={`/login`}> قبلاَ عضو شدید؟</Link>       
                     </div>
                     <br/>
-                    <button type="submit" className="btn btn-success">ورود</button>
+                    <button type="submit" className="btn btn-success">ثبت نام</button>
 
                 </form>
+                <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
+
         </div>
         )
     }

@@ -29,7 +29,7 @@ namespace TestStream.Controllers
         }
 
         //[Authorize]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Get()
         {

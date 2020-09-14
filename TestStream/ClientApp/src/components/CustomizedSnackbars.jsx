@@ -116,7 +116,7 @@ export default class CustomizedSnackbars extends Component {
           }}
           className="rtl"
           open={this.state.open}
-          autoHideDuration={1000}
+          autoHideDuration={5000}
           onClose={this.handleClose.bind(this) && this.props.handleClose}
         >
             <MySnackbarContentWrapper
@@ -155,7 +155,7 @@ export default class CustomizedSnackbars extends Component {
               horizontal: 'right',
             }}
             open={this.state.open}
-            autoHideDuration={2000}
+            autoHideDuration={5000}
             onClose={this.handleClose.bind(this) && this.props.handleClose}
           >
         <MySnackbarContentWrapper
