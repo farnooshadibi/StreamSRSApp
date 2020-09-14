@@ -169,6 +169,10 @@ export class NavMenu extends Component {
                                         <div className="active"></div>
                                     </NavItem>
                                     <NavItem>
+                                        <NavLink tag={Link} to='/signup' >ورود و ثبت نام</NavLink>
+                                        <div className="active"></div>
+                                    </NavItem>
+                                    <NavItem>
                                         
                                             <div className="text-center" style={{display:'flex'}}>
                                                 <input className='searcho'
