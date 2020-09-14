@@ -100,11 +100,12 @@ export default class Login extends Component {
                             value={this.state.password} id="exampleInputPassword1" placeholder="Password" onChange={this.handlePassword} />
                         <span className="invalid-feedback rtl" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]} </span>
                     </div>
-                    <div style={{marginTop:'25px'}}>
-                        <Link className="btn btn-light" style={{ textDecoration: 'none'}} to={`/signup`}> هنوز عضو نیستید؟</Link>       
-                    </div>
+                   
                     <br/>
                     <button type="submit" className="btn btn-success">ورود</button>
+                    <div style={{ marginTop: '25px' }}>
+                        <Link className="btn btn-light" style={{ textDecoration: 'none' }} to={`/signup`}> هنوز عضو نیستید؟</Link>
+                    </div>
 
                 </form>
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
