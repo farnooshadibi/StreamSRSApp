@@ -43,7 +43,6 @@ export default class Service extends Component {
         axios.get(`/api/requester/${reqId}`)
             .then(
                 response => {
-                    console.log("response:::::", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         boardName: response.data.boardName,

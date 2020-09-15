@@ -5,6 +5,7 @@ import ShrineList from './ShrineList';
 import ProgramList from './ProgramList';
 import Slider from "react-slick";
 import { type } from 'jquery';
+import { Link } from 'react-router-dom';
 
 
 export default class Home extends Component {
@@ -20,7 +21,6 @@ export default class Home extends Component {
     componentWillMount() {
         axios.get('/api/customer/getfamouscustomer')
             .then(response => {            
-                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: data
@@ -146,8 +146,6 @@ export default class Home extends Component {
                 firstSix.push(this.state.unfamous[i])
                 i++
             }
-        console.log("adasdasdasdasdasd",firstSix)
-        
         return (
             <div>
             <div className="Container-fluid">
@@ -165,7 +163,13 @@ export default class Home extends Component {
                                         <VideoList webView={this.props.webView} key={index} customer={customer} mode="video-detail" />: null
                                 )}
                     </Slider>
-                </div>
+                    </div>
+                   
+                    <div className="farakhan">
+                        <Link style={{ textDecoration: 'none' }} to={{ pathname: '/festival', state: {  mode: 'add' } }}>
+                            <img className="farakhan" src='/farakhan.jpg' />
+                        </Link>
+                    </div>
                 <div className="upstar">
                     <img src='/starTop.png' />
                 </div>

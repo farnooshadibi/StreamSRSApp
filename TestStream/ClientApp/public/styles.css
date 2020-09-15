@@ -41,6 +41,10 @@ body{
     background-image: url('./back_1.jpg');
     padding: 5% 10%;
 }
+.farakhan {
+    padding: 5% 10%;
+    width: 100%;
+}
 
 .cardBg {
     border-radius: 25px!important;
@@ -72,7 +76,7 @@ body{
 }
 .upstar > img {
     width: 100%;
-    margin-top:65px
+    margin-top:35px
 }
 
 .downStar {
@@ -140,7 +144,7 @@ body{
     border-radius: 8px;
     border: 0;
     color:azure;
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .videojsplayer {

@@ -442,32 +442,47 @@ namespace TestStream.Controllers
             try
             {
                 var festivalObj = db.festivals.Where(c => c.Id == festival.Id).SingleOrDefault();
+                var userId = HttpContext.Session.GetInt32("userId");                
                 Response response = new Response();
 
                 if (festivalObj != null)
                 {
-                    if (festival.Like == true)
+                    var userFestival = db.userFestivals.Where(c => c.FestivalId == festival.Id && c.UserId == userId).SingleOrDefault();
+                    
+                    if (festival.Like == true && userFestival == null)
                     {
                         festivalObj.Like += 1;
+                        UserFestival obj = new UserFestival();
+                        int uid = 0;
+                        int.TryParse(userId.ToString(), out uid);
+                        obj.UserId = uid;
+                        obj.FestivalId = festival.Id;
+                        db.userFestivals.Add(obj);
+                        db.SaveChanges();
                     }
 
-                    if (festival.Like == false)
+                    else if (festival.Like == false && userFestival != null)
                     {
                         festivalObj.Like -= 1;
+
+                        db.userFestivals.Remove(userFestival);
+                        db.SaveChanges();
                     }
 
-
-                    db.festivals.Update(festivalObj);
-                    db.SaveChanges();
+                    if ((festival.Like == true && userFestival != null) || (festival.Like == false && userFestival == null))
+                    {
+                        //return this.NotFound("این فایل قبلا لایک شده است");
+                    }
+                    else
+                    {
+                        db.festivals.Update(festivalObj);
+                        db.SaveChanges();
+                    }
 
                     response.Data = festivalObj;
                     response.Status = true;
                     response.Message = "Create successfully";
-
                 }
-
-
-
 
                 return Ok(response);
             }
@@ -501,7 +516,6 @@ namespace TestStream.Controllers
             }
 
         }
-
 
         [HttpGet("GetCommentsList")]
         public ActionResult GetCommentsList()
@@ -563,6 +577,7 @@ namespace TestStream.Controllers
             }
 
         }
+
         [HttpPost("ApproveComment")]
         public ActionResult ApproveComment([FromBody] Comment comment)
         {
@@ -593,7 +608,6 @@ namespace TestStream.Controllers
 
         }
 
-        // POST api/values/5
         [HttpPut]
         public ActionResult Put([FromBody] FestivalDto festivalDto)
         {

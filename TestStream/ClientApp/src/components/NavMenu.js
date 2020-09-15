@@ -53,7 +53,9 @@ export class NavMenu extends Component {
 
     render() {
         const { isAuthenticated, userName } = this.state;
+        
         if (!isAuthenticated) {
+            const { auth: isAuthenticate } = this.props;
             return this.anonymousView();
         } else {
             return this.authenticatedView();
@@ -168,10 +170,24 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} to={{ pathname: '/gallery', state: { mode: 'add' } }} >گالری </NavLink>
                                         <div className="active"></div>
                                     </NavItem>
-                                    <NavItem>
-                                        <NavLink tag={Link} to='/signup' >ورود و ثبت نام</NavLink>
-                                        <div className="active"></div>
-                                    </NavItem>
+                                    {
+                                        this.props.auth 
+                                            ? (
+                                                <div>
+                                                    <NavItem>
+                                                    <NavLink tag={Link} to="/" onClick={this.props.logout}>خروج </NavLink>
+                                                        <div className="active"></div>
+                                                    </NavItem>
+
+                                                </div>
+                                            ) : (
+                                                <NavItem>
+                                                    <NavLink tag={Link} to='/signup' >ورود و ثبت نام</NavLink>
+                                                    <div className="active"></div>
+                                                </NavItem>
+                                            )
+                                    }
+                                   
                                     <NavItem>
                                         
                                             <div className="text-center" style={{display:'flex'}}>

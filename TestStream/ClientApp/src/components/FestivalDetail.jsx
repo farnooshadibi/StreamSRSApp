@@ -107,16 +107,13 @@ export default class FestivalDetail extends Component {
     }
 
     handleChange(event) {
-//        console.log('handleCHeckbox', event.target.id, this.state)
-        var index = this.state.festivalFile.findIndex(p => p.id == event.target.id)
-        console.log('handleCHeckbox', index)
+        var index = this.state.festivalFile.findIndex(p => p.id === event.target.id)
         //this.setState({
         this.state.festivalFile[index].approve = event.target.checked
         this.forceUpdate()
         //});
     }
     render() {
-        console.log("festivalFile", this.state.festivalFile)
         const { firstName, lastName, mobile, festivalFiles, description, processed, approve, workName, approvefile, comment, like, FestivalFileTypeId } = this.state;
         return (<Container>
             <div className="form-group requester">
@@ -157,21 +154,21 @@ export default class FestivalDetail extends Component {
                     <div className="row">
                         <div className="col-lg-6 form-group rtl">
                             <label>نوع اثر </label>
-                            {this.state.festivalFileTypeId == 1 ? <input type="text"
+                            {this.state.festivalFileTypeId === 1 ? <input type="text"
                                 className="form-control rtl"
                                 disabled
                                 name="fileTypeId"
                                 value="عکس"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
                             /> : null}
-                            {this.state.festivalFileTypeId == 2 ? <input type="text"
+                            {this.state.festivalFileTypeId === 2 ? <input type="text"
                                 className="form-control rtl"
                                 disabled
                                 name="fileTypeId"
                                 value="فیلم"
                                 onChange={(event) => { this.setState({ fileTypeId: event.target.value }); }}
                             /> : null}
-                            {this.state.festivalFileTypeId == 3 ? <input type="text"
+                            {this.state.festivalFileTypeId === 3 ? <input type="text"
                                 className="form-control rtl"
                                 disabled
                                 name="fileTypeId"
@@ -206,9 +203,9 @@ export default class FestivalDetail extends Component {
                             <div className="d-flex justify-content-around">
                                 <div className="card text-center" style={{ width: '100%', height: "50", backgroundColor: "transparent" }}>
                                 <div className="card cardBg">
-                                    {FestivalFileTypeId == 1 ? <img src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
-                                    {FestivalFileTypeId == 2 ? <video controls src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
-                                    {FestivalFileTypeId == 3 ? <audio controls src={value.fileURL} style={{ height: "70px", width: "auto", margin: '10px', borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه'  /> : null}
+                                    {FestivalFileTypeId === 1 ? <img src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
+                                    {FestivalFileTypeId === 2 ? <video controls src={value.fileURL} style={{ height: "270px", width: "auto", borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه' /> : null}
+                                    {FestivalFileTypeId === 3 ? <audio controls src={value.fileURL} style={{ height: "70px", width: "auto", margin: '10px', borderRadius: "26px 26px 0 0" }} className="card-img-top" alt='عکس مربوطه'  /> : null}
                                     <div className="row" style={{ padding: "5px", textAlign: 'right', direction: 'rtl' }}>
                                                 <div className="col-md-12" style={{ display: "inline-flex" }}>
                                                     <i className="fa fa-heart" style={{ fontSize: '15px', color: 'white', padding: "11px 0px 3px 5px" }}></i>

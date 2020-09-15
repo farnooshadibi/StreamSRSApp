@@ -164,7 +164,6 @@ export default class Requester extends Component {
     render() {
         const { boardName, trusteeName, agentName, phoneNumber, email, dailySchedule, startTime, endTime, reviewerOpinion, description, processed, eventCity, options } = this.state;
         const { errors } = this.state;
-        console.log(boardName, reviewerOpinion, processed)
         if (this.state.isSuccess && this.state.mode === 'add' ) {
             return (
                 <Container>

@@ -16,14 +16,10 @@ export default class SearchList extends Component {
     
     componentWillReceiveProps(nextProps) {
         this.setState({ name: nextProps.location.state });
-        console.log("nextProps", nextProps.location.state);
-        console.log("name", this.state.name);
         axios.post('/api/customer/SearchByName', nextProps.location.state)
             .then(response => {
                 const { data } = response.data;
                 this.setState({ filteredCustomer: data });
-
-                console.log(this.state.filteredCustomer)
             })
             .catch((error) => {
                 console.log(error)
@@ -37,8 +33,6 @@ export default class SearchList extends Component {
             .then(response => {
                 const { data } = response.data;
                 this.setState({ filteredCustomer: data });
-
-                console.log(this.state.filteredCustomer)
             })
             .catch((error) => {
                 console.log(error)

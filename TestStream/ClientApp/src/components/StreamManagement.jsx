@@ -68,19 +68,12 @@ export default class UserList extends Component {
             axios.get('http://185.194.76.58:1985/api/v1/clients', { httpsAgent: agent })
                 .then(response => {
                     const { data } = response.data.clients;
-                    console.log("r", response.data.clients);
-                    console.log("data", data);
                     this.setState({ users: response.data.clients });
-                    console.log("userrrrrrrr", this.state.users);
                 })
                 .catch(error => console.log(error))
         }
     handleClickOpen(id, client) {
-        console.log("clientttttt", client);
         this.setState({ mode: 'delete', client: client });
-        console.log("client", this.state.client);
-      //  this.handleRequest();
-        //console.log("mode:",this.state.mode)
         this.setState({ setOpen: true, open: true, userId: id })
         this.setState({ message: "آیا مایل به حذف استریم کاربر هستید؟" })
         //this.handleDelete(id)
@@ -102,7 +95,6 @@ export default class UserList extends Component {
     }
     handleDelete(id) {
         const { userId } = this.state;
-        console.log("id", userId);
         this.setState({ mode: 'submit' });
         // if (window.confirm("Do you want delete this User?")) {
         this.handleRequest();

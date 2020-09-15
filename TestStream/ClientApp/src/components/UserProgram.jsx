@@ -99,10 +99,6 @@ export default class UserProgram extends Component {
         })
     }
     handleRequest() {
-       //const { userId } = this.props.location.state;
-        //this.setState({ customerId: userId });
-        console.log("customerId:", this.state.customerId);
-        console.log("start time:", this.state.startTime);
         const { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId } = this.state;
         axios.post(apiPost, { name, image, startTime, endTime, description, performerName, lamenter, eventPlace, customerId })
             .then(response => {
@@ -161,7 +157,7 @@ export default class UserProgram extends Component {
                             value={this.state.value}
                             onChange={value => {
                                // var strDateTime = value.format("YYYY-MM-DD HH:mm:ss");
-                                console.log(value._d)
+                                //console.log(value._d)
                                 this.setState({ startTime: value._d });
                             }
                             }
@@ -173,8 +169,6 @@ export default class UserProgram extends Component {
                             isGregorian={false}
                             value={this.state.value}
                             onChange={value => {
-                                // var strDateTime = value.format("YYYY-MM-DD HH:mm:ss");
-                                console.log(value)
                                 this.setState({ endTime: value._d });
                             }}
                         />

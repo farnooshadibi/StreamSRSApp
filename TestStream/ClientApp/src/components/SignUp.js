@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import CustomizedSnackbars from './CustomizedSnackbars';
+import { Redirect } from 'react-router-dom';
 const apiPost = '/api/user';
+
 
 
 export default class Login extends Component {
@@ -45,7 +47,6 @@ export default class Login extends Component {
             errors["reenter"] = "تکرار رمز عبور نمیتواند خالی باشد";
         }
         else if (password !== reenter) {
-            console.log("hdtfgthtgf")
                 formIsValid = false;
                 errors["reenter"] = "تکرار رمز عبور با رمز عبور وارد شده، مطابقت ندارد";
             }
@@ -76,7 +77,8 @@ export default class Login extends Component {
         const { userName, password, reenter } = this.state;
         axios.post(apiPost, { userName, password, reenter })
             .then(response => {
-                this.setState({ isSuccess: true,mode:'add', message: "ثبت کاربر با موفقیت انجام شد" });
+                this.setState({ isSuccess: true, mode: 'add', message: "ثبت کاربر با موفقیت انجام شد" });
+                //this.props.history.push('/gallery');
             })
             .catch((error) => {
                 console.log(error)
@@ -100,7 +102,7 @@ export default class Login extends Component {
                             className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
-                            placeholder="Enter email"
+                            placeholder="ایمیل خود را وارد نمایید"
                             name="userName"
                             value={this.state.userName}
                             onChange={this.handleEmail} />
@@ -108,25 +110,34 @@ export default class Login extends Component {
                     </div>
                     <div class="form-group">
                             <label for="exampleInputPassword1">کلمه عبور</label>
-                        <input type="password" className={["form-control rtl", errors["password"] ? 'is-invalid' : ''].join(' ')} name="password"
-                            value={this.state.password} id="exampleInputPassword1" placeholder="Password" onChange={this.handlePassword} />
+                        <input type="password"
+                            className={["form-control rtl", errors["password"] ? 'is-invalid' : ''].join(' ')}
+                            name="password"
+                            value={this.state.password}
+                            id="exampleInputPassword1"
+                            placeholder="رمز عبور را وارد نمایید" onChange={this.handlePassword} />
                         <span className="invalid-feedback rtl" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]} </span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"> تکرار کلمه عبور</label>
-                        <input type="password" className={["form-control rtl", errors["reenter"] ? 'is-invalid' : ''].join(' ')} id="exampleInputPassword1" name="reenter"
-                            value={this.state.reenter} placeholder="Password" onChange={this.handleReenter} />
+                        <input type="password"
+                            className={["form-control rtl", errors["reenter"] ? 'is-invalid' : ''].join(' ')}
+                            id="exampleInputPassword1"
+                            name="reenter"
+                            value={this.state.reenter}
+                            placeholder="رمز عبور را مجددا وارد نمایید"
+                            onChange={this.handleReenter} />
                         <span className="invalid-feedback rtl" style={{ display: errors["reenter"] ? 'block' : 'none' }}>{errors["reenter"]} </span>
-                    </div>
-                    <div style={{marginTop:'25px'}}>
-                        <Link className="btn btn-light" style={{ textDecoration: 'none'}} to={`/login`}> قبلاَ عضو شدید؟</Link>       
-                    </div>
-                    <br/>
+                    </div>                  
                     <button type="submit" className="btn btn-success">ثبت نام</button>
+                    <div style={{ marginTop: '25px' }}>
+                        <Link className="btn btn-light" style={{ textDecoration: 'none' }} to={`/login`}> قبلاَ عضو شدید؟</Link>
+                    </div>
 
                 </form>
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />
-
+                {/* {this.state.isSuccess == true ? setTimeout(< Redirect to={{ pathname: "/gallery" }}/> , 1000) :null}*/}
+                
         </div>
         )
     }

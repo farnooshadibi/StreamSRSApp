@@ -63,7 +63,15 @@ namespace TestStream
                 options.Scope.Add("api");
                 options.Scope.Add("offline_access");
             });
+            //add session 
+            services.AddDistributedMemoryCache();
 
+            services.AddSession(options =>
+            {
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -93,6 +101,8 @@ namespace TestStream
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseIdentityServer();
             app.UseAuthentication();

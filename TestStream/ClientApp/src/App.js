@@ -55,23 +55,23 @@ export default class App extends Component {
 
     componentDidMount() {
         let apiToken = localStorage.getItem('api-token');
-         console.log("api token" , apiToken)
+         //console.log("api token" , apiToken)
 
         if (apiToken === null) {
             this.setState({
                 isAuthenticate: false
             })
         } else {
-            this.setState({
-                isAuthenticate: true
-            })
-            console.log("api tokennnnnnnn", apiToken, this.state.isAuthenticate)
+            //this.setState({
+            //    isAuthenticate: true
+            //})
+            //console.log("api tokennnnnnnn", apiToken, this.state.isAuthenticate)
             //axios //ToDo
-            //axios.get(`/api/user?api_token=${apiToken}`)
-            //    .then(response => this.setState({ isAuthenticate: true }))
+            axios.get(`/api/user/${apiToken}`)
+                .then(response => this.setState({ isAuthenticate: true }))
 
 
-            //    .catch((error) => this.setState({ isAuthenticate: false }))
+                .catch((error) => this.setState({ isAuthenticate: false }))
 
         }
     }
@@ -83,7 +83,7 @@ export default class App extends Component {
                     <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
                     <Route path="/requester2" component={Requester} />
                     <Route path="/">
-                        <Layout>
+                        <Layout auth={this.state.isAuthenticate} logout={this.handleLogout.bind(this)}>
 
                             <Route exact path='/' component={Home} />
                             <AuthorizeRoute path="/user-list" component={UserList} />

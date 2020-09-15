@@ -22,62 +22,34 @@ namespace TestStream.Controllers
         }
 
         //[Authorize]
-        // GET api/values/5
-        //[HttpGet("{id}")]
-        //public ActionResult Get(int id)
-        //{
-        //    try
-        //    {
-        //        var user = db.user.Find(id);
-        //        CustomerPlayListDto customerPlayListDto = new CustomerPlayListDto();
-        //        customerPlayListDto.Name = customer.Name;
-        //        customerPlayListDto.Url = customer.Url;
+        //GET api/values/5
+        [HttpGet("{api_token}")]
+        public ActionResult Get(string api_token)
+        {
+            try
+            {
+                var userToken = HttpContext.Session.GetString("Token");
+                if( api_token == userToken)
+                {
+                    return Ok(true);
 
-        //        var customerObj = db.customers
-        //         .Where(customer => customer.Id == id)
-        //         .Select(customer => new
-        //         {
-        //             customer.Name,
-        //             customer.Description,
-        //             customer.Url,
-        //             customer.LatinName,
-        //             customer.IsActive,
-        //             customer.Famous,
-        //             customer.Image,
-        //             customer.StreamUrl,
-        //             customer.Token,
-        //             PlayList = customer.playLists.Where(p => p.EndTime > DateTime.Now)
-        //                         .OrderBy(p => p.StartTime)
-        //                         .FirstOrDefault(),
-        //             startTime = customer.playLists.Where(p => p.EndTime > DateTime.Now)
-        //                         .OrderBy(p => p.StartTime)
-        //                         .FirstOrDefault()
-        //                         .StartTime,
-        //             IntervalSec = ((customer.playLists.Where(p => p.EndTime > DateTime.Now)
-        //                         .OrderBy(p => p.StartTime)
-        //                         .FirstOrDefault()
-        //                         .StartTime - DateTime.Now).TotalSeconds)
-        //         })
-        //          .FirstOrDefault();
+                }
+                else
+                {
+                    return this.NotFound("Doesnt correct");
 
-        //        if (customerObj == null)
-        //        {
-        //            return this.NotFound(" doesnt exist");
-        //        }
-        //        else
-        //        {
+                }
 
-        //            return Ok(customerObj);
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        writeException.Write(e.Message, DateTime.Now, "Customer", "Get", "Admin");
-        //        return this.NotFound("Dosnt Get Customer successfully");
-        //    }
+                  
+            }
+            catch (Exception e)
+            {
+                writeException.Write(e.Message, DateTime.Now, "Customer", "Get", "Admin");
+                return this.NotFound("Dosnt Get Customer successfully");
+            }
 
 
-        //}
+        }
 
         [HttpPost("Login")]
         public ActionResult Login([FromBody] User user)
@@ -104,14 +76,10 @@ namespace TestStream.Controllers
                     response.Data = user2;
                     response.Status = true;
                     response.Message = "Received successfully";
+                    HttpContext.Session.SetString( "Token" , user2.Token.ToString());
+                    HttpContext.Session.SetInt32("userId", user2.Id);
                     return Ok(response);
                     
-                    //var doctorID = doctor.drId;
-
-                    //    output.Login.id = doctor.ID;
-                    //    output.Login.label = "drToken";
-                    //    output.Login.value = doctorID.ToString();
-                    //    return Ok(output);
                     }
                     else
                     {

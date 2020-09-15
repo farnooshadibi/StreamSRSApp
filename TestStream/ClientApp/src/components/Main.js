@@ -16,7 +16,6 @@ export default class Main extends Component {
     componentDidMount() {
         axios.get('/api/customer')
             .then(response => {
-                console.log("response", response);
                 const { data } = response.data;
                 this.setState({
                     customers: data
@@ -36,7 +35,6 @@ export default class Main extends Component {
         const filteredCustomers = customers.filter(customer => {
             return customer.name.toLowerCase().includes(searchField.toLowerCase());
         });
-        console.log(this.state.customers)
         return (
             <div>
                 <div className="jumbotron rtl">

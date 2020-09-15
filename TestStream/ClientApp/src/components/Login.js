@@ -88,7 +88,7 @@ export default class Login extends Component {
                             className={["form-control rtl", errors["name"] ? 'is-invalid' : ''].join(' ')}
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
-                            placeholder="Enter email"
+                            placeholder="ایمیل خود را وارد نمایید"
                             name="userName"
                             value={this.state.userName}
                             onChange={this.handleEmail} />
@@ -97,7 +97,7 @@ export default class Login extends Component {
                     <div class="form-group">
                         <label for="exampleInputPassword1">کلمه عبور</label>
                         <input type="password" className={["form-control rtl", errors["password"] ? 'is-invalid' : ''].join(' ')} name="password"
-                            value={this.state.password} id="exampleInputPassword1" placeholder="Password" onChange={this.handlePassword} />
+                            value={this.state.password} id="exampleInputPassword1" placeholder="رمز عبور خود را وارد نمایید" onChange={this.handlePassword} />
                         <span className="invalid-feedback rtl" style={{ display: errors["password"] ? 'block' : 'none' }}>{errors["password"]} </span>
                     </div>
                    
@@ -105,7 +105,7 @@ export default class Login extends Component {
                     <button type="submit" className="btn btn-success">ورود</button>
                     <div style={{ marginTop: '25px' }}>
                         <Link className="btn btn-light" style={{ textDecoration: 'none' }} to={`/signup`}> هنوز عضو نیستید؟</Link>
-                    </div>
+                    </div>                                                                                                                                                                                
 
                 </form>
                 <CustomizedSnackbars action={this.state.mode} message={this.state.message} open={this.state.isSuccess} handleClose={this.handleCloseCustomizadSnack.bind(this)} />

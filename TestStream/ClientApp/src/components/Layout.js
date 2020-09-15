@@ -8,7 +8,7 @@ export class Layout extends Component {
     render() {
         return (
             <div>
-                <NavMenu />
+                <NavMenu auth={this.props.auth} logout={this.props.logout} />
                 <div>
                     {this.props.children}
                 </div>

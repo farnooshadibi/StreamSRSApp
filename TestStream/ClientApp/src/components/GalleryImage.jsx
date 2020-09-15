@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default class GalleryImage extends Component{
     
     render(){
-        console.log(this.props)
+       // console.log(this.props)
         
             return (
                 <div className="col-md-4 col-sm-12" style={{marginBottom:'25px'}}>

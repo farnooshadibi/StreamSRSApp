@@ -95,7 +95,6 @@ export default class VideoPlayer extends React.Component {
           "Picture-in-Picture": "تصویر در تصویر"
       }), function onPlayerReady() {
           
-      console.log('onPlayerReady', this)
     });
   }
 

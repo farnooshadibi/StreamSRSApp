@@ -38,7 +38,6 @@ export default class Gallery extends Component {
         if (this.props.mode === '') {
             axios.get(`/api/festival/getAllFestivalFiles/${this.state.currentPage}`)
                 .then(response => {
-                    console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", response.data);
                     this.setState({
                         data: response.data.data,
                         allPages: response.data.countPage
@@ -51,7 +50,6 @@ export default class Gallery extends Component {
         if (this.props.mode === 'images') {
             axios.get(`/api/festival/getPhotos/${this.state.currentPage}`)
                 .then(response => {
-                    console.log("r", response);
                     this.setState({
                         data: response.data.data,
                         allPages: response.data.countPage
@@ -77,7 +75,6 @@ export default class Gallery extends Component {
         if (this.props.mode === 'audios') {
             axios.get(`/api/festival/getAudios/${this.state.currentPage}`)
                 .then(response => {
-                    console.log("r", response);
                     this.setState({
                         data: response.data.data,
                         allPages: response.data.countPage
@@ -95,17 +92,18 @@ export default class Gallery extends Component {
         return (
             <div className="container">
                 <div className="gallerymenu" style={{ marginBottom: "25px" }}>
-                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/gallery`}><button type="button" class="btn btn-light">همه</button></Link>
-                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/images`}><button type="button" class="btn btn-light">عکس ها</button></Link>
-                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/videos`}><button type="button" class="btn btn-light">ویدئو ها</button></Link>
-                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/audios`}><button type="button" class="btn btn-light">صداها</button></Link>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/gallery`}><button type="button" className="btn btn-light">همه</button></Link>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/images`}><button type="button" className="btn btn-light">عکس ها</button></Link>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/videos`}><button type="button" className="btn btn-light">ویدئو ها</button></Link>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/audios`}><button type="button" className="btn btn-light">صداها</button></Link>
                 </div>
 
                 <div className='row'>
                 {
                     this.props.mode === '' ?
                         
-                                this.state.data.map(x => {
+                            this.state.data.map((x) => {                             
+                                
                                     switch (x.festivalFileTypeId) {
                                         case 1:
                                             return <GalleryImage customer={x} />
@@ -114,7 +112,7 @@ export default class Gallery extends Component {
                                         case 3:
                                             return <GalleryAudio customer={x} />
                                     }
-                                }
+                              }
                             
                         )
                   : ''

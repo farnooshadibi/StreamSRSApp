@@ -20,8 +20,6 @@ export default class ShrineDetail extends Component {
         const { params } = this.props.match;
         axios.get(`/api/shrine/${params.id}`)
             .then(response => {
-                console.log("r", response);
-
                 this.setState({
                     video: response.data,
                     url2: response.data.url
@@ -37,7 +35,6 @@ export default class ShrineDetail extends Component {
 
         const { video, url2, play } = this.state;
         let url = video.url
-        console.log(url2)
         const videoJsOptions = {
             autoplay: true,
             controls: true,
@@ -46,7 +43,6 @@ export default class ShrineDetail extends Component {
                 type: 'application/x-mpegURL'
             }]
         }
-        console.log(url)
         if (url2 === "")
             return ('')
 

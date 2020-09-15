@@ -53,8 +53,6 @@ export default class User extends Component {
         axios.get(`/api/customer/getCustomer/${userId}`)
             .then(
                 response => {
-                    console.log("response", response);
-                    console.log("userId", userId);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         name: response.data.name,

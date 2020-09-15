@@ -165,7 +165,6 @@ export default class Festival extends Component {
         formData.append('description', description);
         formData.append('fileTypeId', fileTypeId);
         formData.append('workName', workName);
-        console.log("type", fileTypeId)
 
         axios.post(apiPost, formData)
             .then(response => {
@@ -192,7 +191,6 @@ export default class Festival extends Component {
         const { firstName, lastName, mobile, festivalFiles, description, processed, result, workName } = this.state;
         const { errors } = this.state;
         let fileType
-        console.log(this.state)
         switch (parseInt(this.state.fileTypeId)) {
             case 1:
                 fileType = 'image'

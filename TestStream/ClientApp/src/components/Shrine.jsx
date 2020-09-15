@@ -38,7 +38,6 @@ export default class Shrine extends Component {
         axios.get(`/api/shrine/${shrineId}`)
             .then(
                 response => {
-                    console.log("response", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         name: response.data.name,
@@ -98,7 +97,6 @@ export default class Shrine extends Component {
     }
     handleSubmitEdit() {
         const { Id, name, url, image, isActive, description } = this.state;
-        console.log("typeOfImage:", typeof( image));
 
         axios.put(`/api/shrine/`, { Id, name, url, image, isActive, description })
             .then(response => {

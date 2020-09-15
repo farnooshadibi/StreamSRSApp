@@ -21,11 +21,8 @@ export default class VideoDetail extends Component{
         const{params} = this.props.match;
         axios.get(`/api/customer/${params.id}`)
         .then(response => {
-            console.log("r", response);
             this.setState ({
                 video: response.data
-
-
             })
         })
 
@@ -58,7 +55,6 @@ export default class VideoDetail extends Component{
             }
         }
         if (this.state && this.state.video.url) {
-            console.log('reinit:::::::::::::', this.state.reInit, this.state.video)
            return (
                <div className="rtl text-center">
                    <h3 style={{ marginTop: '20px' }}>{webView ? '' : this.state.video.name}</h3>
