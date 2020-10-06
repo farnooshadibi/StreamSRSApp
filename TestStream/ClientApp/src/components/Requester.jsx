@@ -36,7 +36,9 @@ export default class Requester extends Component {
 
 
     componentDidMount() {
-        const { mode } = this.props.location.state
+        const { mode } = this.state;
+        //const { mode } = this.props;
+        //console.log("mode", mode);
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { reqId } = this.props.location.state
@@ -51,7 +53,7 @@ export default class Requester extends Component {
         axios.get(`/api/requester/${reqId}`)
             .then(
                 response => {
-                    console.log("response:::::", response);
+                    //console.log("response:::::", response);
                     this.setState(prevState => ({
                         ...prevState.fields,
                         boardName: response.data.boardName,
@@ -167,7 +169,8 @@ export default class Requester extends Component {
         if (this.state.isSuccess && this.state.mode === 'add' ) {
             return (
                 <Container>
-                    <div className="alert alert-success" role="alert">
+                    <div className="row" style={{ marginBottom: '30px' }}> </div>
+                    <div className="row alert alert-success" role="alert">
                         <h4 className="alert-heading"></h4>
                         <p> ثبت اطلاعات با موفقیت انجام شد، کارشناسان ما در اسرع وقت با شما تماس می گیرند</p>
                         <hr />

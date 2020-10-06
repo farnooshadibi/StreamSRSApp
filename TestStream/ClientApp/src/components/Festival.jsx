@@ -40,7 +40,10 @@ export default class Festival extends Component {
 
 
     componentDidMount() {
-        const { mode } = this.props.location.state
+        //const { mode } = this.props.location.state
+        //const { mode } = this.props;
+        const { mode } = this.state;
+        console.log("modefe", mode);
         if (mode === 'edit') {
             this.state.mode = 'edit'
             const { festivalId } = this.props.location.state
@@ -205,7 +208,8 @@ export default class Festival extends Component {
         if (this.state.isSuccess && this.state.mode === 'add') {
             return (
                 <Container>
-                    <div className="alert alert-success" role="alert">
+                    <div className="row" style={{ marginBottom: '30px' }}> </div>
+                    <div className=" row alert alert-success" role="alert">
                         <h4 className="alert-heading"></h4>
                         <p> ثبت اطلاعات با موفقیت انجام شد</p>
                         <p>کد رهگیری شما : {this.state.trackingCode}</p>
