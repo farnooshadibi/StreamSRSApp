@@ -82,6 +82,7 @@ export default class App extends Component {
                     <Route exact path="/video-detail2/:id" component={VideoDetail} />
                     <Route exact path="/shrine-detail2/:id" component={ShrineDetail} />
                     <Route path="/requester2" component={Requester} />
+                    <Route path="/festival2" component={Festival} />
                     <Route path="/">
                         <Layout auth={this.state.isAuthenticate} logout={this.handleLogout.bind(this)}>
 

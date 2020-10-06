@@ -14,7 +14,7 @@ export default class Requester extends Component {
         this.state = {
             errors: {},
             Id: 0,
-            mode: '',
+            mode: 'add',
             reqId:0,
             isSuccess: false,
             message: '',
